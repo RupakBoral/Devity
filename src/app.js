@@ -14,7 +14,7 @@ app.post("/signUp", async (req, res) => {
     await User.save();
     res.send("User added successfully");
   } catch (err) {
-    res.status(404).send("Unexpected error occured");
+    res.status(404).send(`Unexpected error occured! ${err}`);
   }
 });
 
@@ -50,20 +50,35 @@ app.patch("/user", async (req, res) => {
   // req.body is the entire document, and change accordingly
   const data = req.body;
   try {
-    await UserModel.findOneAndUpdate({ emailId }, data);
+    const NOT_ALLOWED = ["emailId"];
+    const isUpdateNotAllowed = Object.keys(data).every((k) =>
+      NOT_ALLOWED.includes(k)
+    );
+    if (isUpdateNotAllowed) throw new Error();
+    await UserModel.findOneAndUpdate({ emailId }, data, {
+      runValidators: true,
+    });
     res.send("User details updated successfully");
   } catch (err) {
-    res.status(404).send("Something went wrong");
+    res.status(404).send(`Something went wrong!, ${err}`);
   }
 });
-app.patch("/user", async (req, res) => {
-  const userId = req.body.userId;
+
+// update the user by _id
+app.patch("/user/:userId", async (req, res) => {
+  const userId = req.params?.userId;
   const data = req.body;
   try {
-    await UserModel.findByIdAndUpdate(userId, data);
+    const NOT_ALLOWED = ["emailId"];
+    const isUpdateNotAllowed = Object.keys(data).every((k) =>
+      NOT_ALLOWED.includes(k)
+    );
+    if (isUpdateNotAllowed) throw new Error("Update not allowed");
+    if (data?.skills.length > 35) throw new Error("Maximum inputs reached!");
+    await UserModel.findByIdAndUpdate(userId, data, { runValidators: true });
     res.send("User details updated successfully");
   } catch (err) {
-    res.status(404).send("Something went wrong");
+    res.status(404).send(`Something went wrong!, ${err}`);
   }
 });
 
