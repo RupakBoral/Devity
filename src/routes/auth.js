@@ -22,4 +22,27 @@ AuthRouter.post("/login", async (req, res) => {
   }
 });
 
+AuthRouter.post("/signup", async (req, res) => {
+  try {
+    const { emailId, password } = req.body;
+    const isEmailExist = await UserModel.findOne({ emailId });
+    if (isEmailExist) {
+      throw new Error("Email already exists");
+    }
+    const user = new UserModel({ emailId, password });
+    await user.save();
+    res.send("User Created Successfully");
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
+});
+
+AuthRouter.post("/logout", async (req, res) => {
+  res
+    .cookie("token", null, {
+      expires: new Date(Date.now()),
+    })
+    .send("Logout Successful");
+});
+
 module.exports = AuthRouter;

@@ -37,6 +37,9 @@ const UserSchema = new mongoose.Schema(
         }
       },
     },
+    gender: {
+      type: String,
+    },
     password: {
       type: String,
       required: true,
@@ -46,13 +49,18 @@ const UserSchema = new mongoose.Schema(
         }
       },
     },
+    photoUrl: {
+      type: String,
+      default: "",
+    },
     about: {
       type: String,
       default: "Hello devs, I am excited to work with you.",
-      maxLength: 50,
+      maxLength: 200,
     },
     skills: {
       type: [String],
+      maxLength: 25,
     },
   },
   {

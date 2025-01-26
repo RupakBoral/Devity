@@ -1,5 +1,6 @@
 const express = require("express");
 const { userAuth } = require("../middlewares/auth");
+const { validateEditProfile } = require("../utils/validate");
 
 const profileRouter = express.Router();
 
@@ -12,23 +13,41 @@ profileRouter.get("/profile", userAuth, async (req, res) => {
   }
 });
 
-profileRouter.patch("/user", async (req, res) => {
-  // the name of the variable needs to be same as the name of the constant in the module
-  const emailId = req.body.emailId;
-  // req.body is the entire document, and change accordingly
-  const data = req.body;
+profileRouter.patch("/profile/edit", userAuth, async (req, res) => {
   try {
-    const NOT_ALLOWED = ["emailId"];
-    const isUpdateNotAllowed = Object.keys(data).every((k) =>
-      NOT_ALLOWED.includes(k)
-    );
-    if (isUpdateNotAllowed) throw new Error();
-    await UserModel.findOneAndUpdate({ emailId }, data, {
-      runValidators: true,
+    if (!validateEditProfile(req)) {
+      throw new Error("Invalid Edit Request");
+    }
+    const LoggedInUser = req.user;
+    Object.keys(req.body).forEach((key) => {
+      LoggedInUser[key] = req.body[key];
     });
-    res.send("User details updated successfully");
+    await LoggedInUser.save();
+    res.json({
+      message: "${loggedInUser.firstName}, your profile has been updated",
+      data: LoggedInUser,
+    });
   } catch (err) {
-    res.status(404).send(`Something went wrong!, ${err}`);
+    res.send(err.message);
+  }
+});
+
+profileRouter.patch("/profile/password", userAuth, async (req, res) => {
+  try {
+    const { newPassword } = req.body;
+    const LoggedInUser = req.user;
+    const Oldpassword = LoggedInUser.password;
+    if (newPassword === Oldpassword) {
+      throw new Error("New Password cannot be same as old password");
+    }
+    LoggedInUser.password = newPassword;
+    await LoggedInUser.save();
+    res.json({
+      message: "Password Updated Successfully",
+      data: req.user,
+    });
+  } catch (err) {
+    res.status(400).send(err.message);
   }
 });
 
