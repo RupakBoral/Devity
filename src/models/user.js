@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema(
     emailId: {
       type: String,
       required: true,
-      unique: true,
+      unique: true, // unique automatically creates index which is helpful in efficient searching
       trim: true,
       // validate function only works when we create a document not when we update
       validate(value) {
@@ -39,6 +39,15 @@ const UserSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
+      enum: {
+        values: ["male", "female"],
+        message: `{value} is incorrect gender`,
+      },
+      // validate(value) {
+      //   if (!['male, "female', "other"].includes(value)) {
+      //     throw new Error("Gender is invalid");
+      //   }
+      // },
     },
     password: {
       type: String,

@@ -1,6 +1,8 @@
 const express = require("express");
 const UserModel = require("../models/user");
 const AuthRouter = express.Router();
+const { validateSignUp } = require("../utils/validate");
+const bcrypt = require("bcrypt");
 
 AuthRouter.post("/login", async (req, res) => {
   try {
@@ -24,12 +26,20 @@ AuthRouter.post("/login", async (req, res) => {
 
 AuthRouter.post("/signup", async (req, res) => {
   try {
-    const { emailId, password } = req.body;
+    const { emailId, password, firstName, lastName, phoneNo } = req.body;
     const isEmailExist = await UserModel.findOne({ emailId });
     if (isEmailExist) {
       throw new Error("Email already exists");
     }
-    const user = new UserModel({ emailId, password });
+    validateSignUp(req);
+    const passwordHash = await bcrypt.hash(password, 10);
+    const user = new UserModel({
+      firstName,
+      lastName,
+      phoneNo,
+      emailId,
+      password: passwordHash,
+    });
     await user.save();
     res.send("User Created Successfully");
   } catch (err) {
