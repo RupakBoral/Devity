@@ -2,6 +2,7 @@ const express = require("express");
 const { userAuth } = require("../middlewares/auth");
 const userRouter = express.Router();
 const ConnectionRequestModel = require("../models/connectionRequest");
+const UserModel = require("../models/user");
 
 const USER_SAFE_DATA = "firstName lastName photoUrl about skills";
 
@@ -27,27 +28,66 @@ userRouter.get("/user/requests/received", userAuth, async (req, res) => {
 });
 
 userRouter.get("/user/connections", userAuth, async (req, res) => {
-  const loggedInUserId = req.user._id;
+  try {
+    const loggedInUserId = req.user._id;
 
-  const ConnectionsEstablished = await ConnectionRequestModel.find({
-    $or: [{ fromUserId: loggedInUserId }, { toUserId: loggedInUserId }],
-    status: "accepted",
-  })
-    .populate("fromUserId", USER_SAFE_DATA)
-    .populate("toUserId", USER_SAFE_DATA);
+    const ConnectionsEstablished = await ConnectionRequestModel.find({
+      $or: [{ fromUserId: loggedInUserId }, { toUserId: loggedInUserId }],
+      status: "accepted",
+    })
+      .populate("fromUserId", USER_SAFE_DATA)
+      .populate("toUserId", USER_SAFE_DATA);
 
-  if (ConnectionsEstablished.length === 0) {
-    return res.status(400).json({ message: "No conneciton found" });
+    if (ConnectionsEstablished.length === 0) {
+      return res.status(400).json({ message: "No conneciton found" });
+    }
+
+    //   handle the case when fromUserId is the loggedInUser
+    const data = ConnectionsEstablished.map((row) => {
+      if (row.fromUserId._id.equals(loggedInUserId.toString())) {
+        return row.toUserId;
+      } else return row.fromUserId;
+    });
+
+    res.status(200).json({ data });
+  } catch (err) {
+    res.status(400).send(err);
   }
+});
 
-  //   handle the case when fromUserId is the loggedInUser
-  const data = ConnectionsEstablished.map((row) => {
-    if (row.fromUserId._id.equals(loggedInUserId.toString())) {
-      return row.toUserId;
-    } else return row.fromUserId;
-  });
+userRouter.get("/feed", userAuth, async (req, res) => {
+  try {
+    const loggedInUser = req.user;
+    // FEED API will show all users details except myself, accepted, rejected, interested and ignored
 
-  res.status(200).json({ data });
+    // find all connections requests that user sent or recieved
+    const connectionRequests = await ConnectionRequestModel.find({
+      $or: [{ fromUserId: loggedInUser._id }, { toUserId: loggedInUser._id }],
+    }).select("fromUserId toUserId");
+    // .populate("fromUserId", "firstName")
+    // .populate("toUserId", "firstName");
+
+    // don't show these users in users feed
+    const HideUsersFromFeed = new Set();
+    connectionRequests.forEach((req) => {
+      HideUsersFromFeed.add(req.fromUserId.toString());
+      HideUsersFromFeed.add(req.toUserId.toString());
+    });
+    // console.log(HideUsersFromFeed);
+    const users = await UserModel.find({
+      // find all the users whose id is 'not-in' the HideUserFromFeed set and is not loggedInUser
+      $and: [
+        { _id: { $nin: Array.from(HideUsersFromFeed) } },
+        { _id: { $ne: loggedInUser._id } },
+      ],
+    }).select(USER_SAFE_DATA);
+
+    res.status(200).send(users);
+  } catch (err) {
+    res
+      .status(400)
+      .send(`Error fetching the Feed!!\n ${err}\n Kindly Reload Again`);
+  }
 });
 
 module.exports = userRouter;
