@@ -31,6 +31,6 @@ connectDb()
       console.log("Server is running");
     });
   })
-  .catch((err) => {
+  .catch(() => {
     console.error("Connection not established");
   });

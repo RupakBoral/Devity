@@ -29,7 +29,7 @@ AuthRouter.post("/signup", async (req, res) => {
     const { emailId, password, firstName, lastName, phoneNo } = req.body;
     const isEmailExist = await UserModel.findOne({ emailId });
     if (isEmailExist) {
-      throw new Error("Email already exists");
+      throw new Error("User already exists");
     }
     validateSignUp(req);
     const passwordHash = await bcrypt.hash(password, 10);
