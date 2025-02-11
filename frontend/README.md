@@ -4,6 +4,10 @@
 - For css : Tailwind Css, DaisyUI
 - For routing : react-router-dom
 
+## Technologies Used
+
+- Redux Toolkit for state management
+
 ## Components
 
 - Body

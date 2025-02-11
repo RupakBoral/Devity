@@ -2,6 +2,20 @@
 
 A platform where all developers connect.
 
+## Technologies Used
+
+- JWT : token creation and validation
+- CORS : allows to make api call from frontend to backend irrespective of different domain names and ip
+- Axios : instead of fetch axios is used to make api calls
+- validator to validate email and password
+
+## CORS
+
+- { origin: "http://localhost:5173",
+  credentials: true
+  }
+- when making an api call, pass { withCredentials: true } as an argument
+
 ## Building APIs
 
 - POST /signup
