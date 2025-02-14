@@ -1,11 +1,11 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
+// import NavBar from "./NavBar";
 import { useDispatch } from "react-redux";
 import { BASE_URL } from "../utils/constants";
 import { addUser } from "../utils/userSlice";
 import axios from "axios";
 import { useEffect } from "react";
+import SideBar from "./SideBar";
 
 const Body = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const Body = () => {
       dispatch(addUser(res.data.data));
     } catch (e) {
       if (e.response.status === 401) {
-        return navigate("/home");
+        return navigate("/login");
       }
       return navigate("/error");
     }
@@ -30,10 +30,9 @@ const Body = () => {
   }, []);
 
   return (
-    <div>
-      <NavBar />
+    <div className="flex w-full h-screen">
+      <SideBar />
       <Outlet />
-      <Footer />
     </div>
   );
 };

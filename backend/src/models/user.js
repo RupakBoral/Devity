@@ -60,7 +60,7 @@ const UserSchema = new mongoose.Schema(
     },
     photoUrl: {
       type: String,
-      default: "",
+      default: "https://img.icons8.com/?size=100&id=7819&format=png",
     },
     about: {
       type: String,

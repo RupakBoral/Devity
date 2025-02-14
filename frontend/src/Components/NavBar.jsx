@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import axios from "axios";
 import { removeUser } from "../utils/userSlice";
+import Bg from "../img/Bg.jpg";
 
 const NavBar = () => {
   const user = useSelector((store) => store.user);
@@ -21,15 +22,22 @@ const NavBar = () => {
   };
 
   return (
-    <div className="navbar bg-base-300">
-      <div className="flex-1 mx-5">
-        <Link to={"/"} className="btn btn-ghost text-xl">
-          🧑‍💻 Devity
-        </Link>
-      </div>
-      {user && (
+    user != null && (
+      <div
+        style={{
+          backgroundImage: `url(${Bg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+        className="navbar border-b-8 border-b-red-500"
+      >
+        <div className="flex-1 mx-5">
+          <Link to={"/home"} className="btn btn-ghost text-2xl text-black">
+            🧑‍💻 Devity
+          </Link>
+        </div>
         <div className="flex-none gap-2 mx-5">
-          <p>{user.firstName}</p>
+          <p className="text-black font-semibold">{user.firstName}</p>
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
@@ -64,8 +72,8 @@ const NavBar = () => {
             </ul>
           </div>
         </div>
-      )}
-    </div>
+      </div>
+    )
   );
 };
 

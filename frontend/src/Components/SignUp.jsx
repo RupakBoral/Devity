@@ -1,75 +1,116 @@
+import axios from "axios";
+import { useRef, useState } from "react";
+import { BASE_URL } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import bgImage from "../img/bg.jpg";
+import SignUpImg from "../img/SignUpImg.jpg";
+
 const SignUp = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  let firstNameRef = useRef("");
+  let lastNameRef = useRef("");
+  let phoneNoRef = useRef("");
+  let emailIdRef = useRef("");
+  let passwordRef = useRef("");
+
+  const [error, setError] = useState("");
+
+  const handleSignUp = async () => {
+    try {
+      const res = await axios.post(
+        BASE_URL + "/signUp",
+        {
+          firstName: firstNameRef.current,
+          lastName: lastNameRef.current,
+          phoneNo: phoneNoRef.current,
+          emailId: emailIdRef.current,
+          password: passwordRef.current,
+        },
+        { withCredentials: true }
+      );
+      setError("");
+      if (res.status === 200) {
+        dispatch(addUser(res?.data));
+        navigate("/login");
+      }
+    } catch (err) {
+      setError(err?.response?.data);
+    }
+  };
+
   return (
-    <div className="card bg-base-300 w-96 shadow-xl mx-auto my-5">
-      <div className="card-body">
-        <h2 className="card-title">Sign Up</h2>
-        <label className="input input-bordered flex items-center gap-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            className="h-4 w-4 opacity-70"
+    <div
+      style={{
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+      className="flex overflow-x-hidden items-center min-h-screen bg-pink-300"
+    >
+      <img src={SignUpImg} className="w-1/2" />
+
+      <div className="border-4 mx-auto border-black rounded-2xl p-8 shadow-xl max-w-sm w-full text-center bg-pink-300">
+        <h2 className="text-3xl font-bold text-black mb-4">Join Us!</h2>
+        <p className="text-black mb-4">
+          Create an account and start exploring 🚀
+        </p>
+
+        <div className="space-y-4">
+          <input
+            type="text"
+            onChange={(e) => (firstNameRef.current = e.target.value)}
+            className="w-full p-3 border-2 font-semibold text-black border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 bg-pink-400 placeholder-white shadow-md"
+            placeholder="First Name"
+          />
+          <input
+            type="text"
+            onChange={(e) => (lastNameRef.current = e.target.value)}
+            className="w-full p-3 border-2 font-semibold text-black border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 bg-pink-400 placeholder-white shadow-md"
+            placeholder="Last Name"
+          />
+          <input
+            type="tel"
+            onChange={(e) => (phoneNoRef.current = e.target.value)}
+            className="w-full p-3 border-2 font-semibold text-black border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 bg-pink-400 placeholder-white shadow-md"
+            placeholder="Phone Number"
+          />
+          <input
+            type="email"
+            onChange={(e) => (emailIdRef.current = e.target.value)}
+            className="w-full p-3 border-2 font-semibold text-black border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 bg-pink-400 placeholder-white shadow-md"
+            placeholder="Email"
+          />
+          <input
+            type="password"
+            onChange={(e) => (passwordRef.current = e.target.value)}
+            className="w-full p-3 font-semibold text-black border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 bg-pink-400 placeholder-white shadow-md"
+            placeholder="Password"
+          />
+        </div>
+
+        {error && <p className="text-red-500 font-semibold mt-2">{error}</p>}
+
+        <button
+          onClick={handleSignUp}
+          className="w-full bg-[#F50057] text-white font-bold py-3 mt-4 rounded-lg border-2 border-black hover:bg-black transition shadow-md"
+        >
+          Sign Up
+        </button>
+
+        <p className="mt-4 text-black">
+          Already have an account?
+          <Link
+            to="/login"
+            className="text-black text-lg font-bold underline ml-1"
           >
-            <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-            <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-          </svg>
-          <input type="text" className="grow" placeholder="First name" />
-        </label>
-        <label className="input input-bordered flex items-center gap-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            className="h-4 w-4 opacity-70"
-          >
-            <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-            <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-          </svg>
-          <input type="text" className="grow" placeholder="Last name" />
-        </label>
-        <label className="input input-bordered flex items-center gap-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            className="h-4 w-4 opacity-70"
-          >
-            <path
-              fillRule="evenodd"
-              d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
-              clipRule="evenodd"
-            />
-          </svg>
-          <input type="password" className="grow" placeholder="Phone no" />
-        </label>
-        <label className="input input-bordered flex items-center gap-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            className="h-4 w-4 opacity-70"
-          >
-            <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-            <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-          </svg>
-          <input type="text" className="grow" placeholder="Email" />
-        </label>
-        <label className="input input-bordered flex items-center gap-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            className="h-4 w-4 opacity-70"
-          >
-            <path
-              fillRule="evenodd"
-              d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
-              clipRule="evenodd"
-            />
-          </svg>
-          <input type="password" className="grow" placeholder="Password" />
-        </label>
-        <button className="btn btn-outline">Sign Up</button>
+            Login
+          </Link>
+        </p>
       </div>
     </div>
   );
