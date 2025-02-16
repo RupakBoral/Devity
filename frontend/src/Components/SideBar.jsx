@@ -40,8 +40,8 @@ const SideBar = () => {
 
   return (
     user && (
-      <div className="w-2/5 h-screen bg-[#f6f5ec] border-r border-r-gray-400 space-y-4">
-        <div className="py-6 bg-gradient-to-tl from-pink-700 to-red-300 p-4 text-white text-lg font-semibold flex justify-between items-baseline">
+      <div className="w-2/5 h-screen bg-[#f6f5ec] border-r-2 border-r-gray-400 space-y-4">
+        <div className="py-6 bg-gradient-to-tl to-[#fa4c50] from-[#ff99ac] border-b-2 border-b-gray-500 p-4 text-white text-lg font-semibold flex justify-between items-baseline">
           <Link
             className="hover:scale-105 hover:opacity-100 opacity-90 transition-all duration-700 p-2 rounded-xl"
             to={"/"}
@@ -57,16 +57,16 @@ const SideBar = () => {
         <div className="flex flex-col">
           <button
             onClick={() => handleEdit()}
-            className="cursor-pointer flex justify-between text-gray-500 font-bold font-mono text-lg px-4"
+            className="cursor-pointer flex justify-between text-gray-700 font-bold font-mono text-lg px-4"
           >
             <p>ACCOUNT SETTINGS</p>
             <span>{">"}</span>
           </button>
-          <div className="py-6 bg-white border-collapse border-y border-gray-400 flex justify-between text-gray-600 px-4 text-lg">
+          <div className="py-6 bg-white border-y-2 border-gray-400 flex justify-between text-gray-600 px-4 text-lg">
             <p>Email</p>
             <p>{emailId}</p>
           </div>
-          <div className="py-6 bg-white border-collapse border-y border-gray-400 flex justify-between text-gray-600 px-4 text-lg">
+          <div className="py-6 bg-white border-b-2 border-gray-400 flex justify-between text-gray-600 px-4 text-lg">
             <p>Phone Number</p>
             <p>{phoneNo}</p>
           </div>
@@ -74,26 +74,26 @@ const SideBar = () => {
         </div>
 
         <div className="flex flex-col">
-          <h2 className="text-gray-500 font-bold font-mono text-lg pl-4">
+          <h2 className="text-gray-700 font-bold font-mono text-lg pl-4">
             APPERANCE
           </h2>
           <div
             onClick={() => setMode("system")}
-            className="py-6 bg-white border-collapse border-y border-gray-400 flex justify-between text-gray-600 px-4 text-lg"
+            className="py-6 cursor-pointer bg-white border-collapse border-y-2 border-gray-400 flex justify-between text-gray-600 px-4 text-lg"
           >
             <p>Use Sytem Setting</p>
             <p>{mode === "system" ? "✔️" : ""}</p>
           </div>
           <div
             onClick={() => setMode("light")}
-            className="py-6 bg-white border-collapse border-y border-gray-400 flex justify-between text-gray-600 px-4 text-lg"
+            className="py-6 cursor-pointer bg-white border-collapse border-b-2 border-gray-400 flex justify-between text-gray-600 px-4 text-lg"
           >
             <p>Light Mode</p>
             <p>{mode === "light" ? "✔️" : ""}</p>
           </div>
           <div
             onClick={() => setMode("dark")}
-            className="py-6 bg-white border-collapse border-y border-gray-400 flex justify-between text-gray-600 px-4 text-lg"
+            className="py-6 cursor-pointer bg-white border-collapse border-b-2 border-gray-400 flex justify-between text-gray-600 px-4 text-lg"
           >
             <p>Dark Mode</p>
             <p>{mode === "dark" ? "✔️" : ""}</p>
@@ -103,7 +103,7 @@ const SideBar = () => {
 
         <button
           onClick={Logout}
-          className="py-6 w-full bg-white border-collapse border-y border-gray-400 flex justify-between text-gray-600 px-4 text-lg"
+          className="py-6 w-full bg-white border-collapse border-y-2 border-gray-400 flex justify-between text-gray-600 px-4 text-lg"
         >
           <p>Logout</p>
         </button>

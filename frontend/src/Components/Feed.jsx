@@ -5,7 +5,7 @@ import axios from "axios";
 import { addFeed } from "../utils/feedSlice";
 import { useEffect } from "react";
 import UserCard from "./UserCard";
-// import FeedBg from "../img/FeedBg.jpg";
+import FeedLightBg from "../img/FeedLightBg.jpg";
 
 const Feed = () => {
   const dispatch = useDispatch();
@@ -39,14 +39,14 @@ const Feed = () => {
 
   return (
     <div
-      // style={{
-      //   backgroundImage: `url(${FeedBg})`,
-      //   backgroundSize: "cover",
-      //   backgroundPosition: "center",
-      // }}
-      className="flex w-full bg-gradient-to-bl from-red-100 to-[#ff99ac] items-center h-full"
+      style={{
+        backgroundImage: `url(${FeedLightBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+      className="flex w-full inset-0 bg-gradient-to-tr from-red-100 to-[#ff99ac] items-center h-full"
     >
-      {feed != null && <UserCard user={feed.data[0]} />}
+      {feed != null && <UserCard user={feed.data[2]} />}
     </div>
   );
 };
