@@ -5,8 +5,7 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import bgImage from "../img/bg.jpg";
-import SignUpImg from "../img/SignUpImg.jpg";
+import SignUpImg from "../img/LoginImg.png";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -44,17 +43,10 @@ const SignUp = () => {
   };
 
   return (
-    <div
-      style={{
-        backgroundImage: `url(${bgImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-      className="flex overflow-x-hidden items-center min-h-screen bg-pink-300"
-    >
-      <img src={SignUpImg} className="w-1/2" />
+    <div className="flex overflow-x-hidden items-center w-screen min-h-screen bg-white">
+      <img src={SignUpImg} className="w-1/2 h-screen" />
 
-      <div className="border-4 mx-auto border-black rounded-2xl p-8 shadow-xl max-w-sm w-full text-center bg-pink-300">
+      <div className="mx-auto rounded-2xl p-8 max-w-lg text-center">
         <h2 className="text-3xl font-bold text-black mb-4">Join Us!</h2>
         <p className="text-black mb-4">
           Create an account and start exploring 🚀
@@ -64,31 +56,31 @@ const SignUp = () => {
           <input
             type="text"
             onChange={(e) => (firstNameRef.current = e.target.value)}
-            className="w-full p-3 border-2 font-semibold text-black border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 bg-pink-400 placeholder-white shadow-md"
+            className="w-full p-3 font-semibold text-black  bg-transparent border-b-2 border-black placeholder:text-gray-500 placeholder:font-medium"
             placeholder="First Name"
           />
           <input
             type="text"
             onChange={(e) => (lastNameRef.current = e.target.value)}
-            className="w-full p-3 border-2 font-semibold text-black border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 bg-pink-400 placeholder-white shadow-md"
+            className="w-full p-3  font-semibold text-black  bg-transparent border-b-2 border-black placeholder:text-gray-500 placeholder:font-medium"
             placeholder="Last Name"
           />
           <input
             type="tel"
             onChange={(e) => (phoneNoRef.current = e.target.value)}
-            className="w-full p-3 border-2 font-semibold text-black border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 bg-pink-400 placeholder-white shadow-md"
+            className="w-full p-3  font-semibold text-black  bg-transparent border-b-2 border-black placeholder:text-gray-500 placeholder:font-medium"
             placeholder="Phone Number"
           />
           <input
             type="email"
             onChange={(e) => (emailIdRef.current = e.target.value)}
-            className="w-full p-3 border-2 font-semibold text-black border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 bg-pink-400 placeholder-white shadow-md"
+            className="w-full p-3  font-semibold text-black bg-transparent border-b-2 border-black placeholder:text-gray-500 placeholder:font-medium "
             placeholder="Email"
           />
           <input
             type="password"
             onChange={(e) => (passwordRef.current = e.target.value)}
-            className="w-full p-3 font-semibold text-black border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 bg-pink-400 placeholder-white shadow-md"
+            className="w-full p-3 font-semibold text-black bg-transparent border-b-2 border-black placeholder:text-gray-500 placeholder:font-medium"
             placeholder="Password"
           />
         </div>
@@ -97,7 +89,7 @@ const SignUp = () => {
 
         <button
           onClick={handleSignUp}
-          className="w-full bg-[#F50057] text-white font-bold py-3 mt-4 rounded-lg border-2 border-black hover:bg-black transition shadow-md"
+          className="w-full bg-black text-white font-bold py-3 mt-4 rounded-sm hover:bg-white hover:text-black transition shadow-md"
         >
           Sign Up
         </button>

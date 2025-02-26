@@ -5,7 +5,6 @@ import axios from "axios";
 import { addFeed } from "../utils/feedSlice";
 import { useEffect } from "react";
 import UserCard from "./UserCard";
-import FeedLightBg from "../img/FeedLightBg.jpg";
 
 const Feed = () => {
   const dispatch = useDispatch();
@@ -14,7 +13,6 @@ const Feed = () => {
 
   const getFeed = async () => {
     if (feed && feed.length > 0) {
-      console.log("object");
       return;
     }
 
@@ -38,14 +36,7 @@ const Feed = () => {
   }, []);
 
   return (
-    <div
-      style={{
-        backgroundImage: `url(${FeedLightBg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-      className="flex w-full inset-0 bg-gradient-to-tr from-red-100 to-[#ff99ac] items-center h-full"
-    >
+    <div className="flex w-full bg-gradient-to-tl from-stone-100 to-stone-300 dark:from-stone-800 dark:to-stone-700 items-center h-screen">
       {feed != null && <UserCard user={feed.data[2]} />}
     </div>
   );

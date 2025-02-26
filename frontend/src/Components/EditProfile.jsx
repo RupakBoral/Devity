@@ -17,9 +17,9 @@ const EditProfile = ({ setShowToast, user }) => {
         setEditBtn={setEditBtn}
       />
     ) : (
-      <div className="p-6 flex items-center bg-[#f6f5ec] min-h-screen bg-gradient-to-bl from-red-50 to-pink-300">
-        <div className="container mx-auto bg-[#f6f5ec] border-2 border-gray-600 rounded-lg shadow-[10px_10px_0px_#fa4c50] mb-6 space-y-6">
-          <div className="flex justify-between py-2 px-4 items-center  rounded-t-lg border border-b-gray-600">
+      <div className="p-6 flex items-center min-h-screen bg-gradient-to-l from-stone-300 to-stone-100">
+        <div className="container w-3/4 mx-auto bg-stone-200 border-2  rounded-lg shadow-[5px_5px_0px_gray] mb-6 space-y-6">
+          <div className="flex justify-between py-2 px-4 items-center rounded-t-lg border-b-2 border-gray-400 ">
             <div className="flex gap-2">
               <span className="w-3 h-3 bg-red-500 rounded-full"></span>
               <span className="w-3 h-3 bg-yellow-500 rounded-full"></span>

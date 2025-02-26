@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 var jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const ProjectSchema = require("./project");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -69,8 +70,13 @@ const UserSchema = new mongoose.Schema(
     },
     skills: {
       type: [String],
-      maxLength: 25,
+      maxLength: 50,
     },
+    age: {
+      type: Number,
+      maxAge: 100,
+    },
+    projects: [ProjectSchema],
   },
   {
     timestamps: true,
