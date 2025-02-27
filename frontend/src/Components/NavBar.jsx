@@ -63,10 +63,13 @@ const NavBar = ({ setOpenSideBar }) => {
           <p>Home</p>
         </Link>
 
-        <div className="flex flex-col text-gray-500 cursor-pointer">
+        <Link
+          to={"/connections"}
+          className="flex flex-col text-gray-500 cursor-pointer"
+        >
           <FiUsers className="w-6 h-6" />
           <p className="text-sm">My Network</p>
-        </div>
+        </Link>
 
         <div className="cursor-pointer">
           {mode === "light" ? (

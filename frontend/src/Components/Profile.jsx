@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import ProfileBg from "../img/ProfileBg.jpg";
 import SmallProjectCard from "./SmallProjectCard";
 import { FiArrowRight, FiEdit, FiUsers, FiMessageSquare } from "react-icons/fi";
 import EditProfileForm from "./EditProfileForm";
@@ -25,6 +24,8 @@ const Profile = () => {
     about,
     // phoneNo,
     // emailId,
+    headline,
+    BgUrl,
     photoUrl,
     skills,
     projects,
@@ -45,7 +46,7 @@ const Profile = () => {
             <div className="relative rounded-lg">
               <img
                 className="h-56 rounded-t-lg w-full object-cover"
-                src={ProfileBg}
+                src={BgUrl}
               />
               <img
                 className="w-32 h-32 border-4 border-white rounded-full absolute -bottom-10 left-10"
@@ -53,33 +54,31 @@ const Profile = () => {
               />
             </div>
             <div className="mt-12 p-6">
-              <div className="flex gap-2">
-                <h1 className="font-bold text-black text-lg">{firstName}</h1>
-                <h1 className="font-bold text-black text-lg">{lastName}</h1>
-              </div>
-              <h3>Headline</h3>
+              <h1 className="font-bold text-black dark:text-white text-lg">
+                {firstName} {lastName}
+              </h1>
+
+              <h3>{headline}</h3>
             </div>
           </section>
 
-          <div className="bg-white dark:bg-black p-6 rounded-lg flex flex-col gap-6 justify-between">
-            <h2 className="text-black font-bold text-lg">
+          <div className="bg-white dark:bg-black p-6 rounded-lg flex flex-col gap-2 justify-between">
+            <h2 className="text-black dark:text-white font-bold text-lg">
               General Information
             </h2>
             <hr />
             <p>{about}</p>
           </div>
 
-          <section className="flex flex-col p-6 bg-white dark:bg-black rounded-lg">
-            <h2 className="text-black font-bold text-lg">Skills</h2>
+          <section className="flex flex-col p-6 bg-white dark:bg-black rounded-lg gap-2">
+            <h2 className="text-black dark:text-gray-200 font-bold text-lg">
+              Skills
+            </h2>
             <hr />
             <div className="flex flex-wrap gap-2">
               {skills.map((skill) => (
-                <span
-                  key={skill}
-                  className="bg-gray-200 px-2 py-1 rounded-full"
-                >
+                <span className="text-gray-600 dark:text-gray-200" key={skill}>
                   {skill}
-                  <hr />
                 </span>
               ))}
             </div>
@@ -88,7 +87,9 @@ const Profile = () => {
           {projects ? (
             <section className="bg-white dark:bg-black p-6 rounded-lg">
               <div className="flex flex-col gap-2 justify-between">
-                <h2 className="text-lg font-bold text-black">Projects</h2>
+                <h2 className="text-lg font-bold text-black dark:text-gray-200">
+                  Projects
+                </h2>
                 <hr />
                 <SmallProjectCard projects={projects} />
                 <hr />
@@ -102,21 +103,38 @@ const Profile = () => {
           )}
         </div>
 
-        <div className="w-1/6 p-6 bg-white dark:bg-black max-h-48 rounded-lg flex flex-col gap-2">
-          <div
-            onClick={() => dispatch(editSetting(true))}
-            className="flex justify-between cursor-pointer items-center"
-          >
-            <p className="text-black dark:text-gray-100">Edit Profile</p>
-            <FiEdit className="w-5 h-5" />
+        <div className="w-1/6 space-y-6">
+          <div className=" p-6 bg-white dark:bg-black max-h-48 rounded-lg flex flex-col gap-2">
+            <div
+              onClick={() => dispatch(editSetting(true))}
+              className="flex justify-between cursor-pointer items-center"
+            >
+              <p className="text-black dark:text-gray-100">Edit Profile</p>
+              <FiEdit className="w-5 h-5" />
+            </div>
+            <div className="flex justify-between cursor-pointer items-center">
+              <p className="text-black dark:text-gray-100">Connections</p>
+              <FiUsers className="w-5 h-5" />
+            </div>
+            <div className="flex justify-between cursor-pointer items-center">
+              <p className="text-black dark:text-gray-100">Messages</p>
+              <FiMessageSquare className="w-5 h-5" />
+            </div>
           </div>
-          <div className="flex justify-between cursor-pointer items-center">
-            <p className="text-black dark:text-gray-100">Connections</p>
-            <FiUsers className="w-5 h-5" />
-          </div>
-          <div className="flex justify-between cursor-pointer items-center">
-            <p className="text-black dark:text-gray-100">Messages</p>
-            <FiMessageSquare className="w-5 h-5" />
+
+          <div className="p-6 bg-white dark:bg-black max-h-48 rounded-lg flex flex-col gap-2">
+            <div className="flex justify-between cursor-pointer items-center">
+              <p className="text-black dark:text-gray-100">Email</p>
+              <p>{user.emailId}</p>
+            </div>
+            <div className="flex justify-between cursor-pointer items-center">
+              <p className="text-black dark:text-gray-100">Phone</p>
+              <p>{user.phoneNo}</p>
+            </div>
+            <div className="flex justify-between cursor-pointer items-center">
+              <p className="text-black dark:text-gray-100">Role</p>
+              <p>Rookie, Expert, Medival</p>
+            </div>
           </div>
         </div>
       </div>

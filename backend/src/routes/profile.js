@@ -4,6 +4,8 @@ const { validateEditProfile } = require("../utils/validate");
 
 const profileRouter = express.Router();
 
+profileRouter.use(express.json());
+
 profileRouter.get("/profile", userAuth, async (req, res) => {
   try {
     const user = req.user;
@@ -15,7 +17,6 @@ profileRouter.get("/profile", userAuth, async (req, res) => {
 
 profileRouter.patch("/profile/edit", userAuth, async (req, res) => {
   try {
-    console.log(req.user);
     if (!validateEditProfile(req)) {
       throw new Error("Invalid Edit Request");
     }

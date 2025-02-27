@@ -4,7 +4,8 @@ const userRouter = express.Router();
 const ConnectionRequestModel = require("../models/connectionRequest");
 const UserModel = require("../models/user");
 
-const USER_SAFE_DATA = "firstName lastName photoUrl about skills";
+const USER_SAFE_DATA =
+  "firstName lastName photoUrl about skills BgUrl projects headline";
 
 userRouter.get("/user/requests/received", userAuth, async (req, res) => {
   try {
@@ -39,7 +40,7 @@ userRouter.get("/user/connections", userAuth, async (req, res) => {
       .populate("toUserId", USER_SAFE_DATA);
 
     if (ConnectionsEstablished.length === 0) {
-      return res.status(400).json({ message: "No conneciton found" });
+      return res.status(200).json({ message: "No conneciton found" });
     }
 
     //   handle the case when fromUserId is the loggedInUser
@@ -57,6 +58,7 @@ userRouter.get("/user/connections", userAuth, async (req, res) => {
 
 userRouter.get("/feed", userAuth, async (req, res) => {
   try {
+    // console.log(req.user);
     const loggedInUser = req.user;
     const page = parseInt(req.query.page) || 1;
     let limit = parseInt(req.query.limit) || 10;

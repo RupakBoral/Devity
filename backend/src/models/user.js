@@ -63,10 +63,20 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: "https://img.icons8.com/?size=100&id=7819&format=png",
     },
+    BgUrl: {
+      type: String,
+      default:
+        "https://t3.ftcdn.net/jpg/09/12/76/70/360_F_912767030_3E4ePOMr42kY42YcFIQhrzUEH9iAFwuW.jpg",
+    },
     about: {
       type: String,
       default: "Hello devs, I am excited to work with you.",
       maxLength: 200,
+    },
+    headline: {
+      type: String,
+      default: "Developer",
+      maxLength: 20,
     },
     skills: {
       type: [String],

@@ -8,6 +8,7 @@ import appStore from "./utils/appStore";
 import Feed from "./Components/Feed";
 import Error from "./Components/Error";
 import Home from "./Components/Home";
+import Connections from "./Components/Connections";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path="/signUp" element={<SignUp />} />
               <Route path="/login" element={<Login />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/connections" element={<Connections />} />
             </Route>
           </Routes>
         </BrowserRouter>

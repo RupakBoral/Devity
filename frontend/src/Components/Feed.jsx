@@ -17,9 +17,7 @@ const Feed = () => {
     }
 
     try {
-      const token = localStorage.getItem("token");
       const res = await axios.get(BASE_URL + "/feed", {
-        headers: { Authorization: `Bearer ${token}` },
         withCredentials: true,
       });
       dispatch(addFeed(res?.data));
@@ -37,7 +35,7 @@ const Feed = () => {
 
   return (
     <div className="flex w-full bg-gradient-to-tl from-stone-100 to-stone-300 dark:from-stone-800 dark:to-stone-700 items-center h-screen">
-      {feed != null && <UserCard user={feed.data[2]} />}
+      {feed != null && <UserCard user={feed.data[0]} />}
     </div>
   );
 };
