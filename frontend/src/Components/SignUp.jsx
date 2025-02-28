@@ -36,7 +36,7 @@ const SignUp = () => {
       setError("");
       if (res.status === 200) {
         dispatch(addUser(res?.data));
-        navigate("/login");
+        navigate("/");
       }
     } catch (err) {
       setError(err?.response?.data);

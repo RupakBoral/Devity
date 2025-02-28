@@ -23,10 +23,10 @@ const UserCard = ({ user, setToast }) => {
         }
       );
       setToast(status);
+      dispatch(updateFeed(_id));
       setTimeout(() => {
         setToast(null);
       }, 2000);
-      dispatch(updateFeed(_id));
       setErr("");
     } catch (err) {
       setErr(err);
@@ -45,7 +45,7 @@ const UserCard = ({ user, setToast }) => {
       </div>
       {!showDetails ? (
         <section className="flex w-full p-6 bg-stone-100 dark:bg-stone-400 rounded-b-lg">
-          <div className="flex flex-col space-y-4 w-full  mx-auto items-center">
+          <div className="flex flex-col space-y-4 w-full mx-auto items-center">
             <img
               src={photoUrl}
               alt={`${firstName}`}

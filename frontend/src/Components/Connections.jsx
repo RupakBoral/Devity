@@ -24,7 +24,7 @@ const Connections = () => {
   };
 
   useEffect(() => {
-    if (connections === null) fetchConnections();
+    fetchConnections();
   }, [requests]);
 
   return connections !== null ? (
@@ -58,7 +58,9 @@ const Connections = () => {
       <p>{err}</p>
     </div>
   ) : (
-    <p>Loading...</p>
+    <div className="w-screen h-screen py-10 bg-gradient-to-tl from-stone-100 to-stone-300 dark:from-stone-800 dark:to-stone-700">
+      <p className="text-center text-lg font-semibold">No connections found</p>
+    </div>
   );
 };
 

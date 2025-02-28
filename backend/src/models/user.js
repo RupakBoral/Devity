@@ -61,7 +61,8 @@ const UserSchema = new mongoose.Schema(
     },
     photoUrl: {
       type: String,
-      default: "https://img.icons8.com/?size=100&id=7819&format=png",
+      default:
+        "https://img.freepik.com/premium-vector/professional-male-avatar-profile-picture-employee-work_1322206-66590.jpg",
     },
     BgUrl: {
       type: String,
@@ -98,7 +99,6 @@ UserSchema.methods.getJWT = async function () {
   const user = this;
   const jwtValue = { _id: user._id };
   const token = jwt.sign(jwtValue, "DEV@277"); // dev@277 secret key
-  // console.log(typeof token);
   return token;
 };
 

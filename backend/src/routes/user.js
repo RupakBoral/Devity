@@ -62,7 +62,6 @@ userRouter.get("/user/connections", userAuth, async (req, res) => {
 
 userRouter.get("/feed", userAuth, async (req, res) => {
   try {
-    // console.log(req.user);
     const loggedInUser = req.user;
     const page = parseInt(req.query.page) || 1;
     let limit = parseInt(req.query.limit) || 10;
@@ -83,7 +82,6 @@ userRouter.get("/feed", userAuth, async (req, res) => {
       HideUsersFromFeed.add(req.fromUserId.toString());
       HideUsersFromFeed.add(req.toUserId.toString());
     });
-    // console.log(HideUsersFromFeed);
     const users = await UserModel.find({
       // find all the users whose id is 'not-in' the HideUserFromFeed set and is not loggedInUser
       $and: [

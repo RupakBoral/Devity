@@ -83,11 +83,15 @@ const Profile = () => {
             </h2>
             <hr />
             <div className="flex flex-wrap gap-2">
-              {skills.map((skill) => (
-                <span className="text-gray-600 dark:text-gray-200" key={skill}>
-                  {skill}
-                </span>
-              ))}
+              {skills &&
+                skills.map((skill) => (
+                  <span
+                    className="text-gray-600 dark:text-gray-200"
+                    key={skill}
+                  >
+                    {skill}
+                  </span>
+                ))}
             </div>
           </section>
 

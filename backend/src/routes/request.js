@@ -83,7 +83,6 @@ requestRouter.post(
 
       res.status(200).json({ data: data, message: `Connection Request` });
     } catch (err) {
-      console.log("ho gya");
       res.status(404).json({ message: err.message });
     }
   }

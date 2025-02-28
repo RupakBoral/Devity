@@ -28,7 +28,6 @@ const Requests = () => {
         }, 3000);
       }
     } catch (err) {
-      console.log(err);
       setErr(err);
     }
   };
@@ -40,7 +39,6 @@ const Requests = () => {
       });
       dispatch(addRequests(res?.data?.data));
     } catch (err) {
-      console.log(err);
       setErr(err);
     }
   };

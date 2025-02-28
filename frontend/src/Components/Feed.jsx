@@ -23,7 +23,7 @@ const Feed = () => {
       const res = await axios.get(BASE_URL + "/feed", {
         withCredentials: true,
       });
-      dispatch(addFeed(res?.data));
+      dispatch(addFeed(res?.data?.data));
     } catch (err) {
       console.error("Fetch Error:", err);
       navigate("/home");
@@ -31,13 +31,11 @@ const Feed = () => {
   };
 
   useEffect(() => {
-    if (!feed || feed.length === 0) {
-      getFeed();
-    }
+    if (feed === null || feed.length === 0) getFeed();
   }, []);
 
-  return (
-    <div className="w-full h-screen mx-auto py-20 bg-gradient-to-tl from-stone-100 to-stone-300 dark:from-stone-800 dark:to-stone-700 ">
+  return feed !== null && feed.length !== 0 ? (
+    <div className="w-full h-screen mx-auto py-20 bg-gradient-to-tl from-stone-100 to-stone-300 dark:from-stone-800 dark:to-stone-700">
       {toast !== null ? (
         toast === "interested" ? (
           <div className="toast toast-top toast-end">
@@ -55,7 +53,13 @@ const Feed = () => {
       ) : (
         <p></p>
       )}
-      {feed !== null && <UserCard user={feed.data[2]} setToast={setToast} />}
+      <UserCard user={feed[0]} setToast={setToast} />
+    </div>
+  ) : (
+    <div className="w-full h-screen mx-auto py-6 bg-gradient-to-tl from-stone-100 to-stone-300 dark:from-stone-800 dark:to-stone-700">
+      <p className="text-lg text-center dark:text-white text-black">
+        No users found !!
+      </p>
     </div>
   );
 };
