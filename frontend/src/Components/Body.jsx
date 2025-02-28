@@ -4,16 +4,12 @@ import { BASE_URL } from "../utils/constants";
 import { addUser } from "../utils/userSlice";
 import axios from "axios";
 import { useEffect } from "react";
-import SideBar from "./SideBar";
-import { useState } from "react";
 import NavBar from "./NavBar";
 
 const Body = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
-
-  const [OpenSideBar, setOpenSideBar] = useState(false);
 
   const fetchUser = async () => {
     try {
@@ -34,20 +30,8 @@ const Body = () => {
   }, []);
 
   return (
-    <div
-      className={`w-full ${!OpenSideBar ? "flex-col" : ""} ${
-        user == null ? "" : "flex"
-      } bg-stone-200 dark:bg-stone-800`}
-    >
-      {user != null ? (
-        OpenSideBar ? (
-          <SideBar OpenSideBar={OpenSideBar} setOpenSideBar={setOpenSideBar} />
-        ) : (
-          <NavBar setOpenSideBar={setOpenSideBar} />
-        )
-      ) : (
-        <p></p>
-      )}
+    <div className={`w-full "flex-col"} bg-stone-200 dark:bg-stone-800`}>
+      {user !== null ? <NavBar /> : <p></p>}
       <Outlet />
     </div>
   );

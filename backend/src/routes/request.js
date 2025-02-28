@@ -1,8 +1,8 @@
 const express = require("express");
 const { userAuth } = require("../middlewares/auth");
+
 const ConnectionRequestModel = require("../models/connectionRequest");
 const UserModel = require("../models/user");
-
 const requestRouter = express.Router();
 
 requestRouter.post(
@@ -76,13 +76,14 @@ requestRouter.post(
       });
 
       if (!connectionRequest) {
-        return res.status(400).json({ message: "No request found" });
+        return res.status(200).json({ message: "No request found" });
       }
-
       connectionRequest.status = status;
       const data = await connectionRequest.save();
-      res.status(200).json({ message: `Connection Request ${data.status}` });
+
+      res.status(200).json({ data: data, message: `Connection Request` });
     } catch (err) {
+      console.log("ho gya");
       res.status(404).json({ message: err.message });
     }
   }

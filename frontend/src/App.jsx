@@ -9,6 +9,7 @@ import Feed from "./Components/Feed";
 import Error from "./Components/Error";
 import Home from "./Components/Home";
 import Connections from "./Components/Connections";
+import Requests from "./Components/Requests";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/connections" element={<Connections />} />
+              <Route path="/requests" element={<Requests />} />
             </Route>
           </Routes>
         </BrowserRouter>

@@ -5,9 +5,15 @@ const Home = () => {
   const userData = useSelector((store) => store.user);
 
   return (
-    <div>
-      <div>{!userData && <Link to={"/login"}>Login</Link>}</div>
-      <p>Home</p>
+    <div className="w-screen h-screen bg-gradient-to-tl from-stone-100 to-stone-300 dark:from-stone-800 dark:to-stone-700">
+      <div>
+        {userData !== null && (
+          <div className="flex flex-col">
+            <Link to={"/signUp"}>Sign Up</Link>
+            <Link to={"/login"}>Login</Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

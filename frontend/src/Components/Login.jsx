@@ -1,11 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import LoginImg from "../img/LoginImg.png";
 import logo from "../img/logo.png";
+import Feed from "./Feed";
 
 const Login = () => {
   const [emailId, setEmailId] = useState("");
@@ -29,7 +30,9 @@ const Login = () => {
     }
   };
 
-  return (
+  const user = useSelector((store) => store.user);
+
+  return user !== null ? (
     <div className="flex overflow-x-hidden items-center min-h-screen bg-white">
       <img src={LoginImg} className="w-1/2 h-screen" />
 
@@ -76,6 +79,8 @@ const Login = () => {
         </p>
       </div>
     </div>
+  ) : (
+    <Feed />
   );
 };
 

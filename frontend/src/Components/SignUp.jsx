@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useRef, useState } from "react";
 import { BASE_URL } from "../utils/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import SignUpImg from "../img/LoginImg.png";
+import Feed from "./Feed";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -42,7 +43,9 @@ const SignUp = () => {
     }
   };
 
-  return (
+  const user = useSelector((store) => store.user);
+
+  return user === null ? (
     <div className="flex overflow-x-hidden items-center w-screen min-h-screen bg-white">
       <img src={SignUpImg} className="w-1/2 h-screen" />
 
@@ -105,6 +108,8 @@ const SignUp = () => {
         </p>
       </div>
     </div>
+  ) : (
+    <Feed />
   );
 };
 

@@ -1,8 +1,9 @@
 const express = require("express");
 const { userAuth } = require("../middlewares/auth");
-const userRouter = express.Router();
+
 const ConnectionRequestModel = require("../models/connectionRequest");
 const UserModel = require("../models/user");
+const userRouter = express.Router();
 
 const USER_SAFE_DATA =
   "firstName lastName photoUrl about skills BgUrl projects headline";
@@ -14,15 +15,18 @@ userRouter.get("/user/requests/received", userAuth, async (req, res) => {
     const connectionRequests = await ConnectionRequestModel.find({
       toUserId: loggedInUserId,
       status: "interested",
-    }).populate("fromUserId", USER_SAFE_DATA);
+    })
+      .select("_id")
+      .populate("fromUserId", USER_SAFE_DATA);
     // populate works with ref, where ref is the model it is related/linked to
 
-    const data = connectionRequests.map((row) => row.fromUserId);
+    // const data = connectionRequests.map((row) => row.fromUserId);
 
-    if (data.length === 0) {
-      return res.status(400).json({ message: "No Request found" });
+    if (connectionRequests.length === 0) {
+      return res.status(200).json({ message: "No Request found" });
     }
-    res.status(200).json({ message: data });
+
+    res.status(200).json({ data: connectionRequests });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

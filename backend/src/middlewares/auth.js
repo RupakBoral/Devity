@@ -5,6 +5,7 @@ const userAuth = async (req, res, next) => {
   try {
     // console.log("Cookies:", req.cookies); // Log all cookies
     const { token } = req.cookies;
+    console.log(token);
     if (!token) {
       return res.status(401).send("Please Login");
     }

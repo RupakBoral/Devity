@@ -1,11 +1,18 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import SmallProjectCard from "./SmallProjectCard";
-import { FiArrowRight, FiEdit, FiUsers, FiMessageSquare } from "react-icons/fi";
+import {
+  FiArrowRight,
+  FiEdit,
+  FiUsers,
+  FiMessageSquare,
+  FiUserPlus,
+} from "react-icons/fi";
 import EditProfileForm from "./EditProfileForm";
 import Error from "./Error";
 import { editSetting } from "../utils/editSlice";
 import Loading from "./Loading";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   let user = useSelector((store) => store.user);
@@ -31,9 +38,9 @@ const Profile = () => {
     projects,
   } = user;
 
-  return user != null ? (
+  return user !== null ? (
     !edit ? (
-      <div className="w-screen h-full flex justify-center gap-6 bg-stone-200 py-6 dark:bg-stone-800">
+      <div className="w-screen h-full flex justify-center gap-6 py-8 bg-gradient-to-tl from-stone-100 to-stone-300 dark:from-stone-800 dark:to-stone-700">
         {showToast && (
           <div className="toast toast-top toast-end">
             <div className="alert alert-success">
@@ -112,10 +119,20 @@ const Profile = () => {
               <p className="text-black dark:text-gray-100">Edit Profile</p>
               <FiEdit className="w-5 h-5" />
             </div>
-            <div className="flex justify-between cursor-pointer items-center">
+            <Link
+              to={"/connections"}
+              className="flex justify-between cursor-pointer items-center"
+            >
               <p className="text-black dark:text-gray-100">Connections</p>
               <FiUsers className="w-5 h-5" />
-            </div>
+            </Link>
+            <Link
+              to={"/connections"}
+              className="flex justify-between cursor-pointer items-center"
+            >
+              <p className="text-black dark:text-gray-100">Requests</p>
+              <FiUserPlus className="w-5 h-5" />
+            </Link>
             <div className="flex justify-between cursor-pointer items-center">
               <p className="text-black dark:text-gray-100">Messages</p>
               <FiMessageSquare className="w-5 h-5" />

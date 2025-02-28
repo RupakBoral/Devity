@@ -8,6 +8,7 @@ const Connections = () => {
   const dispatch = useDispatch();
 
   const [err, setErr] = useState("");
+  const connections = useSelector((store) => store.connections);
 
   const fetchConnections = async () => {
     try {
@@ -15,22 +16,18 @@ const Connections = () => {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
-      console.log(res);
       dispatch(addConnections(res?.data?.data));
     } catch (err) {
-      console.log(err);
       setErr(err);
     }
   };
 
   useEffect(() => {
-    fetchConnections();
+    if (connections === null) fetchConnections();
   }, []);
 
-  const connections = useSelector((store) => store.connections);
-
-  return connections != null ? (
-    <div className="w-screen h-screen flex flex-col gap-6 items-center p-6">
+  return connections !== null ? (
+    <div className="w-screen h-screen flex flex-col gap-6 items-center p-6 bg-gradient-to-tl from-stone-100 to-stone-300 dark:from-stone-800 dark:to-stone-700">
       <h2 className="text-lg font-bold dark:text-white text-black">
         Connections
       </h2>
@@ -39,7 +36,7 @@ const Connections = () => {
         return (
           <div
             key={index}
-            className="bg-white dark:bg-stone-500 p-4 rounded-lg w-2/6 min-h-24 flex gap-2 justify-between items-center"
+            className="bg-white dark:bg-stone-600 p-4 rounded-lg w-2/6 min-h-24 flex gap-2 justify-between items-center"
           >
             <img
               className="w-20 h-20 rounded-full border-2 border-white dark:border-black"

@@ -1,13 +1,13 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import rightArrow from "../img/rightArrow.jpg";
 import Details from "./Details";
 
-/* eslint-disable react/prop-types */
 const UserCard = ({ user }) => {
   const { firstName, lastName, photoUrl, about } = user;
   const [showDetails, setShowDetails] = useState(false);
 
-  return (
+  return user !== null ? (
     <div className="flex flex-col items-center min-h-3/4 justify-around bg-stone-100 rounded-lg w-full max-w-3xl mx-auto relative">
       {/* Nav bar */}
       <div className="bg-stone-400 w-full flex justify-between items-center px-3 py-2   rounded-t-md">
@@ -69,6 +69,10 @@ const UserCard = ({ user }) => {
           setShowDetails={setShowDetails}
         />
       )}
+    </div>
+  ) : (
+    <div>
+      <p className="text-center">No data available</p>
     </div>
   );
 };

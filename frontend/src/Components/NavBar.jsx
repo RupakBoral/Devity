@@ -4,13 +4,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import axios from "axios";
 import { removeUser } from "../utils/userSlice";
-import { FiAlignJustify } from "react-icons/fi";
 import logo from "../img/logo.png";
-import { FiUsers } from "react-icons/fi";
-import { FiToggleLeft, FiToggleRight, FiHome } from "react-icons/fi";
+import {
+  FiToggleLeft,
+  FiToggleRight,
+  FiHome,
+  FiUserPlus,
+  FiUsers,
+} from "react-icons/fi";
 import { useState, useEffect } from "react";
 
-const NavBar = ({ setOpenSideBar }) => {
+const NavBar = () => {
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -39,25 +43,24 @@ const NavBar = ({ setOpenSideBar }) => {
   }, [mode]);
 
   return (
-    user != null && (
+    user !== null && (
       <div className="navbar bg-white dark:bg-black flex items-center gap-6 justify-around">
-        <div className="flex-1 mx-5">
-          <FiAlignJustify
-            onClick={() => setOpenSideBar(true)}
-            className="w-8 h-8 cursor-pointer"
+        <Link
+          to={"/home"}
+          className="group text-2xl dark:text-white text-black"
+        >
+          <img
+            className="w-12 h-12 bg-gray-400 group-hover:bg-gray-300 dark:group-hover:bg-white rounded-2xl"
+            src={logo}
           />
-          <Link
-            to={"/home"}
-            className="btn btn-ghost text-2xl dark:text-white text-black"
-          >
-            <img className="w-12 h-12 bg-white rounded-2xl" src={logo} />
-            <p>evity</p>
-          </Link>
-        </div>
+          <p className="text-gray-400 group-hover:text-black dark:group-hover:text-white">
+            evity
+          </p>
+        </Link>
 
         <Link
           to={"/"}
-          className="cursor-pointer flex flex-col text-gray-500 text-sm"
+          className="dark:hover:text-white hover:text-black cursor-pointer flex flex-col text-gray-400 text-sm"
         >
           <FiHome className="w-6 h-6" />
           <p>Home</p>
@@ -65,13 +68,21 @@ const NavBar = ({ setOpenSideBar }) => {
 
         <Link
           to={"/connections"}
-          className="flex flex-col text-gray-500 cursor-pointer"
+          className="flex flex-col dark:hover:text-white hover:text-black  text-gray-400 cursor-pointer"
         >
           <FiUsers className="w-6 h-6" />
           <p className="text-sm">My Network</p>
         </Link>
 
-        <div className="cursor-pointer">
+        <Link
+          to={"/requests"}
+          className="flex flex-col dark:hover:text-white hover:text-black  text-gray-400 cursor-pointer"
+        >
+          <FiUserPlus className="w-6 h-6" />
+          <p className="text-sm">Requests</p>
+        </Link>
+
+        <div className="cursor-pointer dark:hover:text-white hover:text-black">
           {mode === "light" ? (
             <div onClick={() => setMode("dark")}>
               <FiToggleLeft className="w-8 h-8" />
@@ -94,15 +105,15 @@ const NavBar = ({ setOpenSideBar }) => {
             >
               <div className="rounded-full">
                 <img
+                  className="bg-white w-10 h-10 border-2 border-black dark:border-white rounded-full "
                   alt="Tailwind CSS Navbar component"
-                  className="bg-white w-10 h-10"
                   src={user.photoUrl}
                 />
               </div>
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content text-gray-600 text-base bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content text-gray-600 text-base bg-white dark:bg-stone-700 dark:text-gray-300 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
                 <Link to={"/profile"} className="justify-between">
