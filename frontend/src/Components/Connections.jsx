@@ -9,6 +9,7 @@ const Connections = () => {
 
   const [err, setErr] = useState("");
   const connections = useSelector((store) => store.connections);
+  const requests = useSelector((store) => store.requests);
 
   const fetchConnections = async () => {
     try {
@@ -24,7 +25,7 @@ const Connections = () => {
 
   useEffect(() => {
     if (connections === null) fetchConnections();
-  }, []);
+  }, [requests]);
 
   return connections !== null ? (
     <div className="w-screen h-screen flex flex-col gap-6 items-center p-6 bg-gradient-to-tl from-stone-100 to-stone-300 dark:from-stone-800 dark:to-stone-700">

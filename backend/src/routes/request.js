@@ -18,11 +18,11 @@ requestRouter.post(
 
       const toUser = await UserModel.findById(toUserId);
       if (!toUser) {
-        return res.status(404).send("User doesnot exist!");
+        return res.status(200).send("User doesnot exist!");
       }
 
       if (!isAllowedRequests.includes(status)) {
-        return res.status(400).json({ message: "Invalid status" });
+        return res.status(200).json({ message: "Invalid status" });
       }
 
       // if one of the way connection exist

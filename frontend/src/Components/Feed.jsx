@@ -5,11 +5,14 @@ import axios from "axios";
 import { addFeed } from "../utils/feedSlice";
 import { useEffect } from "react";
 import UserCard from "./UserCard";
+import { useState } from "react";
 
 const Feed = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const feed = useSelector((store) => store.feed);
+
+  const [toast, setToast] = useState(null);
 
   const getFeed = async () => {
     if (feed && feed.length > 0) {
@@ -34,8 +37,25 @@ const Feed = () => {
   }, []);
 
   return (
-    <div className="flex w-full bg-gradient-to-tl from-stone-100 to-stone-300 dark:from-stone-800 dark:to-stone-700 items-center h-screen">
-      {feed !== null && <UserCard user={feed.data[0]} />}
+    <div className="w-full h-screen mx-auto py-20 bg-gradient-to-tl from-stone-100 to-stone-300 dark:from-stone-800 dark:to-stone-700 ">
+      {toast !== null ? (
+        toast === "interested" ? (
+          <div className="toast toast-top toast-end">
+            <div className="alert alert-success">
+              <span>Request sent</span>
+            </div>
+          </div>
+        ) : (
+          <div className="toast toast-top toast-end">
+            <div className="alert alert-info">
+              <span>ignored</span>
+            </div>
+          </div>
+        )
+      ) : (
+        <p></p>
+      )}
+      {feed !== null && <UserCard user={feed.data[2]} setToast={setToast} />}
     </div>
   );
 };

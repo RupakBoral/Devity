@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
-import { addRequests, removeRequests } from "../utils/requestSlice";
+import { addRequests, removeRequest } from "../utils/requestSlice";
 
 const Requests = () => {
   const [err, setErr] = useState("");
@@ -20,7 +20,7 @@ const Requests = () => {
           withCredentials: true,
         }
       );
-      dispatch(removeRequests(_id));
+      dispatch(removeRequest(_id));
       if (res?.data?.message === "Connection Request") {
         setToast(status);
         setTimeout(() => {

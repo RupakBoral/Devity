@@ -127,7 +127,7 @@ const Profile = () => {
               <FiUsers className="w-5 h-5" />
             </Link>
             <Link
-              to={"/connections"}
+              to={"/requests"}
               className="flex justify-between cursor-pointer items-center"
             >
               <p className="text-black dark:text-gray-100">Requests</p>

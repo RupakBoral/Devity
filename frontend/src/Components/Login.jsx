@@ -32,7 +32,7 @@ const Login = () => {
 
   const user = useSelector((store) => store.user);
 
-  return user !== null ? (
+  return user === null ? (
     <div className="flex overflow-x-hidden items-center min-h-screen bg-white">
       <img src={LoginImg} className="w-1/2 h-screen" />
 
