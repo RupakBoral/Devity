@@ -31,6 +31,7 @@ const NavBar = () => {
   };
 
   const [mode, setMode] = useState(localStorage.getItem("theme") || "light");
+  const photoUrl = user.photoUrl;
 
   useEffect(() => {
     if (mode === "dark") {
@@ -44,7 +45,7 @@ const NavBar = () => {
 
   return (
     user !== null && (
-      <div className="navbar bg-white dark:bg-black flex items-center gap-6 justify-around">
+      <div className="navbar bg-white dark:bg-black flex items-center border-b border-yellow-700 gap-6 justify-around">
         <Link
           to={"/home"}
           className="group text-2xl dark:text-white text-black"
@@ -60,36 +61,38 @@ const NavBar = () => {
 
         <Link
           to={"/"}
-          className="dark:hover:text-white hover:text-black cursor-pointer flex flex-col text-gray-400 text-sm"
+          className=" hover:text-black flex flex-col gap-1 dark:hover:text-yellow-600 cursor-pointer text-gray-400"
         >
           <FiHome className="w-6 h-6" />
-          <p>Home</p>
+          <p className="font-merriweather">Home</p>
         </Link>
 
         <Link
           to={"/connections"}
-          className="flex flex-col dark:hover:text-white hover:text-black  text-gray-400 cursor-pointer"
+          className="flex flex-col gap-1 dark:hover:text-yellow-600 hover:text-black  text-gray-400 cursor-pointer"
         >
           <FiUsers className="w-6 h-6" />
-          <p className="text-sm">My Network</p>
+          <p className="font-merriweather">My Network</p>
         </Link>
 
         <Link
           to={"/requests"}
-          className="flex flex-col dark:hover:text-white hover:text-black  text-gray-400 cursor-pointer"
+          className="flex flex-col gap-1 dark:hover:text-yellow-600 hover:text-black  text-gray-400 cursor-pointer"
         >
           <FiUserPlus className="w-6 h-6" />
-          <p className="text-sm">Requests</p>
+          <p className="font-merriweather">Requests</p>
         </Link>
 
-        <div className="cursor-pointer dark:hover:text-white hover:text-black">
+        <div className="cursor-pointer flex flex-col gap-1 dark:hover:text-yellow-600 hover:text-black">
           {mode === "light" ? (
             <div onClick={() => setMode("dark")}>
               <FiToggleLeft className="w-8 h-8" />
+              <p className="font-merriweather">light</p>
             </div>
           ) : mode === "dark" ? (
             <div onClick={() => setMode("light")}>
               <FiToggleRight className="w-8 h-8" />
+              <p className="font-merriweather">dark</p>
             </div>
           ) : (
             <p></p>
@@ -103,12 +106,8 @@ const NavBar = () => {
               role="button"
               className="btn btn-ghost btn-circle avatar"
             >
-              <div className="rounded-full">
-                <img
-                  className="bg-white w-10 h-10 border-2 border-black dark:border-white rounded-full "
-                  alt="Tailwind CSS Navbar component"
-                  src={user.photoUrl}
-                />
+              <div className="rounded-full dark:shadow-[0px_0px_5px_4px_#FFFFE0]">
+                <img src={photoUrl} />
               </div>
             </div>
             <ul

@@ -33,13 +33,13 @@ const Login = () => {
   const user = useSelector((store) => store.user);
 
   return user === null ? (
-    <div className="flex overflow-x-hidden items-center min-h-screen bg-white">
+    <div className="flex overflow-x-hidden items-center min-h-screen bg-stone-200">
       <img src={LoginImg} className="w-1/2 h-screen" />
 
       <div className="mx-auto rounded-2xl p-8 text-center space-y-8">
         <div className="flex items-center justify-center text-black">
           <img src={logo} className="w-20 h-20" />
-          <h3 className="font-semibold text-xl">evity</h3>
+          <h3 className="font-bold text-2xl text-black">evity</h3>
         </div>
 
         <div className="space-y-4">
@@ -47,14 +47,14 @@ const Login = () => {
             type="text"
             value={emailId}
             onChange={(e) => setEmailId(e.target.value)}
-            className="w-full p-3 border-b-2 text-black border-black focus:outline-none focus:ring-2 focus:ring-white  bg-transparent"
+            className="w-full p-3 border-b-2 text-black placeholder:text-gray-500 border-black focus:outline-none text-lg font-serif bg-transparent"
             placeholder="Email"
           />
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-3 border-b-2 text-black border-black  focus:outline-none focus:ring-2 focus:ring-white bg-transparent"
+            className="w-full p-3 border-b-2 text-black border-black placeholder:text-gray-500 focus:outline-none text-lg font-serif bg-transparent"
             placeholder="Password"
           />
         </div>

@@ -46,7 +46,7 @@ const SignUp = () => {
   const user = useSelector((store) => store.user);
 
   return user === null ? (
-    <div className="flex overflow-x-hidden items-center w-screen min-h-screen bg-white">
+    <div className="flex overflow-x-hidden items-center w-screen min-h-screen bg-stone-200">
       <img src={SignUpImg} className="w-1/2 h-screen" />
 
       <div className="mx-auto rounded-2xl p-8 max-w-lg text-center">
@@ -59,31 +59,31 @@ const SignUp = () => {
           <input
             type="text"
             onChange={(e) => (firstNameRef.current = e.target.value)}
-            className="w-full p-3 font-semibold text-black  bg-transparent border-b-2 border-black placeholder:text-gray-500 placeholder:font-medium"
+            className="w-full p-3 font-semibold text-black font-serif bg-transparent border-b-2 border-black placeholder:text-gray-500 focus:outline-none placeholder:font-medium"
             placeholder="First Name"
           />
           <input
             type="text"
             onChange={(e) => (lastNameRef.current = e.target.value)}
-            className="w-full p-3  font-semibold text-black  bg-transparent border-b-2 border-black placeholder:text-gray-500 placeholder:font-medium"
+            className="w-full p-3  font-semibold text-black  bg-transparent border-b-2 border-black font-serif placeholder:text-gray-500 focus:outline-none placeholder:font-medium"
             placeholder="Last Name"
           />
           <input
             type="tel"
             onChange={(e) => (phoneNoRef.current = e.target.value)}
-            className="w-full p-3  font-semibold text-black  bg-transparent border-b-2 border-black placeholder:text-gray-500 placeholder:font-medium"
+            className="w-full p-3  font-semibold text-black  bg-transparent border-b-2 border-black font-serif focus:outline-none placeholder:text-gray-500 placeholder:font-medium"
             placeholder="Phone Number"
           />
           <input
             type="email"
             onChange={(e) => (emailIdRef.current = e.target.value)}
-            className="w-full p-3  font-semibold text-black bg-transparent border-b-2 border-black placeholder:text-gray-500 placeholder:font-medium "
+            className="w-full p-3  font-semibold text-black bg-transparent border-b-2 border-black font-serif focus:outline-none placeholder:text-gray-500 placeholder:font-medium "
             placeholder="Email"
           />
           <input
             type="password"
             onChange={(e) => (passwordRef.current = e.target.value)}
-            className="w-full p-3 font-semibold text-black bg-transparent border-b-2 border-black placeholder:text-gray-500 placeholder:font-medium"
+            className="w-full p-3 font-semibold text-black bg-transparent border-b-2 border-black font-serif placeholder:text-gray-500 focus:outline-none placeholder:font-medium"
             placeholder="Password"
           />
         </div>

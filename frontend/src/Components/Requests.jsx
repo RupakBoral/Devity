@@ -50,7 +50,7 @@ const Requests = () => {
   }, []);
 
   return requests !== null && requests.length !== 0 ? (
-    <div className="w-screen h-screen bg-gradient-to-tl from-stone-100 to-stone-300 dark:from-stone-800 dark:to-stone-700 py-10">
+    <div className="w-screen relative z-10 h-screen bg-gradient-to-tl from-stone-100 to-stone-300 dark:to-stone-900 dark:from-stone-950 py-10">
       {toast != null ? (
         toast === "accepted" ? (
           <div className="toast toast-top toast-end">
@@ -68,50 +68,49 @@ const Requests = () => {
       ) : (
         <p></p>
       )}
-      <div className="p-4 dark:bg-stone-700 bg-white w-2/5 mx-auto rounded-lg">
-        <h1 className="text-xl font-bold text-center my-5 text-black dark:text-white">
-          Requests
-        </h1>
-        {requests.map((request, index) => {
-          const { firstName, lastName, photoUrl, about, headline } =
-            request.fromUserId;
-          return (
-            <div
-              key={index}
-              className="bg-stone-200 dark:bg-stone-900 p-4 rounded-lg min-h-24 flex gap-2 justify-between items-center mx-auto my-10"
-            >
-              <img
-                className="w-20 h-20 rounded-full border-2 border-white dark:border-black"
-                src={photoUrl}
-              />
-              <div className="flex flex-col flex-1">
-                <h2 className="text-black text-lg dark:text-white">
-                  {firstName} {lastName}
-                </h2>
-                <p className="text-gray-500 dark:text-gray-200">{headline}</p>
-                <p className="text-gray-500 dark:text-gray-200">{about}</p>
-              </div>
-              <button
-                onClick={() => reviewRequest("rejected", request._id)}
-                className="btn btn-outline btn-primary dark:text-blue-300"
-              >
-                Ignore
-              </button>
-              <button
-                onClick={() => reviewRequest("accepted", request._id)}
-                className="btn btn-outline btn-primary dark:text-blue-300"
-              >
-                Accept
-              </button>
+      <div className="w-72 h-72 rounded-full bg-stone-400 absolute blur-3xl top-[30%] right-[43%]"></div>
+      <h1 className="font-merriweather text-3xl font-bold z-20 text-center my-5 text-black dark:text-stone-300">
+        Requests
+      </h1>
+      {requests.map((request, index) => {
+        const { firstName, lastName, photoUrl, about, headline } =
+          request.fromUserId;
+        return (
+          <div
+            key={index}
+            className="w-1/2 bg-stone-200 z-20 dark:bg-transparent border border-stone-300 p-4 rounded-lg min-h-24 flex gap-2 justify-between items-center mx-auto my-10 hover:dark:shadow-[0px_0px_8px_2px_#FFFFE0] duration-700 ease-in"
+          >
+            <img
+              className="w-20 h-20 rounded-full border-2 border-white dark:border-black"
+              src={photoUrl}
+            />
+            <div className="flex flex-col flex-1">
+              <h2 className="text-black text-lg dark:text-white">
+                {firstName} {lastName}
+              </h2>
+              <p className="text-gray-500 dark:text-gray-200">{headline}</p>
+              <p className="text-gray-500 dark:text-gray-200">{about}</p>
             </div>
-          );
-        })}
-      </div>
+            <button
+              onClick={() => reviewRequest("rejected", request._id)}
+              className="btn btn-outline duration-700 ease-in hover:bg-stone-700 dark:border text-lg dark:border-yellow-500 text-white font-montserrat font-thin dark:text-white"
+            >
+              Ignore
+            </button>
+            <button
+              onClick={() => reviewRequest("accepted", request._id)}
+              className="btn btn-outline duration-700 ease-in hover:bg-stone-700 font-montserrat text-lg dark:border-yellow-500 font-thin dark:text-white"
+            >
+              Accept
+            </button>
+          </div>
+        );
+      })}
     </div>
   ) : err !== "" ? (
     <p>{err}</p>
   ) : (
-    <div className="w-screen h-screen py-8 bg-gradient-to-tl from-stone-100 to-stone-300 dark:from-stone-800 dark:to-stone-700">
+    <div className="w-screen relative z-10 h-screen bg-gradient-to-tl from-stone-100 to-stone-300 dark:to-stone-900 dark:from-stone-950 py-10">
       {toast != null ? (
         toast === "accepted" ? (
           <div className="toast toast-top toast-end">
@@ -129,7 +128,7 @@ const Requests = () => {
       ) : (
         <p></p>
       )}
-      <p className="text-center text-gray-700 dark:text-gray-300 text-xl">
+      <p className="text-center text-4xl text-gray-700 dark:text-gray-300 font-merriweather">
         No requests found!!
       </p>
     </div>

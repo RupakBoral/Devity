@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import leftArrow from "../img/leftArrow.jpg";
+import { FiChevronLeft } from "react-icons/fi";
 
 const Details = ({ user, showDetails, setShowDetails }) => {
   const { about, skills } = user;
@@ -10,7 +10,7 @@ const Details = ({ user, showDetails, setShowDetails }) => {
         className="left-2 absolute"
         onClick={() => setShowDetails(!showDetails)}
       >
-        <img src={leftArrow} className="w-10 h-10 rounded-full" />
+        <FiChevronLeft className="w-10 h-10" />
       </button>
       <div className="flex flex-col w-full gap-4 justify-evenly text-black p-4">
         <div className="p-4 rounded-lg ">

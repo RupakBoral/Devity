@@ -35,7 +35,7 @@ const Feed = () => {
   }, []);
 
   return feed !== null && feed.length !== 0 ? (
-    <div className="w-full h-screen mx-auto py-20 bg-gradient-to-tl from-stone-100 to-stone-300 dark:from-stone-800 dark:to-stone-700">
+    <div className="w-full relative h-screen mx-auto my-auto py-20 bg-gradient-to-tl from-stone-100 to-stone-300 dark:to-stone-900 dark:from-black">
       {toast !== null ? (
         toast === "interested" ? (
           <div className="toast toast-top toast-end">
@@ -53,6 +53,7 @@ const Feed = () => {
       ) : (
         <p></p>
       )}
+
       <UserCard user={feed[0]} setToast={setToast} />
     </div>
   ) : (
