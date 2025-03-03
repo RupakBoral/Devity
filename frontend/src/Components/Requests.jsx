@@ -50,7 +50,7 @@ const Requests = () => {
   }, []);
 
   return requests !== null && requests.length !== 0 ? (
-    <div className="w-screen relative z-10 h-screen bg-gradient-to-tl from-stone-100 to-stone-300 dark:to-stone-900 dark:from-stone-950 py-10">
+    <div className="w-screen relative z-10 h-screen bg-gradient-to-tl from-stone-100 to-stone-300 dark:to-black dark:from-stone-950 py-10">
       {toast != null ? (
         toast === "accepted" ? (
           <div className="toast toast-top toast-end">
@@ -78,18 +78,22 @@ const Requests = () => {
         return (
           <div
             key={index}
-            className="w-1/2 bg-stone-200 z-20 dark:bg-transparent border border-stone-300 p-4 rounded-lg min-h-24 flex gap-2 justify-between items-center mx-auto my-10 hover:dark:shadow-[0px_0px_8px_2px_#FFFFE0] duration-700 ease-in"
+            className="w-1/2 bg-stone-200 z-20 dark:bg-transparent border backdrop-blur-lg border-stone-300 p-4 rounded-lg min-h-24 flex gap-2 justify-between items-center mx-auto my-10 hover:dark:shadow-[0px_0px_8px_2px_#FFFFE0] duration-700 ease-in"
           >
             <img
               className="w-20 h-20 rounded-full border-2 border-white dark:border-black"
               src={photoUrl}
             />
             <div className="flex flex-col flex-1">
-              <h2 className="text-black text-lg dark:text-white">
+              <h2 className="text-black dark:text-white text-xl font-merriweather">
                 {firstName} {lastName}
               </h2>
-              <p className="text-gray-500 dark:text-gray-200">{headline}</p>
-              <p className="text-gray-500 dark:text-gray-200">{about}</p>
+              <p className="text-gray-500 dark:text-gray-300 font-montserrat">
+                {headline}
+              </p>
+              <p className="text-gray-500 dark:text-gray-200 font-poppins">
+                {about}
+              </p>
             </div>
             <button
               onClick={() => reviewRequest("rejected", request._id)}

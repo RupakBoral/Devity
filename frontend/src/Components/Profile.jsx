@@ -40,7 +40,7 @@ const Profile = () => {
 
   return user !== null ? (
     !edit ? (
-      <div className="w-screen h-full flex justify-center gap-6 py-8 bg-gradient-to-tl from-stone-100 to-stone-300 dark:from-stone-800 dark:to-stone-700">
+      <div className="w-screen h-full flex justify-center gap-6 py-8 bg-gradient-to-tl from-stone-100 to-stone-300 dark:from-black dark:to-stone-950">
         {showToast && (
           <div className="toast toast-top toast-end">
             <div className="alert alert-success">
@@ -49,7 +49,7 @@ const Profile = () => {
           </div>
         )}
         <div className="w-3/6 h-full rounded-lg flex flex-col gap-4">
-          <section className="bg-white dark:bg-black rounded-lg ">
+          <section className="bg-white dark:bg-black rounded-lg dark:border border-gray-400">
             <div className="relative rounded-lg">
               <img
                 className="h-56 rounded-t-lg w-full object-cover"
@@ -61,34 +61,31 @@ const Profile = () => {
               />
             </div>
             <div className="mt-12 p-6">
-              <h1 className="font-bold text-black dark:text-white text-lg">
+              <h1 className="font-bold font-montserrat text-2xl text-black dark:text-white">
                 {firstName} {lastName}
               </h1>
 
-              <h3>{headline}</h3>
+              <h3 className="text-lg">{headline}</h3>
             </div>
           </section>
 
-          <div className="bg-white dark:bg-black p-6 rounded-lg flex flex-col gap-2 justify-between">
-            <h2 className="text-black dark:text-white font-bold text-lg">
+          <section className="bg-white dark:bg-black p-6 rounded-lg flex flex-col gap-2 justify-between dark:border border-gray-400">
+            <h2 className="text-black dark:text-white font-merriweather text-xl font-semibold">
               General Information
             </h2>
             <hr />
-            <p>{about}</p>
-          </div>
+            <p className="text-lg">{about}</p>
+          </section>
 
-          <section className="flex flex-col p-6 bg-white dark:bg-black rounded-lg gap-2">
-            <h2 className="text-black dark:text-gray-200 font-bold text-lg">
+          <section className="flex flex-col p-6 bg-white dark:bg-black rounded-lg gap-2 dark:border border-gray-400">
+            <h2 className="text-black dark:text-gray-200 font-bold font-merriweather text-xl">
               Skills
             </h2>
             <hr />
             <div className="flex flex-wrap gap-2">
               {skills &&
                 skills.map((skill) => (
-                  <span
-                    className="text-gray-600 dark:text-gray-200"
-                    key={skill}
-                  >
+                  <span className="text-lg" key={skill}>
                     {skill}
                   </span>
                 ))}
@@ -96,16 +93,17 @@ const Profile = () => {
           </section>
 
           {projects ? (
-            <section className="bg-white dark:bg-black p-6 rounded-lg">
-              <div className="flex flex-col gap-2 justify-between">
-                <h2 className="text-lg font-bold text-black dark:text-gray-200">
+            <section className="bg-white dark:bg-black p-6 rounded-lg dark:border border-gray-400">
+              <div className="flex flex-col gap-4 justify-between">
+                <h2 className="text-xl font-merriweather font-bold text-black dark:text-gray-200">
                   Projects
                 </h2>
                 <hr />
                 <SmallProjectCard projects={projects} />
                 <hr />
-                <button className="flex justify-center place-items-center gap-2">
-                  Show all projects <FiArrowRight className="" />
+                <button className="flex justify-center font-montserrat place-items-center gap-2">
+                  Show all projects{" "}
+                  <FiArrowRight className="animate-bounce w-5 h-5" />
                 </button>
               </div>
             </section>
@@ -115,7 +113,7 @@ const Profile = () => {
         </div>
 
         <div className="w-1/6 space-y-6">
-          <div className=" p-6 bg-white dark:bg-black max-h-48 rounded-lg flex flex-col gap-2">
+          <div className="dark:border border-gray-400  p-6 bg-white dark:bg-black max-h-48 rounded-lg flex flex-col gap-2">
             <div
               onClick={() => dispatch(editSetting(true))}
               className="flex justify-between cursor-pointer items-center"
@@ -143,7 +141,7 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="p-6 bg-white dark:bg-black max-h-48 rounded-lg flex flex-col gap-2">
+          <div className="dark:border border-gray-400 p-6 bg-white dark:bg-black max-h-48 rounded-lg flex flex-col gap-2">
             <div className="flex justify-between cursor-pointer items-center">
               <p className="text-black dark:text-gray-100">Email</p>
               <p>{user.emailId}</p>

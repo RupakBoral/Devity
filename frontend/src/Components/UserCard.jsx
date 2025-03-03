@@ -8,7 +8,16 @@ import { useDispatch } from "react-redux";
 import { updateFeed } from "../utils/feedSlice";
 
 const UserCard = ({ user, setToast }) => {
-  const { _id, firstName, lastName, photoUrl, about } = user;
+  const {
+    _id,
+    firstName,
+    lastName,
+    headline,
+    photoUrl,
+    about,
+    skills,
+    projects,
+  } = user;
   const [showDetails, setShowDetails] = useState(false);
   const [err, setErr] = useState("");
   const dispatch = useDispatch();
@@ -34,52 +43,59 @@ const UserCard = ({ user, setToast }) => {
   };
 
   return user !== null ? (
-    <div className="flex flex-col items-center animate-blinkGlow transition-shadow ease-in-out shadow-[0px_0px_30px_5px_#FFFFE0] relative min-h-3/4 border-2 border-stone-300 dark:border-0 justify-around w-full max-w-3xl rounded-2xl mx-auto">
-      {/* Nav bar */}
-      <div className="dark:bg-stone-900 bg-stone-400 w-full flex justify-between items-center px-3 py-2  rounded-t-2xl">
-        <div className="flex gap-2">
-          <span className="w-3 h-3 bg-red-500 rounded-full"></span>
-          <span className="w-3 h-3 bg-yellow-500 rounded-full"></span>
-          <span className="w-3 h-3 bg-green-500 rounded-full"></span>
-        </div>
-      </div>
+    <div className="h-full max-w-4xl mx-auto">
       {!showDetails ? (
-        <section className="flex w-full p-6 bg-stone-100 dark:bg-stone-950  rounded-b-2xl">
-          <div className="flex flex-col space-y-4 w-full mx-auto items-center">
+        <section className="flex w-full animate-blinkGlow transition-shadow ease-in relative min-h-[450px] bg-stone-100 dark:bg-stone-950 ">
+          <div className="flex gap-6 p-10 w-full mx-auto items-center">
             <img
               src={photoUrl}
               alt={`${firstName}`}
-              className="w-40 h-40 object-cover rounded-full dark:border-white border-4"
+              className="w-72 h-72 object-cover rounded-md dark:border-white border-4"
             />
-            <h1 className="text-4xl text-center font-bold font-merriweather text-gray-900 dark:text-yellow-500">
-              {firstName} {lastName}
-            </h1>
-            <p className="text-justify text-gray-700 dark:text-gray-400 text-lg">
-              {about}
-            </p>
-            <div className="flex w-3/5 pt-8 pb-4 mx-auto justify-around">
-              <button
-                onClick={() => handleRequest("ignored", _id)}
-                className="btn bg-stone-700 text-lg font-montserrat"
-              >
-                Ignore
-              </button>
-              <button
-                onClick={() => handleRequest("interested", _id)}
-                className="btn dark:hover:bg-amber-500 font-montserrat text-lg dark:text-black dark:bg-amber-600"
-              >
-                Connect
-              </button>
+            <div className="text-justify space-y-0">
+              <h1 className="text-4xl font-merriweather text-gray-900 dark:text-[#dada73]">
+                {firstName.toUpperCase()} {lastName && lastName.toUpperCase()}
+              </h1>
+              <p className="text-lg font-montserrat pb-6 dark:text-white">
+                {headline}
+              </p>
+              <p className="text-gray-700 text-wrap pb-2 dark:text-[#a2cfef] text-xl font-merriweather">
+                {about}
+              </p>
+              {skills && (
+                <div className="flex items-center gap-2 text-lg font-inter-sans-serif">
+                  <span className="text-xl dark:text-[#84c2ab] font-semibold">
+                    Skills:
+                  </span>{" "}
+                  <p className=" text-lg dark:text-white">{skills}</p>
+                </div>
+              )}
+              <div className="flex w-3/5 pt-8 pb-4 mx-auto justify-around">
+                <button
+                  onClick={() => handleRequest("ignored", _id)}
+                  className="btn bg-[#404040] text-lg font-montserrat dark:text-white"
+                >
+                  Ignore
+                </button>
+                <button
+                  onClick={() => handleRequest("interested", _id)}
+                  className="btn dark:hover:shadow-[0px_0px_10px_5px_#57977f] duration-700 ease-in dark:border-white font-montserrat text-lg dark:text-black dark:bg-[#57977f]"
+                >
+                  Connect
+                </button>
+              </div>
             </div>
           </div>
 
-          <button
-            className="right-2 top-[47%] absolute"
-            onClick={() => setShowDetails(!showDetails)}
-          >
-            <FiChevronRight className="w-10 animate-pulse h-10 text-gray-400" />
-            {/*showDetails ? "Back" : "Next →"*/}
-          </button>
+          {projects.length !== 0 && (
+            <button
+              className="right-2 top-[47%] absolute"
+              onClick={() => setShowDetails(!showDetails)}
+            >
+              <FiChevronRight className="w-10 animate-pulse h-10 text-gray-400" />
+              {/*showDetails ? "Back" : "Next →"*/}
+            </button>
+          )}
           <p>{err}</p>
         </section>
       ) : (

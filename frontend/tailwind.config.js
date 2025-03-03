@@ -9,11 +9,13 @@ export default {
         poppins: ["Poppins", "sans-serif"],
         playwrite: ["Playwrite IT Moderna", "cursive"],
         merriweather: ["Merriweather", "serif"],
+        "instrument-sans": ["Instrument Sans", "sans-serif"],
+        "inter-sans-serif": ["Inter", "sans-serif"],
       },
       keyframes: {
         blinkGlow: {
-          "0%, 100%": { boxShadow: "0px 0px 20px 3px #FFFFE0" },
-          "50%": { boxShadow: "0px 0px 25px 5px #FFFFE0" },
+          "0%, 100%": { boxShadow: "0px 0px 5px 1px #e3cba5" },
+          "50%": { boxShadow: "0px 0px 10px 4px #e3cba5" },
         },
       },
       animation: {

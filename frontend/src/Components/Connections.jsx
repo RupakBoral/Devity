@@ -28,7 +28,7 @@ const Connections = () => {
   }, [requests]);
 
   return connections !== null ? (
-    <div className="w-screen h-screen relative flex flex-col gap-6 items-center py-10 bg-gradient-to-tl from-stone-100 to-stone-300 dark:to-stone-900 dark:from-stone-950">
+    <div className="w-screen h-screen relative flex flex-col gap-6 items-center py-10 bg-gradient-to-tl from-stone-100 to-stone-300 dark:to-black dark:from-stone-950">
       <div className="w-72 h-72 rounded-full bg-stone-500 absolute blur-3xl top-[30%] right-[43%]"></div>
       <h2 className="text-3xl z-10 dark:text-stone-300 font-merriweather font-bold text-black">
         Connections
@@ -45,14 +45,14 @@ const Connections = () => {
               src={photoUrl}
             />
             <div className="flex flex-col flex-1">
-              <h2 className="text-black text-3xl dark:text-yellow-500 font-light font-merriweather">
+              <h2 className="text-black text-3xl dark:text-white font-light font-merriweather">
                 {firstName} {lastName}
               </h2>
-              <p className="text-gray-500 dark:text-gray-200 font-playwrite">
+              <p className="text-gray-500 dark:text-gray-300 font-montserrat">
                 {headline}
               </p>
             </div>
-            <button className="btn dark:border-yellow-600 dark:bg-stone-800 duration-700 ease-in dark:text-white text-lg font-montserrat m-auto dark:hover:bg-stone-600 font-thin dark:hover:text-yellow-400">
+            <button className="btn dark:border-yellow-200 dark:bg-stone-800 duration-700 ease-in dark:text-white text-lg font-instrument-sans m-auto dark:hover:bg-stone-600 font-thin dark:hover:text-yellow-400">
               Message
             </button>
           </div>

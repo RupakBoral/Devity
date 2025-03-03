@@ -44,8 +44,8 @@ const EditProfileForm = ({ setShowToast, user }) => {
   };
 
   return (
-    <div className="flex items-center justify-center py-10 min-h-screen bg-gradient-to-tl from-stone-100 to-stone-300 dark:from-stone-800 dark:to-stone-700">
-      <div className="w-full max-w-4xl mx-auto overflow-hidden bg-white dark:bg-stone-600 rounded-lg">
+    <div className="flex items-center justify-center py-10 min-h-screen bg-gradient-to-br from-stone-100 to-stone-300 dark:from-stone-950 dark:to-stone-900">
+      <div className="w-full max-w-4xl mx-auto border border-gray-200 overflow-hidden bg-white dark:bg-black rounded-lg">
         <form className="p-6 space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>

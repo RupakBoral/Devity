@@ -45,7 +45,7 @@ const NavBar = () => {
 
   return (
     user !== null && (
-      <div className="navbar bg-white dark:bg-black flex items-center border-b border-yellow-700 gap-6 justify-around">
+      <div className="navbar bg-white dark:bg-black flex items-center border-b border-[#FFFF00] gap-6 justify-around">
         <Link
           to={"/home"}
           className="group text-2xl dark:text-white text-black"
@@ -72,7 +72,7 @@ const NavBar = () => {
           className="flex flex-col gap-1 dark:hover:text-yellow-600 hover:text-black  text-gray-400 cursor-pointer"
         >
           <FiUsers className="w-6 h-6" />
-          <p className="font-merriweather">My Network</p>
+          <p className="font-merriweather">Network</p>
         </Link>
 
         <Link
@@ -112,7 +112,7 @@ const NavBar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content text-gray-600 text-base bg-white dark:bg-stone-700 dark:text-gray-300 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content text-gray-600 text-base bg-white dark:bg-black border dark:text-gray-300 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
                 <Link to={"/profile"} className="justify-between">
