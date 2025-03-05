@@ -68,7 +68,7 @@ const Requests = () => {
       ) : (
         <p></p>
       )}
-      <div className="w-72 h-72 rounded-full bg-stone-400 absolute blur-3xl top-[30%] right-[43%]"></div>
+      <div className="w-72 h-72 rounded-full bg-stone-500 absolute blur-3xl top-[30%] right-[43%]"></div>
       <h1 className="font-merriweather text-3xl font-bold z-20 text-center my-5 text-black dark:text-stone-300">
         Requests
       </h1>

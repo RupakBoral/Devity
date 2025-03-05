@@ -62,7 +62,7 @@ const UserCard = ({ user, setToast }) => {
               <p className="text-gray-700 text-wrap pb-2 dark:text-[#a2cfef] text-xl font-merriweather">
                 {about}
               </p>
-              {skills && (
+              {skills.length !== 0 && (
                 <div className="flex items-center gap-2 text-lg font-inter-sans-serif">
                   <span className="text-xl dark:text-[#84c2ab] font-semibold">
                     Skills:

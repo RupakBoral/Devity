@@ -83,6 +83,9 @@ const UserSchema = new mongoose.Schema(
       type: [String],
       maxLength: 50,
     },
+    gitHub: {
+      type: String,
+    },
     age: {
       type: Number,
       maxAge: 100,

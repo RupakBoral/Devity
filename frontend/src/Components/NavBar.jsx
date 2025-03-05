@@ -99,7 +99,7 @@ const NavBar = () => {
           )}
         </div>
 
-        <div className="flex-none gap-2 mx-5">
+        <div className="flex-none gap-2 mx-5 z-20">
           <div className="dropdown dropdown-end ">
             <div
               tabIndex={0}

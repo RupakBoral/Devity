@@ -13,6 +13,7 @@ import Error from "./Error";
 import { editSetting } from "../utils/editSlice";
 import Loading from "./Loading";
 import { Link } from "react-router-dom";
+import GitHub from "./GitHub";
 
 const Profile = () => {
   let user = useSelector((store) => store.user);
@@ -31,6 +32,7 @@ const Profile = () => {
     about,
     // phoneNo,
     // emailId,
+    gitHub,
     headline,
     BgUrl,
     photoUrl,
@@ -77,21 +79,6 @@ const Profile = () => {
             <p className="text-lg">{about}</p>
           </section>
 
-          <section className="flex flex-col p-6 bg-white dark:bg-black rounded-lg gap-2 dark:border border-gray-400">
-            <h2 className="text-black dark:text-gray-200 font-bold font-merriweather text-xl">
-              Skills
-            </h2>
-            <hr />
-            <div className="flex flex-wrap gap-2">
-              {skills &&
-                skills.map((skill) => (
-                  <span className="text-lg" key={skill}>
-                    {skill}
-                  </span>
-                ))}
-            </div>
-          </section>
-
           {projects ? (
             <section className="bg-white dark:bg-black p-6 rounded-lg dark:border border-gray-400">
               <div className="flex flex-col gap-4 justify-between">
@@ -110,6 +97,8 @@ const Profile = () => {
           ) : (
             <p></p>
           )}
+
+          <GitHub gitHub={gitHub} />
         </div>
 
         <div className="w-1/6 space-y-6">
@@ -151,10 +140,25 @@ const Profile = () => {
               <p>{user.phoneNo}</p>
             </div>
             <div className="flex justify-between cursor-pointer items-center">
-              <p className="text-black dark:text-gray-100">Role</p>
-              <p>Rookie, Expert, Medival</p>
+              <p className="text-black dark:text-gray-100">GitHub</p>
+              <p>{gitHub}</p>
             </div>
           </div>
+
+          <section className="flex flex-col p-6 bg-white dark:bg-black rounded-lg gap-2 dark:border border-gray-400">
+            <h2 className="text-black dark:text-gray-200 font-bold font-merriweather text-xl">
+              Skills
+            </h2>
+            <hr />
+            <div className="flex flex-wrap gap-2">
+              {skills &&
+                skills.map((skill) => (
+                  <span className="text-lg" key={skill}>
+                    {skill}
+                  </span>
+                ))}
+            </div>
+          </section>
         </div>
       </div>
     ) : (
