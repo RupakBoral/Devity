@@ -79,6 +79,8 @@ const Profile = () => {
             <p className="text-lg">{about}</p>
           </section>
 
+          <GitHub gitHub={gitHub} />
+
           {projects ? (
             <section className="bg-white dark:bg-black p-6 rounded-lg dark:border border-gray-400">
               <div className="flex flex-col gap-4 justify-between">
@@ -97,8 +99,6 @@ const Profile = () => {
           ) : (
             <p></p>
           )}
-
-          <GitHub gitHub={gitHub} />
         </div>
 
         <div className="w-1/6 space-y-6">
@@ -146,7 +146,7 @@ const Profile = () => {
           </div>
 
           <section className="flex flex-col p-6 bg-white dark:bg-black rounded-lg gap-2 dark:border border-gray-400">
-            <h2 className="text-black dark:text-gray-200 font-bold font-merriweather text-xl">
+            <h2 className="text-black dark:text-gray-200 font-bold font-merriweather text-lg">
               Skills
             </h2>
             <hr />

@@ -28,8 +28,8 @@ const Connections = () => {
   }, [requests]);
 
   return connections !== null ? (
-    <div className="w-screen h-screen relative flex flex-col gap-6 items-center py-10 bg-gradient-to-tl from-stone-100 to-stone-300 dark:to-black dark:from-stone-950">
-      <div className="w-72 h-72 rounded-full bg-stone-500 absolute blur-3xl top-[30%] right-[43%]"></div>
+    <div className="w-screen h-screen relative flex flex-col gap-6 items-center py-10 bg-gradient-to-tl transition-all duration-200 from-stone-100 to-stone-300 dark:to-black dark:from-black">
+      <div className="w-72 h-72 rounded-full dark:bg-stone-500 bg-gray-300 absolute blur-3xl top-[30%] right-[43%]"></div>
       <h2 className="text-3xl z-10 dark:text-stone-300 font-merriweather font-bold text-black">
         Connections
       </h2>

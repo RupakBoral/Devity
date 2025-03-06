@@ -13,13 +13,18 @@ export default {
         "inter-sans-serif": ["Inter", "sans-serif"],
       },
       keyframes: {
-        blinkGlow: {
-          "0%, 100%": { boxShadow: "0px 0px 5px 1px #e3cba5" },
-          "50%": { boxShadow: "0px 0px 10px 4px #e3cba5" },
+        LightblinkGlow: {
+          "0%, 100%": { boxShadow: "0px 0px 5px 1px white" },
+          "50%": { boxShadow: "0px 0px 10px 4px white" },
+        },
+        DarkblinkGlow: {
+          "0%, 100%": { boxShadow: "0px 0px 5px 1px gray" },
+          "50%": { boxShadow: "0px 0px 10px 4px gray" },
         },
       },
       animation: {
-        blinkGlow: "blinkGlow 3s infinite",
+        LightblinkGlow: "LightblinkGlow 3s infinite",
+        DarkblinkGlow: "DarkblinkGlow 3s infinite",
       },
     },
   },

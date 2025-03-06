@@ -45,11 +45,8 @@ const NavBar = () => {
 
   return (
     user !== null && (
-      <div className="navbar bg-white dark:bg-black flex items-center border-b border-[#FFFF00] gap-6 justify-around">
-        <Link
-          to={"/home"}
-          className="group text-2xl dark:text-white text-black"
-        >
+      <div className="navbar bg-white dark:bg-black flex items-center border-b border-[#f7f7e9] gap-6 justify-around">
+        <Link to={"/"} className="group text-2xl dark:text-white text-black">
           <img
             className="w-12 h-12 bg-gray-400 group-hover:bg-gray-300 dark:group-hover:bg-white rounded-2xl"
             src={logo}
@@ -119,9 +116,7 @@ const NavBar = () => {
                   Profile
                 </Link>
               </li>
-              <li>
-                <a>Settings</a>
-              </li>
+
               <li>
                 <Link to={"/home"} onClick={Logout}>
                   Logout

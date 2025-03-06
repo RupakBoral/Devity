@@ -45,7 +45,7 @@ const UserCard = ({ user, setToast }) => {
   return user !== null ? (
     <div className="h-full max-w-4xl mx-auto">
       {!showDetails ? (
-        <section className="flex w-full animate-blinkGlow transition-shadow ease-in relative min-h-[450px] bg-stone-100 dark:bg-stone-950 ">
+        <section className="flex w-full dark:animate-LightblinkGlow animate-DarkblinkGlow transition-shadow ease-in relative min-h-[450px] bg-stone-100 dark:bg-stone-900 ">
           <div className="flex gap-6 p-10 w-full mx-auto items-center">
             <img
               src={photoUrl}
@@ -53,10 +53,10 @@ const UserCard = ({ user, setToast }) => {
               className="w-72 h-72 object-cover rounded-md dark:border-white border-4"
             />
             <div className="text-justify space-y-0">
-              <h1 className="text-4xl font-merriweather text-gray-900 dark:text-[#dada73]">
+              <h1 className="text-4xl font-merriweather text-gray-900 dark:text-white">
                 {firstName.toUpperCase()} {lastName && lastName.toUpperCase()}
               </h1>
-              <p className="text-lg font-montserrat pb-6 dark:text-white">
+              <p className="text-lg font-montserrat pb-6 dark:text-gray-300">
                 {headline}
               </p>
               <p className="text-gray-700 text-wrap pb-2 dark:text-[#a2cfef] text-xl font-merriweather">

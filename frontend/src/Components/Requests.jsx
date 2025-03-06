@@ -50,7 +50,7 @@ const Requests = () => {
   }, []);
 
   return requests !== null && requests.length !== 0 ? (
-    <div className="w-screen relative z-10 h-screen bg-gradient-to-tl from-stone-100 to-stone-300 dark:to-black dark:from-stone-950 py-10">
+    <div className="w-screen relative z-10 h-screen bg-gradient-to-tl from-stone-100 to-stone-300 dark:to-black dark:from-black py-10">
       {toast != null ? (
         toast === "accepted" ? (
           <div className="toast toast-top toast-end">
@@ -114,7 +114,7 @@ const Requests = () => {
   ) : err !== "" ? (
     <p>{err}</p>
   ) : (
-    <div className="w-screen relative z-10 h-screen bg-gradient-to-tl from-stone-100 to-stone-300 dark:to-stone-900 dark:from-stone-950 py-10">
+    <div className="w-screen relative z-10 h-screen bg-gradient-to-tl from-stone-100 to-stone-300 dark:to-black dark:from-black py-10">
       {toast != null ? (
         toast === "accepted" ? (
           <div className="toast toast-top toast-end">
