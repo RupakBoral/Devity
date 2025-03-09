@@ -1,19 +1,20 @@
 import Body from "./Components/Body";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./Components/Login";
-import Profile from "./Components/Profile";
-import SignUp from "./Components/SignUp";
+import Login from "./Components/Auth/Login";
+import Profile from "./Components/Profile/Profile";
+import SignUp from "./Components/Auth/SignUp";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
-import Feed from "./Components/Feed";
-import Error from "./Components/Error";
-import Home from "./Components/Home";
-import Connections from "./Components/Connections";
-import Requests from "./Components/Requests";
+import Feed from "./Components/Page/Feed";
+import Error from "./Components/utils/Error";
+import Home from "./Components/Page/Home";
+import Connections from "./Components/Page/Connections";
+import Requests from "./Components/Page/Requests";
+import AboutMe from "./Components/Page/AboutMe";
 
 function App() {
   return (
-    <div>
+    <div className="p-0 m-0">
       <Provider store={appStore}>
         <BrowserRouter>
           <Routes>
@@ -26,6 +27,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/connections" element={<Connections />} />
               <Route path="/requests" element={<Requests />} />
+              <Route path="/aboutMe" element={<AboutMe />} />
             </Route>
           </Routes>
         </BrowserRouter>

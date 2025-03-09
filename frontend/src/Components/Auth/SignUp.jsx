@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useRef, useState } from "react";
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL } from "../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser } from "../utils/userSlice";
+import { addUser } from "../../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import SignUpImg from "../img/LoginImg.png";
-import Feed from "./Feed";
+import SignUpImg from "../../img/LoginImg.png";
+import Feed from "../Page/Feed";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -92,7 +92,7 @@ const SignUp = () => {
 
         <button
           onClick={handleSignUp}
-          className="w-full bg-black text-white font-bold py-3 mt-4 rounded-sm hover:bg-white hover:text-black transition shadow-md"
+          className="w-full bg-black cursor-pointer text-white font-bold py-3 mt-4 rounded-sm hover:bg-white hover:text-black transition shadow-md"
         >
           Sign Up
         </button>
@@ -101,7 +101,7 @@ const SignUp = () => {
           Already have an account?
           <Link
             to="/login"
-            className="text-black text-lg font-bold underline ml-1"
+            className="text-black cursor-pointer text-lg font-bold underline ml-1"
           >
             Login
           </Link>

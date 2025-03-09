@@ -1,12 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser } from "../utils/userSlice";
+import { addUser } from "../../utils/userSlice";
 import { Link, useNavigate } from "react-router-dom";
-import { BASE_URL } from "../utils/constants";
-import LoginImg from "../img/LoginImg.png";
-import logo from "../img/logo.png";
-import Feed from "./Feed";
+import { BASE_URL } from "../../utils/constants";
+import LoginImg from "../../img/LoginImg.png";
+import logo from "../../img/logo.png";
+import Feed from "../Page/Feed";
 
 const Login = () => {
   const [emailId, setEmailId] = useState("");
@@ -62,7 +62,7 @@ const Login = () => {
         {error && <p className="text-red-600 font-semibold mt-2">{error}</p>}
 
         <button
-          className="w-full bg-black text-white font-bold py-3 mt-4 rounded-sm hover:bg-white hover:text-black transition shadow-md"
+          className="w-full cursor-pointer bg-black text-white font-bold py-3 mt-4 rounded-sm hover:bg-white hover:text-black transition shadow-md"
           onClick={handleLogin}
         >
           Login
@@ -72,7 +72,7 @@ const Login = () => {
           New here?
           <Link
             to="/signUp"
-            className="text-slate-900 font-bold underline ml-1"
+            className="text-slate-900 cursor-pointer font-bold underline ml-1"
           >
             Sign Up
           </Link>

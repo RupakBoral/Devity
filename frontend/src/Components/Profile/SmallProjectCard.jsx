@@ -11,25 +11,26 @@ const SmallProjectCard = ({ projects }) => {
         projects.map((project, index) => (
           <section
             key={index}
-            className="flex flex-col gap-2 border w-72 bg-stone-200 dark:bg-black p-4 rounded-lg"
+            className="flex flex-col gap-2 border border-accent-content w-80 py-3 px-5 rounded-lg"
           >
-            <p className="text-black font-bold font-montserrat text-lg dark:text-white">
+            <p className="font-semibold font-montserrat text-lg">
               {project.PName}
             </p>
-            <img src={project.BgUrl} className="w-64 h-56 rounded-lg mx-auto" />
-            <p className="text-gray-600 dark:text-gray-200">
+            <img src={project.BgUrl} className="w-72 h-56 rounded-lg mx-auto" />
+            <p className="text-accent-content text-justify">
               {project.PDescription}
             </p>
             <div className="flex flex-wrap gap-x-2 dark:text-gray-200">
-              <p className="text-black dark:text-gray-200 font-semibold">
-                Skills:{" "}
-              </p>
+              <p className="text-base-content font-semibold">Skills: </p>
               {project.PSkills.map((skill, index) => (
-                <p className="text-gray-600 dark:text-gray-300" key={index}>
+                <p className="text-gray-500 " key={index}>
                   {skill} |{" "}
                 </p>
               ))}
             </div>
+            <p>{project.P_URL}</p>
+            <p>{project.P_GitURL}</p>
+            <p>{project.P_PhotoURL}</p>
           </section>
         ))}
     </div>

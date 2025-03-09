@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL } from "../../utils/constants";
 import axios from "axios";
-import { addFeed } from "../utils/feedSlice";
+import { addFeed } from "../../utils/feedSlice";
 import { useEffect } from "react";
 import UserCard from "./UserCard";
 import { useState } from "react";
+import Footer from "../utils/Footer";
 
 const Feed = () => {
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ const Feed = () => {
   }, []);
 
   return feed !== null && feed.length !== 0 ? (
-    <div className="w-full relative h-screen flex items-center justify-center mx-auto my-auto py-20 bg-gradient-to-tl from-stone-100 to-stone-300 dark:backdrop-brightness-90 dark:from-black dark:to-black">
+    <div className="w-full relative h-screen flex flex-col items-center justify-center mx-auto ">
       {toast !== null ? (
         toast === "interested" ? (
           <div className="toast toast-top toast-end">
@@ -55,6 +56,7 @@ const Feed = () => {
       )}
 
       <UserCard user={feed[0]} setToast={setToast} />
+      <Footer />
     </div>
   ) : (
     <div className="w-full h-screen mx-auto py-6 bg-gradient-to-tl from-stone-100 to-stone-300 dark:from-stone-800 dark:to-stone-700">

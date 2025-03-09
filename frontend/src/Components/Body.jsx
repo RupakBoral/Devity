@@ -4,7 +4,7 @@ import { BASE_URL } from "../utils/constants";
 import { addUser } from "../utils/userSlice";
 import axios from "axios";
 import { useEffect } from "react";
-import NavBar from "./NavBar";
+import NavBar from "./utils/NavBar";
 
 const Body = () => {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const Body = () => {
   }, []);
 
   return (
-    <div className={`w-full "flex-col"} bg-stone-200 dark:bg-stone-800`}>
+    <div className={`w-full "flex-col h-full gap-10"}`}>
       {user !== null ? <NavBar /> : <p></p>}
       <Outlet />
     </div>

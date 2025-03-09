@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { FiChevronLeft } from "react-icons/fi";
-import SmallProjectCard from "./SmallProjectCard";
+import SmallProjectCard from "../Profile/SmallProjectCard";
 
 const Details = ({ user, showDetails, setShowDetails }) => {
   const { projects } = user;

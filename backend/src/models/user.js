@@ -38,18 +38,6 @@ const UserSchema = new mongoose.Schema(
         }
       },
     },
-    gender: {
-      type: String,
-      enum: {
-        values: ["male", "female"],
-        message: `{value} is incorrect gender`,
-      },
-      // validate(value) {
-      //   if (!['male, "female', "other"].includes(value)) {
-      //     throw new Error("Gender is invalid");
-      //   }
-      // },
-    },
     password: {
       type: String,
       required: true,
@@ -88,7 +76,7 @@ const UserSchema = new mongoose.Schema(
     },
     age: {
       type: Number,
-      maxAge: 100,
+      maxAge: 80,
     },
     projects: [ProjectSchema],
   },

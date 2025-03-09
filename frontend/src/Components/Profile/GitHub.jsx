@@ -28,34 +28,37 @@ const GitHub = ({ gitHub }) => {
   return (
     user !== null &&
     user.length !== 0 && (
-      <section className="bg-white dark:bg-black p-6 rounded-lg flex flex-col gap-2 justify-between dark:border border-gray-400">
-        <h2 className="text-white font-semibold text-xl font-merriweather">
+      <section className="p-6 bg-base-200/50 rounded-lg flex flex-col gap-2 justify-between dark:border border-gray-400">
+        <h2 className="font-semibold text-xl font-merriweather">
           GitHub Profile
         </h2>
+        <hr className="text-accent" />
         <div className="flex justify-around items-center">
           <img className="w-20 h-20 rounded-full" src={avatar_url} />
-          <h3>
-            Name: <span className="dark:text-white">{name}</span>
+          <h3 className="text-gray-500">
+            Name: <span className="text-base-content">{name}</span>
           </h3>
-          <p>
-            <span className="dark:text-white">{bio}</span>
+          <p className="text-gray-500">
+            {bio !== null && bio.length !== 0 && <p>Bio</p>}
+            <span className="text-base-content">{bio}</span>
           </p>
-          <p>
-            Repos: <span className="dark:text-white">{public_repos}</span>
+          <p className="text-gray-500">
+            Repositories:{" "}
+            <span className="text-base-content">{public_repos}</span>
           </p>
-          <p>
-            <span className="dark:text-white">{location}</span>
+          <p className="text-gray-500">
+            Location: <span className="text-base-content">{location}</span>
           </p>
         </div>
         <div className="flex justify-around">
           <Link target="_blank" to={html_url}>
-            <p className="dark:text-white border border:black bg-transparent dark:border-white px-4 py-2 rounded-md dark:hover:shadow-[0px_0px_5px_4px_white]">
+            <p className="btn text-base-content border border-base-content">
               Profile
             </p>
           </Link>
           <Link target="_blank" href={repos_url}>
-            <p className="dark:text-white border border:black bg-transparent dark:border-white px-4 py-2 rounded-md dark:hover:shadow-[0px_0px_5px_4px_white]">
-              GitHub Repositories
+            <p className="btn text-base-content border border-base-content  ">
+              Repositories
             </p>
           </Link>
         </div>
