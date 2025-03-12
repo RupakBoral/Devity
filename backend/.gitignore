@@ -2,3 +2,5 @@
 /node_modules
 /src/gyan.js
 /src/app1.js
+.env
+
