@@ -16,7 +16,7 @@ app.use(
   })
 );
 
-const PORT = process.env.PORT || 4000;
+const port = process.env.PORT || 4000;
 const authRouter = require("./routes/auth.js");
 const profileRouter = require("./routes/profile.js");
 const requestRouter = require("./routes/request.js");
@@ -38,7 +38,7 @@ app.use("/", userRouter);
 connectDb()
   .then(() => {
     console.log("Connection is Established");
-    app.listen(PORT, () => {
+    app.listen(port, () => {
       console.log("Server is running");
     });
   })
