@@ -21,7 +21,12 @@ const Login = () => {
       const res = await axios.post(
         BASE_URL + "/login",
         { emailId, password },
-        { withCredentials: true }
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json", // ✅ Ensures correct request format
+          },
+        }
       );
       dispatch(addUser(res.data));
       navigate("/");

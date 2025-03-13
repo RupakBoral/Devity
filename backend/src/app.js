@@ -1,18 +1,18 @@
 require("dotenv").config();
 const express = require("express");
+var cors = require("cors");
 const app = express();
 const connectDb = require("./database");
 const cookieParser = require("cookie-parser");
-var cors = require("cors");
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
     origin: [
+      "https://devity-frontend.onrender.com",
       "http://localhost:5173",
       "http://localhost:8888",
-      "https://devity-frontend.onrender.com",
     ],
     credentials: true,
     allowedHeaders: "Content-Type",
