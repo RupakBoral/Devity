@@ -9,7 +9,11 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:8888"],
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:8888",
+      "https://devity-frontend.onrender.com",
+    ],
     credentials: true,
     allowedHeaders: "Content-Type",
     methods: "GET,POST,PATCH,PUT,DELETE",
