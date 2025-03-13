@@ -4,6 +4,8 @@ var cors = require("cors");
 const app = express();
 const connectDb = require("./database");
 const cookieParser = require("cookie-parser");
+const http = require("http");
+const initializeSocket = require("./utils/socket.js");
 
 app.use(express.json());
 app.use(cookieParser());
@@ -39,15 +41,17 @@ app.use("/", requestRouter);
 // users connection request
 app.use("/", userRouter);
 
+// socket config
+const server = http.createServer(app);
+initializeSocket(server);
+
 connectDb()
   .then(() => {
     console.log("Connection is Established");
-    app.listen(port, "0.0.0.0", () => {
-      console.log("Port" + port);
+    server.listen(port, "0.0.0.0", () => {
       console.log("Server is running");
     });
   })
   .catch(() => {
-    console.log("Port" + port);
     console.error("Connection not established");
   });

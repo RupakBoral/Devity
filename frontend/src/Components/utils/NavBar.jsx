@@ -15,7 +15,7 @@ const NavBar = () => {
 
   const photoUrl = user.photoUrl;
 
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "luxury");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "black");
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -76,9 +76,9 @@ const NavBar = () => {
           <input
             type="checkbox"
             className="theme-controller"
-            checked={theme === "luxury"}
+            checked={theme === "black"}
             onChange={() =>
-              setTheme(theme === "caramellatte" ? "luxury" : "caramellatte")
+              setTheme(theme === "caramellatte" ? "black" : "caramellatte")
             }
           />
           {/* sun icon */}

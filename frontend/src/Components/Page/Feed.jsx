@@ -39,7 +39,7 @@ const Feed = () => {
   }, []);
 
   return feed !== null && feed.length !== 0 ? (
-    <div className="w-full relative h-screen flex flex-col items-center justify-center mx-auto ">
+    <div className="w-full relative h-screen flex flex-col items-center justify-center mx-auto">
       {toast !== null ? (
         toast === "interested" ? (
           <div className="toast toast-top toast-end">

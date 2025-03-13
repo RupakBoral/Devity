@@ -109,48 +109,36 @@ const Profile = () => {
               onClick={() => dispatch(editSetting(true))}
               className="flex justify-between cursor-pointer items-center"
             >
-              <p className="text-primary/70 sm:hidden lg:inline md:inline">
-                Edit Profile
-              </p>
+              <p className="sm:hidden lg:inline md:inline">Edit Profile</p>
               <FiEdit className="w-5 h-5" />
             </div>
             <Link
               to={"/connections"}
               className="flex justify-between cursor-pointer items-center"
             >
-              <p className="text-primary/70 sm:hidden lg:inline md:inline">
-                Connections
-              </p>
+              <p className="sm:hidden lg:inline md:inline">Connections</p>
               <FiUsers className="w-5 h-5" />
             </Link>
             <Link
               to={"/requests"}
               className="flex justify-between cursor-pointer items-center"
             >
-              <p className="text-primary/70 sm:hidden lg:inline md:inline">
-                Requests
-              </p>
+              <p className="sm:hidden lg:inline md:inline">Requests</p>
               <FiUserPlus className="w-5 h-5" />
             </Link>
             <div className="flex justify-between cursor-pointer items-center">
-              <p className="text-primary/70 sm:hidden lg:inline md:inline">
-                Messages
-              </p>
+              <p className="sm:hidden lg:inline md:inline">Messages</p>
               <FiMessageSquare className="w-5 h-5" />
             </div>
           </div>
 
           <div className="border border-gray-400 bg-base-200/50 p-6  max-h-48 rounded-lg flex flex-col gap-2">
             <div className="flex justify-between cursor-pointer items-center">
-              <p className="text-primary/70 sm:hidden lg:inline md:inline">
-                Email
-              </p>
+              <p className="sm:hidden lg:inline md:inline">Email</p>
               <p className="text-wrap">{emailId}</p>
             </div>
             <div className="flex justify-between cursor-pointer items-center">
-              <p className="text-primary/70 sm:hidden lg:inline  md:inline">
-                Phone
-              </p>
+              <p className=" sm:hidden lg:inline  md:inline">Phone</p>
               <p>{phoneNo}</p>
             </div>
             {age && (
@@ -164,10 +152,8 @@ const Profile = () => {
           </div>
 
           <section className="flex flex-col p-6 bg-base-200/50  rounded-lg gap-2 border border-gray-400">
-            <h1 className=" font-merriweather text-primary/70 text-lg">
-              Skills
-            </h1>
-            <hr className="text-primary/70" />
+            <h1 className=" font-merriweather text-lg">Skills</h1>
+            <hr className="" />
             <div className="flex flex-wrap gap-2">
               {skills &&
                 skills.map((skill) => (
