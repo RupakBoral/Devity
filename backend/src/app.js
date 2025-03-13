@@ -16,7 +16,7 @@ app.use(
   })
 );
 
-const port = process.env.PORT || 10000;
+const port = process.env.PORT;
 const authRouter = require("./routes/auth.js");
 const profileRouter = require("./routes/profile.js");
 const requestRouter = require("./routes/request.js");
