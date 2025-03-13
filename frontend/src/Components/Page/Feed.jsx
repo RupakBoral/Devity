@@ -21,6 +21,7 @@ const Feed = () => {
     }
 
     try {
+      if (BASE_URL === "http://localhost:8888") console.log(BASE_URL);
       const res = await axios.get(BASE_URL + "/feed", {
         withCredentials: true,
         headers: {

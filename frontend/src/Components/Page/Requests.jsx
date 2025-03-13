@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
 import { addRequests, removeRequest } from "../../utils/requestSlice";
+import { useNavigate } from "react-router-dom";
 
 const Requests = () => {
   const [err, setErr] = useState("");
   const [toast, setToast] = useState(null);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const reviewRequest = async (status, _id) => {
     try {
@@ -43,6 +45,7 @@ const Requests = () => {
       dispatch(addRequests(res?.data?.data));
     } catch (err) {
       setErr(err);
+      navigate("/home");
     }
   };
 
