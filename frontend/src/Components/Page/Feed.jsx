@@ -23,6 +23,9 @@ const Feed = () => {
     try {
       const res = await axios.get(BASE_URL + "/feed", {
         withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       dispatch(addFeed(res?.data?.data));
     } catch (err) {

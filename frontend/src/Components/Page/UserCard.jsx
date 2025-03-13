@@ -29,6 +29,9 @@ const UserCard = ({ user, setToast }) => {
         {},
         {
           withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
       );
       setToast(status);

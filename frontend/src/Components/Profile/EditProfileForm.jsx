@@ -40,8 +40,10 @@ const EditProfileForm = ({ setShowToast, user }) => {
   const saveProfile = async () => {
     try {
       const res = await axios.patch(BASE_URL + "/profile/edit", body, {
-        headers: { "Content-Type": "application/json" },
         withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
 
       dispatch(addUser(res?.data?.data));

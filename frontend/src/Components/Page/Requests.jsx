@@ -36,6 +36,9 @@ const Requests = () => {
     try {
       const res = await axios.get(BASE_URL + "/user/requests/received", {
         withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       dispatch(addRequests(res?.data?.data));
     } catch (err) {

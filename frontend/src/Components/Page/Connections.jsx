@@ -14,8 +14,10 @@ const Connections = () => {
   const fetchConnections = async () => {
     try {
       const res = await axios.get(BASE_URL + "/user/connections", {
-        headers: { "Content-Type": "application/json" },
         withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       dispatch(addConnections(res?.data?.data));
     } catch (err) {

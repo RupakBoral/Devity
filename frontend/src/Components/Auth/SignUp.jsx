@@ -31,7 +31,12 @@ const SignUp = () => {
           emailId: emailIdRef.current,
           password: passwordRef.current,
         },
-        { withCredentials: true }
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
       setError("");
       if (res.status === 200) {

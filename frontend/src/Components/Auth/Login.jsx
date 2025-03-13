@@ -24,7 +24,7 @@ const Login = () => {
         {
           withCredentials: true,
           headers: {
-            "Content-Type": "application/json", // ✅ Ensures correct request format
+            "Content-Type": "application/json",
           },
         }
       );
