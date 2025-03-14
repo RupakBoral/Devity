@@ -20,7 +20,7 @@ AuthRouter.post("/login", async (req, res) => {
         httpOnly: true,
         secure: true, // Required for HTTPS
         sameSite: "none", // Allows cross-site cookie sharing
-        domain: "https://devity-frontend.onrender.com", // May be needed depending on your setup
+        domain: "devity-backend.onrender.com", // May be needed depending on your setup
       });
       res.status(200).send(user);
     }
@@ -51,7 +51,7 @@ AuthRouter.post("/signup", async (req, res) => {
       httpOnly: true,
       secure: true, // Required for HTTPS
       sameSite: "none", // Allows cross-site cookie sharing
-      domain: "https://devity-frontend.onrender.com", // May be needed depending on your setup
+      domain: "devity-backend.onrender.com", // May be needed depending on your setup
     });
     res
       .status(200)
