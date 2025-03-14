@@ -16,7 +16,12 @@ AuthRouter.post("/login", async (req, res) => {
       throw new Error("Invalid Credentials");
     } else {
       const token = await user.getJWT();
-      res.cookie("token", token);
+      res.cookie("token", token, {
+        httpOnly: true,
+        secure: true, // Required for HTTPS
+        sameSite: "none", // Allows cross-site cookie sharing
+        domain: "https://devity-frontend.onrender.com", // May be needed depending on your setup
+      });
       res.status(200).send(user);
     }
   } catch (err) {
@@ -42,7 +47,12 @@ AuthRouter.post("/signup", async (req, res) => {
     });
     const savedUser = await user.save();
     const token = await savedUser.getJWT();
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true, // Required for HTTPS
+      sameSite: "none", // Allows cross-site cookie sharing
+      domain: "https://devity-frontend.onrender.com", // May be needed depending on your setup
+    });
     res
       .status(200)
       .json({ message: "User created successfully", data: savedUser });
