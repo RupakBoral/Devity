@@ -12,8 +12,13 @@ const Feed = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const feed = useSelector((store) => store.feed);
+  const user = useSelector((store) => store.user);
 
   const [toast, setToast] = useState(null);
+
+  if (user !== null && user.length !== 0) {
+    navigate("/home");
+  }
 
   const getFeed = async () => {
     if (feed && feed.length > 0) {

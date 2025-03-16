@@ -45,8 +45,8 @@ const Chat = () => {
   };
 
   return (
-    <div className="w-screen h-screen pt-10">
-      <div className="max-w-md h-10/12 mx-auto my-auto p-4 border rounded-lg shadow-md bg-base-200 flex flex-col">
+    <div className="w-screen h-screen pt-10 px-4">
+      <div className="max-w-sm md:max-w-md lg:max-w-lg h-10/12 mx-auto my-auto p-4 border rounded-lg shadow-md bg-base-200 flex flex-col">
         <div className="flex-1 overflow-y-auto p-2 border-b">
           {messages.map((mssg, index) =>
             mssg.userId !== userId ? (

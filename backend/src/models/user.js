@@ -74,11 +74,14 @@ const UserSchema = new mongoose.Schema(
     gitHub: {
       type: String,
     },
+    linkedin: {
+      type: String,
+    },
     age: {
       type: Number,
       maxAge: 80,
     },
-    projects: [ProjectSchema],
+    projects: [{ type: mongoose.Schema.Types.ObjectId, ref: "Project" }],
   },
   {
     timestamps: true,

@@ -19,9 +19,10 @@ const validateEditProfile = (req) => {
     "skills",
     "BgUrl",
     "headline",
-    "projects",
     "gitHub",
+    "linkedin",
     "age",
+    "photoUrl",
   ];
   const isEditAllowed = Object.keys(req.body).every((field) =>
     allowedEditFields.includes(field)
@@ -29,4 +30,21 @@ const validateEditProfile = (req) => {
   return isEditAllowed;
 };
 
-module.exports = { validateSignUp, validateEditProfile };
+const validateProject = (req) => {
+  const allowedEdits = [
+    "PName",
+    "PSkills",
+    "PDescription",
+    "P_URL",
+    "P_GitURL",
+    "P_PhotoURL",
+    "help_indicator",
+    "project_status",
+  ];
+  const isEditAllowed = Object.keys(req.body).every((field) =>
+    allowedEdits.includes(field)
+  );
+  return isEditAllowed;
+};
+
+module.exports = { validateSignUp, validateEditProfile, validateProject };

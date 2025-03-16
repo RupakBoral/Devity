@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="footer footer-center bg-base-300 text-base-content  p-10 mt-30 border-t-2 border-accent">
-      <nav className="grid grid-flow-col gap-4">
+    <footer className="footer footer-center bg-base-300 text-base-content mx-0 p-10 mt-30 border-t-2 border-accent">
+      <nav className="grid grid-flow-col md:gap-4 lg:gap-4 gap-2">
         <Link to={"/aboutMe"} className="link link-hover">
           About
         </Link>
@@ -34,7 +34,10 @@ const Footer = () => {
         </div>
       </nav>
       <aside>
-        <p>Developed by Rupak Boral</p>
+        <p>
+          <span className="md:inline lg:inline hidden">Developed by </span>
+          Rupak Boral
+        </p>
       </aside>
     </footer>
   );

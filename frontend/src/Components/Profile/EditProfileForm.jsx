@@ -20,6 +20,7 @@ const EditProfileForm = ({ setShowToast, user }) => {
   const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
   const [BgUrl, setBgUrl] = useState(user.BgUrl);
   const [gitHub, setGitHub] = useState(user.gitHub);
+  const [linkedin, setLinkedin] = useState(user.linkedin);
   const [projects, setProjects] = useState(user.projects);
   const [err, setErr] = useState("");
   const emailId = user.emailId;
@@ -189,7 +190,12 @@ const EditProfileForm = ({ setShowToast, user }) => {
             </div>
           </form>
         ) : editType === "social" ? (
-          <Social gitHub={gitHub} setGitHub={setGitHub} />
+          <Social
+            gitHub={gitHub}
+            setGitHub={setGitHub}
+            linkedin={linkedin}
+            setLinkedin={setLinkedin}
+          />
         ) : (
           <ProjectForm projects={projects} setProjects={setProjects} />
         )}
@@ -224,7 +230,7 @@ const EditProfileForm = ({ setShowToast, user }) => {
           Social Links
         </h3>
         <h3 onClick={() => setEditType("project")} className="cursor-pointer">
-          Skills
+          Projects
         </h3>
       </div>
     </div>

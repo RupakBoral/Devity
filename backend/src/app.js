@@ -30,6 +30,7 @@ const authRouter = require("./routes/auth.js");
 const profileRouter = require("./routes/profile.js");
 const requestRouter = require("./routes/request.js");
 const userRouter = require("./routes/user.js");
+const projectRouter = require("./routes/project.js");
 
 // authentication
 app.use("/", authRouter);
@@ -43,6 +44,9 @@ app.use("/", requestRouter);
 
 // users connection request
 app.use("/", userRouter);
+
+// projects
+app.use("/", projectRouter);
 
 // socket config
 const server = http.createServer(app);

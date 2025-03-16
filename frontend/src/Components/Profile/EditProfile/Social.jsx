@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-const Social = ({ gitHub, setGitHub }) => {
+const Social = ({ gitHub, setGitHub, linkedin, setLinkedin }) => {
   return (
     <fieldset className="fieldset w-xl mx-auto bg-base-200 space-y-4 border border-base-300 p-4 rounded-box">
       <div>
@@ -17,8 +17,8 @@ const Social = ({ gitHub, setGitHub }) => {
         <input
           type="text"
           name="linkedin"
-          value={gitHub}
-          onChange={(e) => setGitHub(e.target.value)}
+          value={linkedin}
+          onChange={(e) => setLinkedin(e.target.value)}
           className="input dark:bg-stone-500 text-white input-bordered w-full bg-white"
         />
       </div>

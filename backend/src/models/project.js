@@ -13,6 +13,7 @@ const ProjectSchema = new mongoose.Schema({
   },
   PDescription: {
     type: String,
+    require: true,
     maxLength: 150,
   },
   P_URL: {
@@ -24,6 +25,17 @@ const ProjectSchema = new mongoose.Schema({
   P_PhotoURL: {
     type: String,
   },
+  project_status: {
+    type: String,
+    enum: ["Completed", "Ongoing", "Discarded"],
+    required: true,
+  },
+  help_indicator: {
+    type: String,
+    enum: ["need_help", "no_help"],
+    required: true,
+  },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
-module.exports = ProjectSchema;
+module.exports = mongoose.model("Project", ProjectSchema);
