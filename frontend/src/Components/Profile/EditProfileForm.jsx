@@ -35,12 +35,12 @@ const EditProfileForm = ({ setShowToast, user }) => {
     photoUrl,
     BgUrl,
     gitHub,
-    projects,
+    linkedin,
   };
 
   const saveProfile = async () => {
     try {
-      const res = await axios.patch(BASE_URL + "/profile/edit", body, {
+      const res = await axios.patch(BASE_URL + "/project/", body, {
         withCredentials: true,
         headers: {
           "Content-Type": "application/json",

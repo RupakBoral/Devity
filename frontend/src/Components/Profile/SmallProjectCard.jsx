@@ -1,12 +1,39 @@
 /* eslint-disable react/prop-types */
 
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { BASE_URL } from "../../utils/constants";
+import axios from "axios";
+import addProject from "../../utils/projectSlice";
 
-const SmallProjectCard = ({ projects }) => {
+const SmallProjectCard = () => {
   const user = useSelector((store) => store.user);
+  const [projects, setProjects] = useState([]);
+  const [err, setErr] = useState();
+  const dispatch = useDispatch();
+
+  const fetchProjects = async () => {
+    try {
+      const res = await axios.get(BASE_URL + "/user/projects", {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      setProjects(res?.data?.data?.projects);
+      dispatch(addProject(res?.data?.data?.projects));
+    } catch (err) {
+      setErr(err);
+    }
+  };
+
+  useEffect(() => {
+    if (projects !== null && projects.length !== 0) return;
+    fetchProjects();
+  }, [projects]);
 
   return user !== null ? (
-    <div>
+    <div className="flex justify-around">
       {projects &&
         projects.map((project, index) => (
           <section
@@ -36,7 +63,7 @@ const SmallProjectCard = ({ projects }) => {
     </div>
   ) : (
     <div>
-      <p className="text-center">No data available</p>
+      <p className="text-center">{err}</p>
     </div>
   );
 };

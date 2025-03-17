@@ -11,8 +11,16 @@ projectRouter.post("/project/add", userAuth, async (req, res) => {
     if (!validateProject(req)) {
       throw new Error("Invalid Request");
     }
-    const { PName, PSkills, PDescription, P_URL, P_GitURL, P_PhotoURL } =
-      req.body;
+    const {
+      PName,
+      PSkills,
+      PDescription,
+      P_URL,
+      P_GitURL,
+      P_PhotoURL,
+      help_indicator,
+      project_status,
+    } = req.body;
     // console.log(req.headers.cookie);
 
     const userId = req.user._id;
@@ -24,6 +32,8 @@ projectRouter.post("/project/add", userAuth, async (req, res) => {
       P_URL,
       P_GitURL,
       P_PhotoURL,
+      help_indicator,
+      project_status,
       userId,
     });
 
@@ -33,9 +43,8 @@ projectRouter.post("/project/add", userAuth, async (req, res) => {
       $push: { projects: savedProject._id },
     });
 
-    res.status(200).json({ message: "Success" });
+    res.status(200).json({ message: "Success", data: savedProject });
   } catch (err) {
-    console.log(err);
     res.status(400).json({ err });
   }
 });
@@ -47,9 +56,8 @@ projectRouter.get("/user/projects", userAuth, async (req, res) => {
       .populate("projects")
       .select("projects");
 
-    res.status(200).json({ message: projects });
+    res.status(200).json({ message: "Success", data: projects });
   } catch (err) {
-    console.log(err);
     res.status(400).json({ err });
   }
 });
@@ -81,7 +89,12 @@ projectRouter.delete(
   userAuth,
   async (req, res) => {
     try {
+      const userId = req.user._id;
       const _id = req.params.project_id;
+      const user = await UserModel.findById(userId);
+      const projects = user.projects.filter((id) => !id.equals(_id));
+      user.projects = projects;
+      await user.save();
       await ProjectModel.deleteOne({ _id });
       res.status(200).json({ message: "Successfully Deleted" });
     } catch (err) {

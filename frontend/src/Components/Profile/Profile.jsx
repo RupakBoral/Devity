@@ -45,7 +45,7 @@ const Profile = () => {
     !edit ? (
       <div className="w-screen h-full flex md:flex-row lg:flex-row flex-col justify-around lg:justify-center md:justify-center px-2 md:px-4 lg:px-6 lg:gap-8 md:gap-6 gap-4 py-8 mx-auto">
         {showToast && (
-          <div className="toast toast-top toast-end">
+          <div className="toast toast-top toast-end z-50">
             <div className="alert alert-success">
               <span>Profile Updated Successfully</span>
             </div>
@@ -90,7 +90,7 @@ const Profile = () => {
                 </h2>
                 <hr className="text-gray-400" />
                 <div className="min-h-3/4">
-                  <SmallProjectCard projects={projects} />
+                  <SmallProjectCard />
                 </div>
                 <hr className="text-gray-300" />
                 <button className="flex justify-center cursor-pointer font-montserrat place-items-center gap-2">

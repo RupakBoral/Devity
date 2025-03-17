@@ -38,8 +38,8 @@ const validateProject = (req) => {
     "P_URL",
     "P_GitURL",
     "P_PhotoURL",
-    "help_indicator",
     "project_status",
+    "help_indicator",
   ];
   const isEditAllowed = Object.keys(req.body).every((field) =>
     allowedEdits.includes(field)

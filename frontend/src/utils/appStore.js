@@ -4,6 +4,7 @@ import feedReducer from "./feedSlice";
 import editReducer from "./editSlice";
 import connectionReducer from "./connectionSlice";
 import requestReducer from "./requestSlice";
+import projectReducer from "./projectSlice";
 
 const appStore = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const appStore = configureStore({
     edit: editReducer,
     connections: connectionReducer,
     requests: requestReducer,
+    projects: projectReducer,
   },
 });
 
