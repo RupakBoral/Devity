@@ -25,26 +25,22 @@ const EditProfileForm = ({ setShowToast, user }) => {
   const [err, setErr] = useState("");
   const emailId = user.emailId;
 
-  const body = {
-    firstName,
-    lastName,
-    phoneNo,
-    age,
-    about,
-    skills,
-    photoUrl,
-    BgUrl,
-    gitHub,
-    linkedin,
-  };
-
   const saveProfile = async () => {
+    const body = {
+      firstName,
+      lastName,
+      phoneNo,
+      age,
+      about,
+      skills,
+      photoUrl,
+      BgUrl,
+      gitHub,
+      linkedin,
+    };
     try {
-      const res = await axios.patch(BASE_URL + "/project/", body, {
+      const res = await axios.patch(BASE_URL + "/profile/edit", body, {
         withCredentials: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
       });
 
       dispatch(addUser(res?.data?.data));
@@ -62,6 +58,61 @@ const EditProfileForm = ({ setShowToast, user }) => {
     }
   };
 
+  const compressBase64 = (base64, quality, type) => {
+    const img = new Image();
+    img.src = base64;
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+
+      // Step 1: Resize the image (reduce by 50%)
+      canvas.width = img.width / 2;
+      canvas.height = img.height / 2;
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      // Step 2: Convert to compressed Base64 (JPEG with reduced quality)
+      const compressedBase64 = canvas.toDataURL("image/jpeg", quality);
+
+      type == "photo"
+        ? setPhotoUrl(compressedBase64)
+        : setBgUrl(compressedBase64); // Step 3: Store the compressed image
+    };
+  };
+
+  const handleBgUpload = async (e) => {
+    const file = e.target.files[0];
+
+    // Step 1: Check file size (limit to 1MB)
+    if (file.size > 1024 * 1024) {
+      alert("File size too large! Please upload an image smaller than 1MB.");
+      return;
+    }
+
+    // Step 2: Read the file as Base64
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      compressBase64(reader.result, 0.5, "bg"); // Step 3: Compress Base64
+    };
+  };
+
+  const handlePhotoUpload = async (e) => {
+    const file = e.target.files[0];
+
+    // Step 1: Check file size (limit to 1MB)
+    if (file.size > 1024 * 1024) {
+      alert("File size too large! Please upload an image smaller than 1MB.");
+      return;
+    }
+
+    // Step 2: Read the file as Base64
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      compressBase64(reader.result, 0.5, "photo"); // Step 3: Compress Base64
+    };
+  };
+
   const [editType, setEditType] = useState("personal");
 
   return (
@@ -72,27 +123,23 @@ const EditProfileForm = ({ setShowToast, user }) => {
           <form className="p-6 space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block dark:text-white text-black font-bold">
-                  First Name
-                </label>
+                <label className="block  font-bold">First Name</label>
                 <input
                   type="text"
                   name="firstName"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className="input border border-gray-300 text-gray-300 input-bordered w-full "
+                  className="input border  input-bordered w-full "
                 />
               </div>
               <div>
-                <label className="block dark:text-white text-black font-bold">
-                  Last Name
-                </label>
+                <label className="block  font-bold">Last Name</label>
                 <input
                   type="text"
                   name="lastName"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  className="input border border-gray-300 text-gray-300 input-bordered w-full "
+                  className="input border  input-bordered w-full "
                 />
               </div>
             </div>
@@ -107,7 +154,7 @@ const EditProfileForm = ({ setShowToast, user }) => {
                   name="age"
                   value={age}
                   onChange={(e) => setAge(e.target.value)}
-                  className="input border border-gray-300 text-gray-300 input-bordered w-full "
+                  className="input border  input-bordered w-full "
                 />
               </div>
               <div>
@@ -119,73 +166,60 @@ const EditProfileForm = ({ setShowToast, user }) => {
                   name="phone"
                   value={phoneNo}
                   onChange={(e) => setPhoneNo(e.target.value)}
-                  className="input border border-gray-300 text-gray-300 input-bordered w-full "
+                  className="input border  input-bordered w-full "
                 />
               </div>
             </div>
 
             <div>
-              <label className="block dark:text-white text-black font-bold">
-                Email
-              </label>
+              <label className="block  font-bold">Email</label>
               <input
                 type="email"
                 name="email"
                 value={emailId}
                 readOnly
-                className="input border border-gray-300 text-gray-300 input-bordered w-full "
+                className="input border  input-bordered w-full "
               />
+            </div>
+            <div className="flex justify-between">
+              <div>
+                <label className="block font-bold">Profile Photo</label>
+                <input
+                  onChange={(e) => handlePhotoUpload(e)}
+                  type="file"
+                  className="file-input"
+                />
+              </div>
+
+              <div>
+                <label className="block  font-bold">Background URL</label>
+                <input
+                  onChange={(e) => handleBgUpload(e)}
+                  type="file"
+                  className="file-input"
+                />
+              </div>
             </div>
 
             <div>
-              <label className="block dark:text-white text-black font-bold">
-                Photo URL
-              </label>
-              <input
-                type="url"
-                name="url"
-                value={photoUrl}
-                onChange={(e) => setPhotoUrl(e.target.value)}
-                className="input border border-gray-300 text-gray-300 input-bordered w-full "
-              />
-            </div>
-
-            <div>
-              <label className="block dark:text-white text-black font-bold">
-                Background URL
-              </label>
-              <input
-                type="url"
-                name="url"
-                value={BgUrl}
-                onChange={(e) => setBgUrl(e.target.value)}
-                className="input border border-gray-300 text-gray-300 input-bordered w-full "
-              />
-            </div>
-
-            <div>
-              <label className="block dark:text-white text-black font-bold">
-                About
-              </label>
+              <label className="block font-bold">About</label>
               <textarea
                 minLength={10}
                 maxLength={200}
                 value={about}
                 onChange={(e) => setAbout(e.target.value)}
-                className="input border border-gray-300 min-h-20 max-h-72 text-gray-300 input-bordered w-full "
+                className="input min-h-20 max-h-72 input-bordered w-full "
               ></textarea>
             </div>
 
             <div>
-              <label className="block dark:text-white text-black font-bold">
-                Skills
-              </label>
+              <label className="block  font-bold">Skills</label>
               <input
                 type="text"
                 name="skills"
                 value={skills}
                 onChange={(e) => setSkills(e.target.value)}
-                className="input border border-gray-300 text-gray-300 input-bordered w-full "
+                className="input border  input-bordered w-full "
               />
             </div>
           </form>

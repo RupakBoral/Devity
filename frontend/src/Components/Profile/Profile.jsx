@@ -1,13 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import SmallProjectCard from "./SmallProjectCard";
-import {
-  FiArrowRight,
-  FiEdit,
-  FiUsers,
-  FiMessageSquare,
-  FiUserPlus,
-} from "react-icons/fi";
+import { FiEdit, FiUsers, FiMessageSquare, FiUserPlus } from "react-icons/fi";
 import EditProfileForm from "./EditProfileForm";
 import Error from "../utils/Error";
 import { editSetting } from "../../utils/editSlice";
@@ -43,7 +37,7 @@ const Profile = () => {
 
   return user !== null ? (
     !edit ? (
-      <div className="w-screen h-full flex md:flex-row lg:flex-row flex-col justify-around lg:justify-center md:justify-center px-2 md:px-4 lg:px-6 lg:gap-8 md:gap-6 gap-4 py-8 mx-auto">
+      <div className="w-screen h-full bg-base-300 pt-32 flex md:flex-row lg:flex-row flex-col justify-around lg:justify-center md:justify-center px-2 md:px-4 lg:px-6 lg:gap-8 md:gap-6 gap-4 py-8 mx-auto">
         {showToast && (
           <div className="toast toast-top toast-end z-50">
             <div className="alert alert-success">
@@ -83,19 +77,13 @@ const Profile = () => {
           <GitHub gitHub={gitHub} />
 
           {projects !== null && projects.length !== 0 ? (
-            <section className="min-h-96 p-6 rounded-lg bg-base-200/50 dark:border border-gray-400">
+            <section className="p-6 rounded-lg bg-base-200/50 dark:border border-gray-400">
               <div className="flex flex-1 flex-col gap-2 justify-between">
                 <h2 className="text-xl font-merriweather font-semibold">
                   Projects
                 </h2>
                 <hr className="text-gray-400" />
-                <div className="min-h-3/4">
-                  <SmallProjectCard />
-                </div>
-                <hr className="text-gray-300" />
-                <button className="flex justify-center cursor-pointer font-montserrat place-items-center gap-2">
-                  Show all projects <FiArrowRight className="w-5 h-5" />
-                </button>
+                <SmallProjectCard />
               </div>
             </section>
           ) : (

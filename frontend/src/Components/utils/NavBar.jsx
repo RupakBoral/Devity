@@ -35,7 +35,7 @@ const NavBar = () => {
 
   return (
     user !== null && (
-      <div className="navbar m-0 px-0 flex items-center border-b-2 border-accent gap-2 lg:gap-6 md:gap-6 justify-evenly md:justify-around lg:justify-around">
+      <div className="navbar bg-base-200 fixed z-50 m-0 px-0 flex items-center border-b-2 border-accent gap-2 lg:gap-6 md:gap-6 justify-evenly md:justify-around lg:justify-around">
         <Link to={"/"} className="group text-2xl flex gap-1 items-center">
           <img className="w-12 h-12 rounded-2xl" src={logo} />
           <p className="font-semibold dark:hover:text-yellow-600 hidden md:inline lg:inline">

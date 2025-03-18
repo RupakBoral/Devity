@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
-
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../../utils/constants";
 import axios from "axios";
 import { addProject } from "../../utils/projectSlice";
+import { Link } from "react-router-dom";
 
 const SmallProjectCard = () => {
   const user = useSelector((store) => store.user);
@@ -33,31 +33,67 @@ const SmallProjectCard = () => {
   }, [projects]);
 
   return user !== null ? (
-    <div className="flex justify-around">
+    <div className="grid grid-cols-2 gap-4">
       {projects &&
         projects.map((project, index) => (
           <section
             key={index}
-            className="flex flex-col gap-2 border border-accent-content w-80 py-3 px-5 rounded-lg"
+            className="flex flex-col gap-2 border border-accent-content w-96 py-3 px-5 rounded-lg"
           >
             <p className="font-semibold font-montserrat text-lg">
               {project.PName}
             </p>
-            <img src={project.BgUrl} className="w-72 h-56 rounded-lg mx-auto" />
+            <img
+              src={project.BgUrl}
+              className="w-full p-4 h-56 rounded-lg mx-auto"
+            />
             <p className="text-accent-content text-justify">
               {project.PDescription}
             </p>
-            <div className="flex flex-wrap gap-x-2 dark:text-gray-200">
-              <p className="text-base-content font-semibold">Skills: </p>
-              {project.PSkills.map((skill, index) => (
-                <p className="text-gray-500 " key={index}>
-                  {skill} |{" "}
-                </p>
-              ))}
-            </div>
-            <p>{project.P_URL}</p>
-            <p>{project.P_GitURL}</p>
-            <p>{project.P_PhotoURL}</p>
+            {project.PSkills !== null && project.PSkills.length !== 0 ? (
+              <p>
+                Skills:{" "}
+                <span className="font-semibold text-accent-content">
+                  {project.PSkills[0]}
+                </span>
+              </p>
+            ) : (
+              <p></p>
+            )}
+            {project.P_URL !== null && project.P_URL !== undefined ? (
+              <p>
+                Website:{" "}
+                <Link
+                  to={project.P_URL}
+                  className="text-accent-content font-semibold"
+                >
+                  {project.PName}
+                </Link>
+              </p>
+            ) : (
+              <p></p>
+            )}
+            {project.P_GitURL !== null && project.P_GitURL !== undefined ? (
+              <Link
+                to={project.P_GitURL}
+                className="text-accent-content font-semibold"
+              >
+                GitHub Repository
+              </Link>
+            ) : (
+              <p></p>
+            )}
+            {project.P_GitURL !== null && project.P_GitURL !== undefined ? (
+              <Link
+                to={project.P_PhotoURL}
+                className="text-accent-content font-semibold"
+              >
+                PhotoURL
+              </Link>
+            ) : (
+              <p></p>
+            )}
+            <p></p>
           </section>
         ))}
     </div>

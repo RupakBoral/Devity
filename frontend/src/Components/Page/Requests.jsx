@@ -56,7 +56,7 @@ const Requests = () => {
   }, []);
 
   return requests !== null && requests.length !== 0 ? (
-    <div className="w-screen h-full relative flex flex-col gap-6 items-center py-5 transition-all ease-in-out duration-300">
+    <div className="w-screen h-screen bg-base-300 relative flex flex-col gap-6 items-center py-5 transition-all ease-in-out duration-300">
       {toast != null ? (
         toast === "accepted" ? (
           <div className="toast toast-top toast-end">
@@ -75,7 +75,9 @@ const Requests = () => {
         <p></p>
       )}
 
-      <h1 className="font-merriweather text-3xl z-20 text-center">Requests</h1>
+      <h1 className="font-merriweather mt-14 text-3xl z-20 text-center">
+        Requests
+      </h1>
       <div className="flex flex-col gap-4 w-4/5 md:w-1/2 lg:w-1/2 ">
         {requests.map((request, index) => {
           const { firstName, lastName, photoUrl, about, headline } =
@@ -83,7 +85,7 @@ const Requests = () => {
           return (
             <div
               key={index}
-              className="cursor-pointer bg-base-200/60 z-20 border-2 border-accent/70 p-4 rounded-lg min-h-24 flex gap-2 justify-between items-center hover:dark:shadow-[0px_0px_3px_2px_#FFFFE0] duration-500 ease-out"
+              className="cursor-pointer bg-base-100/50 z-20 border-2 border-accent/70 p-4 rounded-lg min-h-24 flex gap-2 justify-between items-center hover:dark:shadow-[0px_0px_3px_2px_#FFFFE0] duration-500 ease-out"
             >
               <img
                 className="w-20 h-20 rounded-full border-2 border-base-content"
@@ -121,7 +123,7 @@ const Requests = () => {
   ) : err !== "" ? (
     <p>{err}</p>
   ) : (
-    <div className="w-screen relative z-10 h-screen py-10">
+    <div className="w-screen bg-base-300 relative z-10 h-screen py-10">
       {toast != null ? (
         toast === "accepted" ? (
           <div className="toast toast-top toast-end">
@@ -139,7 +141,7 @@ const Requests = () => {
       ) : (
         <p></p>
       )}
-      <p className="text-center font-merriweather">No requests found!!</p>
+      <p className="text-center mt-14 font-merriweather">No requests found!!</p>
     </div>
   );
 };
