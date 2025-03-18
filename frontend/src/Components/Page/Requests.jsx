@@ -75,9 +75,7 @@ const Requests = () => {
         <p></p>
       )}
 
-      <h1 className="font-merriweather mt-14 text-3xl z-20 text-center">
-        Requests
-      </h1>
+      <h1 className="font-merriweather text-3xl z-20 text-center">Requests</h1>
       <div className="flex flex-col gap-4 w-4/5 md:w-1/2 lg:w-1/2 ">
         {requests.map((request, index) => {
           const { firstName, lastName, photoUrl, about, headline } =
@@ -141,7 +139,7 @@ const Requests = () => {
       ) : (
         <p></p>
       )}
-      <p className="text-center mt-14 font-merriweather">No requests found!!</p>
+      <p className="text-center font-merriweather">No requests found!!</p>
     </div>
   );
 };

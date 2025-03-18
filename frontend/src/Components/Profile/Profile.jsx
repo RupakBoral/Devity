@@ -37,7 +37,7 @@ const Profile = () => {
 
   return user !== null ? (
     !edit ? (
-      <div className="w-screen h-full bg-base-300 pt-32 flex md:flex-row lg:flex-row flex-col justify-around lg:justify-center md:justify-center px-2 md:px-4 lg:px-6 lg:gap-8 md:gap-6 gap-4 py-8 mx-auto">
+      <div className="w-screen h-full bg-base-300 flex md:flex-row lg:flex-row flex-col justify-around lg:justify-center md:justify-center px-2 md:px-4 lg:px-6 lg:gap-8 md:gap-6 gap-4 py-8 mx-auto">
         {showToast && (
           <div className="toast toast-top toast-end z-50">
             <div className="alert alert-success">

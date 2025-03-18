@@ -46,7 +46,7 @@ const UserCard = ({ user, setToast }) => {
   };
 
   return user !== null ? (
-    <div className="border-yellow-400/25 shadow-md bg-base-200 shadow-amber-200 border-2 duration-300 max-w-lg md:max-w-4xl lg:max-w-4xl mt-44 mx-2 md:mx-auto lg:mx-auto animate-LightblinkGlow transition-shadow ease-in rounded-md">
+    <div className="border-yellow-400/25 shadow-md bg-base-200 shadow-amber-200 border-2 duration-300 max-w-lg md:max-w-4xl lg:max-w-4xl mt-28 mx-2 md:mx-auto lg:mx-auto animate-LightblinkGlow transition-shadow ease-in rounded-md">
       {!showDetails ? (
         <section className="flex w-full items-center relative min-h-[400px] md:min-h-[400px] lg:min-h-[400px]">
           <div className="flex flex-col md:flex-row lg:flex-row gap-6 p-5 md:p-10 lg:p-10 w-full mx-auto items-center">
