@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../../utils/constants";
 import axios from "axios";
-import addProject from "../../utils/projectSlice";
+import { addProject } from "../../utils/projectSlice";
 
 const SmallProjectCard = () => {
   const user = useSelector((store) => store.user);

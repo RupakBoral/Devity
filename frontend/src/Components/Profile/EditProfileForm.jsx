@@ -1,15 +1,16 @@
 /* eslint-disable react/prop-types */
 import axios from "axios";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../../utils/userSlice";
 import { BASE_URL } from "../../utils/constants";
 import { editSetting } from "../../utils/editSlice";
 import Social from "./EditProfile/Social";
-import ProjectForm from "./EditProfile/ProjectForm";
+import EditProjects from "./EditProfile/EditProjects";
 
 const EditProfileForm = ({ setShowToast, user }) => {
   const dispatch = useDispatch();
+  const projects = useSelector((store) => store.projects);
 
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
@@ -21,7 +22,6 @@ const EditProfileForm = ({ setShowToast, user }) => {
   const [BgUrl, setBgUrl] = useState(user.BgUrl);
   const [gitHub, setGitHub] = useState(user.gitHub);
   const [linkedin, setLinkedin] = useState(user.linkedin);
-  const [projects, setProjects] = useState(user.projects);
   const [err, setErr] = useState("");
   const emailId = user.emailId;
 
@@ -197,30 +197,36 @@ const EditProfileForm = ({ setShowToast, user }) => {
             setLinkedin={setLinkedin}
           />
         ) : (
-          <ProjectForm projects={projects} setProjects={setProjects} />
+          <EditProjects projects={projects} />
         )}
-        <div className="w-1/2 mx-auto flex justify-around">
-          <button
-            onClick={() => dispatch(editSetting(false))}
-            type="submit"
-            className="btn btn-soft btn-error border border-gray-300"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              saveProfile();
-            }}
-            type="submit"
-            className="btn btn-soft btn-success border border-gray-300"
-          >
-            Save Profile
-          </button>
-        </div>
-        <p className="font-semibold text-lg text-center mt-5 text-red-500">
-          {err}
-        </p>
+        {editType !== "project" ? (
+          <div>
+            <div className="w-1/2 mx-auto flex justify-around">
+              <button
+                onClick={() => dispatch(editSetting(false))}
+                type="submit"
+                className="btn btn-soft btn-error border border-gray-300"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  saveProfile();
+                }}
+                type="submit"
+                className="btn btn-soft btn-success border border-gray-300"
+              >
+                Save Profile
+              </button>
+            </div>
+            <p className="font-semibold text-lg text-center mt-5 text-red-500">
+              {err}
+            </p>
+          </div>
+        ) : (
+          <p></p>
+        )}
       </div>
       <div className="border border-white h-fit p-4 rounded-lg">
         <h3 onClick={() => setEditType("personal")} className="cursor-pointer">

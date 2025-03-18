@@ -1,83 +1,144 @@
 /* eslint-disable react/prop-types */
-// import { useState } from "react";
+import { useState } from "react";
+import axios from "axios";
+import { BASE_URL } from "../../../utils/constants";
+// import {useDispatch} from "react-redux"
 
-const ProjectForm = ({ projects, setProjects }) => {
-  const handleChange = (e, index) => {
-    const { name, value } = e.target;
+const ProjectForm = ({ updateProject, setBtn }) => {
+  const [err, setErr] = useState("");
+  const [PName, setPName] = useState(updateProject.PName);
+  const [PDescription, setPDescription] = useState(updateProject.PDescription);
+  const [PSkills, setPSkills] = useState(updateProject.PSkills);
+  const [P_URL, setP_URL] = useState(updateProject.P_URL);
+  const [P_GitURL, setP_GitURL] = useState(updateProject.P_GitURL);
+  const [P_PhotoURL, setP_PhotoURL] = useState(updateProject.P_PhotoURL);
+  const [project_status, setProject_Status] = useState(
+    updateProject.project_status
+  );
+  const [help_indicator, setHelp_indicator] = useState(
+    updateProject.help_indicator
+  );
 
-    // Create a new array with updated values
-    const updatedProjects = projects.map((project, i) =>
-      i === index ? { ...project, [name]: value } : project
-    );
+  //   dispatch update project action
+  //   const dispatch = useDispatch()
 
-    // Update state with the new projects array
-    setProjects(updatedProjects);
+  const _id = updateProject._id;
+
+  const handleSubmit = async () => {
+    try {
+      const body = {
+        PName,
+        PDescription,
+        PSkills,
+        P_GitURL,
+        P_PhotoURL,
+        P_URL,
+        project_status,
+        help_indicator,
+      };
+      await axios.patch(BASE_URL + `/project/${_id}/update`, body, {
+        withCredentials: true,
+      });
+
+      //   console.log(res?.data?.data);
+    } catch (err) {
+      setErr(err);
+      setTimeout(() => {
+        setErr("");
+      }, 2000);
+    }
   };
 
   return (
-    <div className="flex flex-col gap-6 p-2">
-      {projects.map((project, index) => (
-        <form key={index} className="flex flex-col gap-4 p-4">
-          <h3 className="font-bold text-lg">Project {index + 1}</h3>
+    <div className="flex flex-col items-center gap-3">
+      <input
+        type="text"
+        value={PName}
+        onChange={(e) => setPName(e.target.value)}
+        placeholder="Project Name"
+        className="input"
+      />
+      <textarea
+        placeholder="Description"
+        value={PDescription}
+        onChange={(e) => setPDescription(e.target.value)}
+        className="textarea h-20 placeholder:text-primary"
+      ></textarea>
+      <input
+        type="text"
+        value={PSkills}
+        onChange={(e) => setPSkills(e.target.value)}
+        placeholder="Skills"
+        className="input"
+      />
+      <input
+        type="text"
+        value={P_URL}
+        onChange={(e) => setP_URL(e.target.value)}
+        placeholder="Website URL"
+        className="input"
+      />
+      <input
+        type="text"
+        value={P_GitURL}
+        onChange={(e) => setP_GitURL(e.target.value)}
+        placeholder="GitHub Repo URL"
+        className="input"
+      />
+      <input
+        type="text"
+        value={P_PhotoURL}
+        onChange={(e) => setP_PhotoURL(e.target.value)}
+        placeholder="Project Photo"
+        className="input"
+      />
 
-          <input
-            type="text"
-            name="PName"
-            placeholder="Project Name"
-            maxLength="25"
-            required
-            value={project.PName}
-            onChange={(e) => handleChange(e, index)}
-            className="p-3 border rounded-md focus:ring-2 border-white focus:ring-gray-400"
-          />
+      <label className="select">
+        <span className="label">Project Status</span>
+        <select
+          onChange={(e) => setProject_Status(e.target.value)}
+          defaultChecked={project_status}
+        >
+          <option>Completed</option>
+          <option>Ongoing</option>
+          <option>Discarded</option>
+        </select>
+      </label>
 
-          <input
-            type="text"
-            name="PSkills"
-            placeholder="Skills (comma-separated)"
-            required
-            value={project.PSkills}
-            onChange={(e) => handleChange(e, index)}
-            className="p-3 border rounded-md focus:ring-2 border-white focus:ring-gray-400"
-          />
+      <label className="select">
+        <span className="label">Help Indicator</span>
+        <select
+          onChange={(e) => setHelp_indicator(e.target.value)}
+          defaultChecked={help_indicator}
+        >
+          <option>Need Help</option>
+          <option>No Help Needed</option>
+        </select>
+      </label>
 
-          <textarea
-            name="PDescription"
-            placeholder="Project Description (max 150 chars)"
-            maxLength="150"
-            value={project.PDescription}
-            onChange={(e) => handleChange(e, index)}
-            className="p-3 border rounded-md focus:ring-2 border-white focus:ring-gray-400"
-          ></textarea>
-
-          <input
-            type="url"
-            name="P_URL"
-            placeholder="Live Project URL"
-            value={project.P_URL}
-            onChange={(e) => handleChange(e, index)}
-            className="p-3 border rounded-md focus:ring-2 border-white focus:ring-gray-400"
-          />
-
-          <input
-            type="url"
-            name="P_GitURL"
-            placeholder="GitHub URL"
-            value={project.P_GitURL}
-            onChange={(e) => handleChange(e, index)}
-            className="p-3 border rounded-md focus:ring-2 border-white focus:ring-gray-400"
-          />
-
-          <input
-            type="url"
-            name="P_PhotoURL"
-            placeholder="Project Image URL"
-            value={project.P_PhotoURL}
-            onChange={(e) => handleChange(e, index)}
-            className="p-3 border rounded-md focus:ring-2 border-white focus:ring-gray-400"
-          />
-        </form>
-      ))}
+      <div className="w-1/2 flex justify-around">
+        <button
+          onClick={() => setBtn(false)}
+          type="submit"
+          className="btn btn-soft btn-error border border-gray-300"
+        >
+          Cancel
+        </button>
+        <button
+          onClick={(e) => {
+            handleSubmit();
+            setBtn(false);
+            e.preventDefault();
+          }}
+          type="submit"
+          className="btn btn-soft btn-success border border-gray-300"
+        >
+          Save
+        </button>
+      </div>
+      <p className="font-semibold text-lg text-center mt-5 text-red-500">
+        {err}
+      </p>
     </div>
   );
 };

@@ -4,9 +4,7 @@ const projectSlice = createSlice({
   name: "projects",
   initialState: null,
   reducers: {
-    addProject: (state, action) => {
-      return action.payload;
-    },
+    addProject: (state, action) => action.payload,
   },
 });
 
