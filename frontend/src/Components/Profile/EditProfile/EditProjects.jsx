@@ -72,14 +72,3 @@ const EditProjects = ({ projects }) => {
 };
 
 export default EditProjects;
-
-/*
-
-
-
-<fieldset className="fieldset">
-  <legend className="fieldset-legend">Your bio</legend>
-  <textarea className="textarea h-24" placeholder="Bio"></textarea>
-  <div className="fieldset-label">Optional</div>
-</fieldset>
-*/

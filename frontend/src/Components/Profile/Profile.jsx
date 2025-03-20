@@ -50,11 +50,17 @@ const Profile = () => {
             <div className="relative rounded-lg">
               <img
                 className="h-56 rounded-t-lg w-full object-cover"
-                src={BgUrl}
+                src={
+                  BgUrl ||
+                  "https://t3.ftcdn.net/jpg/09/12/76/70/360_F_912767030_3E4ePOMr42kY42YcFIQhrzUEH9iAFwuW.jpg"
+                }
               />
               <img
                 className="w-32 h-32 border-2 border-base-content rounded-full absolute -bottom-10 left-10"
-                src={photoUrl}
+                src={
+                  photoUrl ||
+                  "https://img.freepik.com/premium-vector/professional-male-avatar-profile-picture-employee-work_1322206-66590.jpg"
+                }
               />
             </div>
             <div className="mt-12 p-6">
@@ -66,7 +72,7 @@ const Profile = () => {
             </div>
           </section>
 
-          <section className="p-6 rounded-lg flex flex-col bg-base-200/50 gap-2 justify-between dark:border border-gray-400">
+          <section className="p-6 rounded-lg flex flex-col bg-base-200/50 gap-2 justify-between ">
             <h2 className="font-merriweather text-xl font-semibold">
               General Information
             </h2>

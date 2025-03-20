@@ -7,6 +7,7 @@ import { BASE_URL } from "../../utils/constants";
 import { editSetting } from "../../utils/editSlice";
 import Social from "./EditProfile/Social";
 import EditProjects from "./EditProfile/EditProjects";
+import { compressBase64 } from "../../utils/constants";
 
 const EditProfileForm = ({ setShowToast, user }) => {
   const dispatch = useDispatch();
@@ -58,58 +59,43 @@ const EditProfileForm = ({ setShowToast, user }) => {
     }
   };
 
-  const compressBase64 = (base64, quality, type) => {
-    const img = new Image();
-    img.src = base64;
-    img.onload = () => {
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-
-      // Step 1: Resize the image (reduce by 50%)
-      canvas.width = img.width / 2;
-      canvas.height = img.height / 2;
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-      // Step 2: Convert to compressed Base64 (JPEG with reduced quality)
-      const compressedBase64 = canvas.toDataURL("image/jpeg", quality);
-
-      type == "photo"
-        ? setPhotoUrl(compressedBase64)
-        : setBgUrl(compressedBase64); // Step 3: Store the compressed image
-    };
-  };
-
   const handleBgUpload = async (e) => {
     const file = e.target.files[0];
 
-    // Step 1: Check file size (limit to 1MB)
-    if (file.size > 1024 * 1024) {
-      alert("File size too large! Please upload an image smaller than 1MB.");
-      return;
-    }
+    if (!file) return;
 
-    // Step 2: Read the file as Base64
+    // Convert to Base64
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      compressBase64(reader.result, 0.5, "bg"); // Step 3: Compress Base64
+    reader.onloadend = async () => {
+      try {
+        const compressedBase64 = await compressBase64(reader.result, 500, 0.4); // Reduce width & quality
+        setBgUrl(compressedBase64);
+      } catch (err) {
+        setTimeout(() => {
+          setErr(err);
+        }, 2000);
+      }
     };
   };
 
   const handlePhotoUpload = async (e) => {
     const file = e.target.files[0];
 
-    // Step 1: Check file size (limit to 1MB)
-    if (file.size > 1024 * 1024) {
-      alert("File size too large! Please upload an image smaller than 1MB.");
-      return;
-    }
+    if (!file) return;
 
-    // Step 2: Read the file as Base64
+    // Convert to Base64
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      compressBase64(reader.result, 0.5, "photo"); // Step 3: Compress Base64
+    reader.onloadend = async () => {
+      try {
+        const compressedBase64 = await compressBase64(reader.result, 500, 0.4); // Reduce width & quality
+        setPhotoUrl(compressedBase64);
+      } catch (err) {
+        setTimeout(() => {
+          setErr(err);
+        }, 2000);
+      }
     };
   };
 

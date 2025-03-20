@@ -33,19 +33,19 @@ const SmallProjectCard = () => {
   }, [projects]);
 
   return user !== null ? (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="flex overflow-x-scroll gap-4">
       {projects &&
         projects.map((project, index) => (
           <section
             key={index}
-            className="flex flex-col gap-2 border border-accent-content w-96 py-3 px-5 rounded-lg"
+            className="flex flex-col gap-2 border border-accent-content w-60 md:min-w-96 py-3 px-5 rounded-lg"
           >
             <p className="font-semibold font-montserrat text-lg">
               {project.PName}
             </p>
             <img
-              src={project.BgUrl}
-              className="w-full p-4 h-56 rounded-lg mx-auto"
+              src={project.P_PhotoURL}
+              className="w-full h-56 rounded-sm border border-accent mx-auto object-cover"
             />
             <p className="text-accent-content text-justify">
               {project.PDescription}

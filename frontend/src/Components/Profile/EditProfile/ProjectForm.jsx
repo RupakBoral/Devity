@@ -2,6 +2,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../../utils/constants";
+import { compressBase64 } from "../../../utils/constants";
 // import {useDispatch} from "react-redux"
 
 const ProjectForm = ({ updateProject, setBtn }) => {
@@ -23,6 +24,26 @@ const ProjectForm = ({ updateProject, setBtn }) => {
   //   const dispatch = useDispatch()
 
   const _id = updateProject._id;
+
+  const handlePhotoUpload = async (e) => {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    // Convert to Base64
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = async () => {
+      try {
+        const compressedBase64 = await compressBase64(reader.result, 500, 0.4); // Reduce width & quality
+        setP_PhotoURL(compressedBase64);
+      } catch (err) {
+        setTimeout(() => {
+          setErr(err);
+        }, 2000);
+      }
+    };
+  };
 
   const handleSubmit = async () => {
     try {
@@ -75,9 +96,17 @@ const ProjectForm = ({ updateProject, setBtn }) => {
         type="text"
         value={P_URL}
         onChange={(e) => setP_URL(e.target.value)}
-        placeholder="Website URL"
+        placeholder="Website Link"
         className="input"
       />
+      <div>
+        <label className="block font-bold">Profile Photo</label>
+        <input
+          onChange={(e) => handlePhotoUpload(e)}
+          type="file"
+          className="file-input"
+        />
+      </div>
       <input
         type="text"
         value={P_GitURL}
@@ -85,14 +114,6 @@ const ProjectForm = ({ updateProject, setBtn }) => {
         placeholder="GitHub Repo URL"
         className="input"
       />
-      <input
-        type="text"
-        value={P_PhotoURL}
-        onChange={(e) => setP_PhotoURL(e.target.value)}
-        placeholder="Project Photo"
-        className="input"
-      />
-
       <label className="select">
         <span className="label">Project Status</span>
         <select

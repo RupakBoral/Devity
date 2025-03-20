@@ -25,6 +25,9 @@ app.use(
   })
 );
 
+app.use(express.json({ limit: "2mb" })); // Increase to 2MB
+app.use(express.urlencoded({ limit: "2mb", extended: true }));
+
 const port = process.env.PORT;
 const authRouter = require("./routes/auth.js");
 const profileRouter = require("./routes/profile.js");
