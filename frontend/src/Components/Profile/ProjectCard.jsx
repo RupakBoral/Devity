@@ -6,13 +6,15 @@ import axios from "axios";
 import { addProject } from "../../utils/projectSlice";
 import { Link } from "react-router-dom";
 
-const SmallProjectCard = () => {
+const ProjectCard = () => {
   const user = useSelector((store) => store.user);
-  const [projects, setProjects] = useState([]);
+  const Storedprojects = useSelector((store) => store.projects);
+  const [projects, setProjects] = useState(Storedprojects);
   const [err, setErr] = useState();
   const dispatch = useDispatch();
 
   const fetchProjects = async () => {
+    if (Storedprojects !== null && Storedprojects.length !== 0) return;
     try {
       const res = await axios.get(BASE_URL + "/user/projects", {
         withCredentials: true,
@@ -30,11 +32,13 @@ const SmallProjectCard = () => {
   useEffect(() => {
     if (projects !== null && projects.length !== 0) return;
     fetchProjects();
-  }, [projects]);
+    setProjects(Storedprojects);
+  }, [Storedprojects]);
 
   return user !== null ? (
     <div className="flex overflow-x-scroll gap-4">
-      {projects &&
+      {projects != null &&
+        projects.length != 0 &&
         projects.map((project, index) => (
           <section
             key={index}
@@ -99,9 +103,9 @@ const SmallProjectCard = () => {
     </div>
   ) : (
     <div>
-      <p className="text-center">{err}</p>
+      <p className="text-center">ERROR {err}</p>
     </div>
   );
 };
 
-export default SmallProjectCard;
+export default ProjectCard;

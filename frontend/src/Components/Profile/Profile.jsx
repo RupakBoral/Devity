@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import SmallProjectCard from "./SmallProjectCard";
+import ProjectCard from "./ProjectCard";
 import { FiEdit, FiUsers, FiMessageSquare, FiUserPlus } from "react-icons/fi";
 import EditProfileForm from "./EditProfileForm";
 import Error from "../utils/Error";
@@ -72,7 +72,7 @@ const Profile = () => {
             </div>
           </section>
 
-          <section className="p-6 rounded-lg flex flex-col bg-base-200/50 gap-2 justify-between ">
+          <section className="p-6 rounded-lg border flex flex-col bg-base-200/50 gap-2 justify-between ">
             <h2 className="font-merriweather text-xl font-semibold">
               General Information
             </h2>
@@ -89,7 +89,7 @@ const Profile = () => {
                   Projects
                 </h2>
                 <hr className="text-gray-400" />
-                <SmallProjectCard />
+                <ProjectCard />
               </div>
             </section>
           ) : (

@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../../utils/constants";
 import { useDispatch } from "react-redux";
-import { addProject } from "../../../utils/projectSlice";
+import { addNewProject } from "../../../utils/projectSlice";
 
 const AddProject = ({ setAdd }) => {
   const [err, setErr] = useState();
@@ -27,8 +27,7 @@ const AddProject = ({ setAdd }) => {
       const res = await axios.post(BASE_URL + "/project/add", body, {
         withCredentials: true,
       });
-      console.log(res);
-      // dispatch(addProject(res?.data?.data));
+      dispatch(addNewProject(res?.data?.data));
       setAdd(false);
     } catch (err) {
       console.log(err);

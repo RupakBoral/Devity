@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import axios from "axios";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addUser } from "../../utils/userSlice";
 import { BASE_URL } from "../../utils/constants";
 import { editSetting } from "../../utils/editSlice";
@@ -11,7 +11,6 @@ import { compressBase64 } from "../../utils/constants";
 
 const EditProfileForm = ({ setShowToast, user }) => {
   const dispatch = useDispatch();
-  const projects = useSelector((store) => store.projects);
 
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
@@ -217,7 +216,7 @@ const EditProfileForm = ({ setShowToast, user }) => {
             setLinkedin={setLinkedin}
           />
         ) : (
-          <EditProjects projects={projects} />
+          <EditProjects />
         )}
         {editType !== "project" ? (
           <div>

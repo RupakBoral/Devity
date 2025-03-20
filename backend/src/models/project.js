@@ -24,6 +24,8 @@ const ProjectSchema = new mongoose.Schema({
   },
   P_PhotoURL: {
     type: String,
+    default:
+      "https://img.freepik.com/free-photo/steel-blue-abstract-background-wallpaper-image_53876-104016.jpg",
   },
   project_status: {
     type: String,

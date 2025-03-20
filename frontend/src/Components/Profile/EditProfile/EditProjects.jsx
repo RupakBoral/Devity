@@ -3,19 +3,24 @@ import ProjectForm from "./ProjectForm";
 import AddProject from "./AddProject";
 import axios from "axios";
 import { BASE_URL } from "../../../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteProject } from "../../../utils/projectSlice";
 
 /* eslint-disable react/prop-types */
-const EditProjects = ({ projects }) => {
+const EditProjects = () => {
   const [btn, setBtn] = useState(false);
   const [add, setAdd] = useState(false);
-  const [updateProject, setUpdateProject] = useState();
+  const [updateThisProject, setUpdateThisProject] = useState();
   const [err, setErr] = useState("");
+  const dispatch = useDispatch();
+  const projects = useSelector((store) => store.projects);
 
   const handleDelete = async (_id) => {
     try {
       await axios.delete(BASE_URL + `/project/${_id}/delete`, {
         withCredentials: true,
       });
+      dispatch(deleteProject(_id));
     } catch (err) {
       setErr(err);
       setTimeout(() => {
@@ -36,7 +41,7 @@ const EditProjects = ({ projects }) => {
                 <div className="card-actions justify-end">
                   <button
                     onClick={() => {
-                      setUpdateProject(project);
+                      setUpdateThisProject(project);
                       setBtn(true);
                     }}
                     className="btn btn-accent"
@@ -64,7 +69,7 @@ const EditProjects = ({ projects }) => {
         <p>{err}</p>
       </div>
     ) : (
-      <ProjectForm updateProject={updateProject} setBtn={setBtn} />
+      <ProjectForm updateThisProject={updateThisProject} setBtn={setBtn} />
     )
   ) : (
     <AddProject setAdd={setAdd} />
