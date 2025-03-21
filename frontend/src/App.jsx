@@ -12,6 +12,7 @@ import Connections from "./Components/Page/Connections";
 import Requests from "./Components/Page/Requests";
 import AboutMe from "./Components/Page/AboutMe";
 import Chat from "./Components/Page/Chat";
+import Projects from "./Components/Page/Projects";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               <Route path="/requests" element={<Requests />} />
               <Route path="/aboutMe" element={<AboutMe />} />
               <Route path="/chat/:receiverId" element={<Chat />} />
+              <Route path="/projects" element={<Projects />} />
             </Route>
           </Routes>
         </BrowserRouter>

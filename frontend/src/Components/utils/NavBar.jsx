@@ -5,7 +5,7 @@ import { BASE_URL } from "../../utils/constants";
 import axios from "axios";
 import { removeUser } from "../../utils/userSlice";
 import logo from "../../img/logo.png";
-import { FiHome, FiUserPlus, FiUsers } from "react-icons/fi";
+import { FiHome, FiUserPlus, FiUsers, FiBriefcase } from "react-icons/fi";
 import { useState, useEffect } from "react";
 
 const NavBar = () => {
@@ -52,6 +52,16 @@ const NavBar = () => {
         </Link>
 
         <Link
+          to={"/projects"}
+          className="hover:text-black flex flex-col gap-1 items-center text-gray-400 dark:hover:text-yellow-600 cursor-pointer"
+        >
+          <FiBriefcase className="w-6 h-6" />
+          <p className="font-merriweather hidden md:inline lg:inline">
+            Projects
+          </p>
+        </Link>
+
+        <Link
           to={"/connections"}
           className="flex flex-col gap-1 items-center dark:hover:text-yellow-600 hover:text-black  text-gray-400 cursor-pointer"
         >
@@ -78,7 +88,7 @@ const NavBar = () => {
             className="theme-controller"
             checked={theme === "black"}
             onChange={() =>
-              setTheme(theme === "caramellatte" ? "black" : "caramellatte")
+              setTheme(theme === "wireframe" ? "black" : "wireframe")
             }
           />
           {/* sun icon */}

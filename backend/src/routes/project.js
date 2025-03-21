@@ -108,8 +108,9 @@ projectRouter.get("/projects", userAuth, async (req, res) => {
   try {
     const user = req.user;
     const userId = user._id;
+    // console.log(userId);
     let projects = await ProjectModel.find({ help_indicator: "need_help" });
-    projects = projects.filter((project) => project._id.equals(user._id));
+    projects = projects.filter((project) => !project.userId.equals(userId));
     res.status(200).json({ data: projects, message: "Data sent successfully" });
   } catch (err) {
     res.status(400).json({ message: "Error occured" + err });
