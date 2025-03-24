@@ -22,7 +22,7 @@ const Projects = () => {
     fetchProjects();
   }, []);
   return (
-    <section className="flex flex-col py-8 gap-10 bg-base-200/80">
+    <section className="flex flex-col py-8 gap-10 bg-base-300">
       <h1 className="text-3xl text-center">Projects</h1>
       <ProjectDetails projects={projects} />
       <p>{err}</p>

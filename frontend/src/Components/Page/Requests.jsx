@@ -4,13 +4,17 @@ import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
 import { addRequests, removeRequest } from "../../utils/requestSlice";
 import { useNavigate } from "react-router-dom";
+import Loading from "../utils/Loading";
 
 const Requests = () => {
   const [err, setErr] = useState("");
   const [toast, setToast] = useState(null);
+  const [flag, setFlag] = useState(true);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const requests = useSelector((store) => store.requests);
 
   const reviewRequest = async (status, _id) => {
     try {
@@ -36,6 +40,7 @@ const Requests = () => {
 
   const fetchRequests = async () => {
     try {
+      setFlag(true);
       const res = await axios.get(BASE_URL + "/user/requests/received", {
         withCredentials: true,
         headers: {
@@ -43,17 +48,20 @@ const Requests = () => {
         },
       });
       dispatch(addRequests(res?.data?.data));
+      setFlag(false);
     } catch (err) {
       setErr(err);
       navigate("/home");
     }
   };
 
-  const requests = useSelector((store) => store.requests);
-
   useEffect(() => {
     if (requests === null) fetchRequests();
   }, []);
+
+  if (flag) {
+    return <Loading />;
+  }
 
   return requests !== null && requests.length !== 0 ? (
     <div className="w-screen h-screen bg-base-300 relative flex flex-col gap-6 items-center py-5 transition-all ease-in-out duration-300">
@@ -83,7 +91,7 @@ const Requests = () => {
           return (
             <div
               key={index}
-              className="cursor-pointer bg-base-100/50 z-20 border-2 border-accent/70 p-4 rounded-lg min-h-24 flex gap-2 justify-between items-center hover:dark:shadow-[0px_0px_3px_2px_#FFFFE0] duration-500 ease-out"
+              className="cursor-pointer bg-base-200/50 z-20 border-2 border-accent/70 p-4 rounded-lg min-h-24 flex gap-2 justify-between items-center hover:shadow-lg hover:shadow-accent duration-500 ease-out"
             >
               <img
                 className="w-20 h-20 rounded-full border-2 border-base-content"

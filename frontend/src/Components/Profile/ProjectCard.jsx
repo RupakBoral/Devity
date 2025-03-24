@@ -42,15 +42,15 @@ const ProjectCard = () => {
         projects.map((project, index) => (
           <section
             key={index}
-            className="flex flex-col gap-2 border border-accent-content w-60 md:min-w-96 py-3 px-5 rounded-lg"
+            className="flex flex-col gap-2 border bg-base-200 border-accent-content w-60 md:min-w-96 py-3 px-5 rounded-lg"
           >
-            <p className="font-semibold font-montserrat text-lg">
-              {project.PName}
-            </p>
             <img
               src={project.P_PhotoURL}
               className="w-full h-56 rounded-sm border border-accent mx-auto object-cover"
             />
+            <h1 className="font-semibold font-montserrat text-lg">
+              {project.PName}
+            </h1>
             <p className="text-accent-content text-justify">
               {project.PDescription}
             </p>

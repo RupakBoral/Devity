@@ -7,18 +7,14 @@ import { useEffect } from "react";
 import UserCard from "./UserCard";
 import { useState } from "react";
 import Footer from "../utils/Footer";
+import Loading from "../utils/Loading";
 
 const Feed = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const feed = useSelector((store) => store.feed);
-  const user = useSelector((store) => store.user);
 
   const [toast, setToast] = useState(null);
-
-  if (user !== null && user.length !== 0) {
-    navigate("/home");
-  }
 
   const getFeed = async () => {
     if (feed && feed.length > 0) {
@@ -67,11 +63,7 @@ const Feed = () => {
       <Footer />
     </div>
   ) : (
-    <div className="w-full h-screen mx-auto py-6 bg-gradient-to-tl from-stone-100 to-stone-300 dark:from-stone-800 dark:to-stone-700">
-      <p className="text-lg text-center dark:text-white text-black">
-        No users found !!
-      </p>
-    </div>
+    <Loading />
   );
 };
 

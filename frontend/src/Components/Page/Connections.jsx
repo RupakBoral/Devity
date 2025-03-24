@@ -4,6 +4,7 @@ import { BASE_URL } from "../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../../utils/connectionSlice";
 import { Link } from "react-router-dom";
+import Loading from "../utils/Loading";
 
 const Connections = () => {
   const dispatch = useDispatch();
@@ -11,9 +12,19 @@ const Connections = () => {
   const [err, setErr] = useState("");
   const connections = useSelector((store) => store.connections);
   const requests = useSelector((store) => store.requests);
+  const [flag, setFlag] = useState(false);
+
+  useEffect(() => {
+    fetchConnections();
+  }, [requests]);
+
+  if (flag) {
+    return <Loading />;
+  }
 
   const fetchConnections = async () => {
     try {
+      setFlag(true);
       const res = await axios.get(BASE_URL + "/user/connections", {
         withCredentials: true,
         headers: {
@@ -24,11 +35,8 @@ const Connections = () => {
     } catch (err) {
       setErr(err);
     }
+    setFlag(false);
   };
-
-  useEffect(() => {
-    fetchConnections();
-  }, [requests]);
 
   return connections !== null ? (
     <div className="w-screen bg-base-300 h-screen relative flex flex-col gap-6 items-center py-10 transition-all ease-in-out duration-300">
@@ -40,7 +48,7 @@ const Connections = () => {
           return (
             <div
               key={_id}
-              className="bg-base-100/50 cursor-pointer z-20 transition-all duration-500 ease-out hover:shadow-[0px_0px_3px_2px_#FFFFE0] p-4 rounded-lg min-h-24 flex gap-2 justify-between items-center border border-accent"
+              className="bg-base-200/50 cursor-pointer z-20 transition-all duration-500 ease-out hover:shadow-lg hover:shadow-accent p-4 rounded-lg min-h-24 flex gap-2 justify-between items-center border border-accent"
             >
               <img
                 className="w-10 h-10 md:lg:w-20 md:lg:h-20 rounded-full border-2 border-base-content"
