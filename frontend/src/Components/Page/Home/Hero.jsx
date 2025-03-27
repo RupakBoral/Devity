@@ -24,7 +24,7 @@ const Hero = () => {
             </p>
             <Link
               to={user === null ? "/login" : "/"}
-              className="btn btn-xl animate-bounce transition-all transition-duration-700 shadow-2xl rounded-sm bg-base-200 hover:bg-gradient-to-l from-violet-600 to-pink-400 border-0 hover:text-black"
+              className="btn btn-xl bg-white text-black hover:text-white animate-bounce transition-all transition-duration-700 shadow-2xl rounded-sm hover:bg-gradient-to-l from-violet-600 to-pink-400 border-0 "
             >
               Get Started
             </Link>
