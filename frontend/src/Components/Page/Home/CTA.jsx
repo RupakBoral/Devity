@@ -1,6 +1,13 @@
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 const CTA = () => {
+  const user = useSelector((store) => store.user);
   return (
-    <section id="get-started" className="pb-20 bg-primary text-white">
+    <section
+      id="get-started"
+      className="py-20 bg-gradient-to-br to-orange-500 from-blue-800 text-white"
+    >
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-6">
           Ready to Transform Your Workflow?
@@ -9,9 +16,12 @@ const CTA = () => {
           Join thousands of satisfied users who have improved their productivity
           with our platform.
         </p>
-        <button className="btn btn-lg bg-white text-primary hover:bg-gray-100">
-          Get Started Now
-        </button>
+        <Link
+          to={user === null ? "/login" : "/"}
+          className="btn btn-xl animate-pulse transition-all transition-duration-700 shadow-2xl rounded-sm bg-base-200 hover:bg-gradient-to-l from-violet-600 to-pink-400 border-0 hover:text-black"
+        >
+          Get Started
+        </Link>
       </div>
     </section>
   );

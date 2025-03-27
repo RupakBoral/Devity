@@ -6,7 +6,7 @@ const Hero = () => {
 
   return (
     <section id="home" className="pt-16">
-      <div className="hero min-h-screen bg-gradient-to-br from-[#3c2485] to-[#a47872]">
+      <div className="hero min-h-screen bg-gradient-to-br from-[#6030f0] to-[#f55844]">
         <div className="hero-overlay bg-opacity-30"></div>
         <div className="hero-content text-center text-neutral-content transition-all duration-500 ease-linear">
           <div className="max-w-lg">

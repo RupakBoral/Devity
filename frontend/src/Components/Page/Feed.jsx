@@ -17,7 +17,7 @@ const Feed = () => {
   const [toast, setToast] = useState(null);
 
   if (user === null || user.length === 0) {
-    navigate("/login");
+    navigate("/home");
   }
 
   const getFeed = async () => {
@@ -44,7 +44,7 @@ const Feed = () => {
   }, []);
 
   return feed !== null && feed.length !== 0 ? (
-    <div className="w-screen bg-base-100 my-auto relative h-screen md:pt-44 lg:pt-44 pt-28 mx-auto">
+    <div className="w-screen bg-gradient-to-br from-base-200 to-accent my-auto relative h-screen md:pt-44 lg:pt-44 pt-28 mx-auto">
       {toast !== null ? (
         toast === "interested" ? (
           <div className="toast toast-top toast-end">

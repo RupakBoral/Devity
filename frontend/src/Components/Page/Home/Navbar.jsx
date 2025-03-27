@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
   return (
     <div className="navbar bg-transparent fixed top-0 backdrop-blur-lg z-60">
@@ -33,7 +35,7 @@ const Navbar = () => {
               <a href="#how-it-works">How It Works</a>
             </li>
             <li>
-              <a href="#get-started">Get Started</a>
+              <Link to={"/"}>Get Started</Link>
             </li>
           </ul>
         </div>

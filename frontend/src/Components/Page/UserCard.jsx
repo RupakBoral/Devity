@@ -45,7 +45,7 @@ const UserCard = ({ user, setToast }) => {
   };
 
   return user !== null ? (
-    <div className="bg-base-accent backdrop-blur-lg cursor-pointer transition-all duration-500 shadow-xl hover:shadow-2xl border border-accent-content shadow-base-content w-sm md:min-w-4xl lg:min-w-4xl mx-auto rounded-lg animate-fadeIn">
+    <div className="bg-base-200/50 cursor-pointer rounded-sm hover:shadow-accent-content shadow-lg backdrop-blur-sm hover:shadow-[5px_5px_2px_2px_gray] transition-shadow duration-500 border border-accent-content/50 shadow-base-content w-sm md:min-w-4xl lg:min-w-4xl mx-auto animate-fadeIn">
       <section className="flex w-full items-center relative min-h-[400px]">
         <div className="flex flex-col md:flex-row gap-6 p-6 w-full mx-auto items-center">
           {/* Profile Image with Hover Effect */}

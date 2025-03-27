@@ -12,8 +12,6 @@ const Body = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
-  dispatch(homeSetting(false));
-
   const fetchUser = async () => {
     try {
       const res = await axios.get(BASE_URL + "/profile", {
@@ -31,6 +29,8 @@ const Body = () => {
   useEffect(() => {
     fetchUser();
   }, []);
+
+  dispatch(homeSetting(false));
 
   return (
     <div className={`w-full "flex-col h-full gap-10 bg-transparent"}`}>

@@ -1,5 +1,3 @@
-// import { useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Footer from "../utils/Footer";
 import Hero from "./Home/Hero";
@@ -8,7 +6,7 @@ import HowItWorks from "./Home/HowItWorks";
 import Navbar from "./Home/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { homeSetting } from "../../utils/homeSlice";
-// import { FloatingAnimation } from "@/components/ui/floating-animation";
+import CTA from "./Home/CTA";
 
 const Home = () => {
   const home = useSelector((store) => store.home);
@@ -55,6 +53,7 @@ const Home = () => {
       <HowItWorks />
 
       {/* CTA Section */}
+      <CTA />
 
       {/* Footer */}
       <Footer />

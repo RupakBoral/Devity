@@ -72,7 +72,7 @@ const Profile = () => {
             </div>
           </section>
 
-          <section className="p-6 rounded-lg border flex flex-col bg-base-200/50 gap-2 justify-between ">
+          <section className="p-6 rounded-lg border flex flex-col bg-base-200/50 border-gray-400 gap-2 justify-between ">
             <h2 className="font-merriweather text-xl font-semibold">
               General Information
             </h2>

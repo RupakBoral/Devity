@@ -60,11 +60,14 @@ const Requests = () => {
   }, []);
 
   if (flag) {
+    setTimeout(() => {
+      setFlag(false);
+    }, 5000);
     return <Loading />;
   }
 
   return requests !== null && requests.length !== 0 ? (
-    <div className="w-screen pt-24 h-screen bg-base-300 relative flex flex-col gap-6 items-center py-5 transition-all ease-in-out duration-300">
+    <div className="w-screen pt-24 h-screen bg-base-300 relative flex flex-col gap-6 items-center py-20 transition-all ease-in-out duration-300">
       {toast != null ? (
         toast === "accepted" ? (
           <div className="toast toast-top toast-end">
@@ -110,13 +113,13 @@ const Requests = () => {
               <div className="flex flex-col md:flex-row lg:flex-row gap-2">
                 <button
                   onClick={() => reviewRequest("rejected", request._id)}
-                  className="btn dark:border-yellow-600 duration-300 ease-in text-lg font-instrument-sans m-auto hover:bg-info-content hover:text-base-content font-thin "
+                  className="btn dark:border-yellow-600 duration-300 ease-in text-lg font-instrument-sans m-auto hover:bg-accent-content/15 hover:text-base-content font-thin"
                 >
                   Ignore
                 </button>
                 <button
                   onClick={() => reviewRequest("accepted", request._id)}
-                  className="btn dark:border-yellow-600 duration-300 ease-in text-lg font-instrument-sans m-auto hover:bg-info-content hover:text-base-content font-thin "
+                  className="btn dark:border-yellow-600 duration-300 ease-in text-lg font-instrument-sans m-auto hover:bg-accent-content/15 hover:text-base-content font-thin"
                 >
                   Accept
                 </button>

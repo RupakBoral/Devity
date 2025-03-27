@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { BASE_URL } from "../../utils/constants";
 import ProjectDetails from "./ProjectDetails";
 import axios from "axios";
+import Loading from "../utils/Loading";
 
 const Projects = () => {
   const [projects, setProjects] = useState();
@@ -21,12 +22,14 @@ const Projects = () => {
   useEffect(() => {
     fetchProjects();
   }, []);
-  return (
-    <section className="flex flex-col py-8 gap-10 bg-base-300 pt-24">
+  return projects ? (
+    <section className="flex flex-col py-8 gap-10 bg-gradient-to-b to-base-300 from-base-accent pt-24">
       <h1 className="text-3xl text-center">Projects</h1>
       <ProjectDetails projects={projects} />
       <p>{err}</p>
     </section>
+  ) : (
+    <Loading />
   );
 };
 

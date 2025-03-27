@@ -39,7 +39,7 @@ const Connections = () => {
   };
 
   return connections !== null ? (
-    <div className="w-screen bg-base-300 min-h-screen relative flex flex-col gap-6 items-center pt-24 py-10 transition-all ease-in-out duration-300">
+    <div className="w-screen bg-gradient-to-b to-base-300 from-base-accent min-h-screen relative flex flex-col gap-6 items-center pt-24 py-10 transition-all ease-in-out duration-300">
       <h2 className="text-3xl z-10 font-poppins">Connections</h2>
       <div className="flex flex-col gap-4 w-5/6 md:w-1/2 lg:w-1/2">
         {connections.map((connection) => {

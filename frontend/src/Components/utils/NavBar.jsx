@@ -17,7 +17,7 @@ const NavBar = () => {
 
   const photoUrl = user.photoUrl;
 
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "sunset");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "black");
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -36,12 +36,12 @@ const NavBar = () => {
   };
 
   return home === false ? (
-    <div className="navbar fixed top-0 backdrop:blur-3xl z-50 m-0 px-0 flex items-center border-b-2 border-base-content gap-2 lg:gap-6 md:gap-6 justify-evenly md:justify-around lg:justify-around">
+    <nav className="navbar fixed top-2 mx-4 w-[98%] rounded-lg backdrop-blur-xl z-60 m-0 flex items-center border-2 border-base-content gap-2 lg:gap-6 md:gap-6 justify-evenly md:justify-around lg:justify-around">
       <Link to={"/home"} className="group text-2xl flex gap-1 items-center">
         <img className="w-12 h-12 rounded-2xl" src={logo} />
-        <p className="font-semibold dark:hover:text-yellow-600 hidden md:inline lg:inline">
+        <span className="text-3xl font-bold animate-pulse bg-gradient-to-l from-violet-600 to-pink-400 text-transparent py-1 bg-clip-text">
           evity
-        </p>
+        </span>
       </Link>
 
       <Link
@@ -81,9 +81,9 @@ const NavBar = () => {
         <input
           type="checkbox"
           className="theme-controller"
-          checked={theme === "sunset"}
+          checked={theme === "black"}
           onChange={() =>
-            setTheme(theme === "wireframe" ? "sunset" : "wireframe")
+            setTheme(theme === "wireframe" ? "black" : "wireframe")
           }
         />
         {/* sun icon */}
@@ -134,7 +134,7 @@ const NavBar = () => {
           </ul>
         </div>
       </div>
-    </div>
+    </nav>
   ) : (
     <p></p>
   );

@@ -42,7 +42,7 @@ const ProjectCard = () => {
         projects.map((project, index) => (
           <section
             key={index}
-            className="flex flex-col gap-2 border bg-base-200 border-accent-content w-60 md:min-w-96 py-3 px-5 rounded-lg"
+            className="flex flex-col gap-2 border bg-base-200 border-accent w-60 md:min-w-96 py-3 px-5 rounded-lg"
           >
             <img
               src={project.P_PhotoURL}
