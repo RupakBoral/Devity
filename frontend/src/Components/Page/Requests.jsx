@@ -64,7 +64,7 @@ const Requests = () => {
   }
 
   return requests !== null && requests.length !== 0 ? (
-    <div className="w-screen h-screen bg-base-300 relative flex flex-col gap-6 items-center py-5 transition-all ease-in-out duration-300">
+    <div className="w-screen pt-24 h-screen bg-base-300 relative flex flex-col gap-6 items-center py-5 transition-all ease-in-out duration-300">
       {toast != null ? (
         toast === "accepted" ? (
           <div className="toast toast-top toast-end">
@@ -129,7 +129,7 @@ const Requests = () => {
   ) : err !== "" ? (
     <p>{err}</p>
   ) : (
-    <div className="w-screen bg-base-300 relative z-10 h-screen py-10">
+    <div className="w-screen bg-base-300 relative z-10 max-h-screen py-[25%]">
       {toast != null ? (
         toast === "accepted" ? (
           <div className="toast toast-top toast-end">

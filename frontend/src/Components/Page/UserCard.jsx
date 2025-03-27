@@ -45,40 +45,47 @@ const UserCard = ({ user, setToast }) => {
   };
 
   return user !== null ? (
-    <div className="bg-base-200/45 cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl border border-accent shadow-accent max-w-lg md:max-w-4xl lg:max-w-4xl mt-28 mx-2 md:mx-auto lg:mx-auto ease-in rounded-md">
-      <section className="flex w-full items-center relative min-h-[400px] md:min-h-[400px] lg:min-h-[400px]">
-        <div className="flex flex-col md:flex-row lg:flex-row gap-6 p-5 md:p-10 lg:p-10 w-full mx-auto items-center">
+    <div className="bg-base-accent backdrop-blur-lg cursor-pointer transition-all duration-500 shadow-xl hover:shadow-2xl border border-accent-content shadow-base-content w-sm md:min-w-4xl lg:min-w-4xl mx-auto rounded-lg animate-fadeIn">
+      <section className="flex w-full items-center relative min-h-[400px]">
+        <div className="flex flex-col md:flex-row gap-6 p-6 w-full mx-auto items-center">
+          {/* Profile Image with Hover Effect */}
           <img
             src={photoUrl}
             alt={`${firstName}`}
-            className="w-40 h-40 md:w-64 md:h-64 lg:w-64 lg:h-64 mx-auto object-cover rounded-md border-2"
+            className="w-40 h-40 md:w-64 md:h-64 object-cover rounded-lg border-2 border-neutral transition-transform duration-300"
           />
-          <div className="text-center md:text-justify lg:text-justify space-y-0 ">
-            <h1 className="text-2xl font-merriweather">
-              {firstName} {lastName && lastName}
+
+          {/* User Details */}
+          <div className="text-center md:text-left space-y-2">
+            <h1 className="text-3xl font-merriweather animate-fadeInUp">
+              {firstName} {lastName}
             </h1>
-            <p className="text-lg font-montserrat pt-2 pb-4 text-success">
+            <p className="text-lg font-montserrat text-success animate-fadeInUp">
               {headline}
             </p>
-            <p className="text-wrap pb-2 text-base-content/85 text-xl font-merriweather">
+            <p className="text-base-content/80 text-xl font-merriweather animate-fadeInUp">
               {about}
             </p>
+
+            {/* Skills */}
             {skills.length !== 0 && (
-              <div className="flex items-center gap-2 text-lg font-inter-sans-serif">
-                <span className="text-xl font-semibold">Skills:</span>{" "}
-                <p className=" text-lg ">{skills}</p>
+              <div className="flex items-center gap-2 text-lg font-inter animate-fadeInUp">
+                <span className="font-semibold">Skills:</span>
+                <p className="text-lg">{skills}</p>
               </div>
             )}
-            <div className="card-actions flex w-3/5 pt-8 pb-4 mx-auto justify-around">
+
+            {/* Action Buttons with Animation */}
+            <div className="card-actions flex w-full pt-6 justify-evenly">
               <button
                 onClick={() => handleRequest("ignored", _id)}
-                className="btn btn-soft border-2 border-[#404040] text-lg font-montserrat "
+                className="btn btn-outline border border-neutral text-lg font-montserrat transition-transform duration-300 hover:scale-105 hover:shadow-lg"
               >
                 Ignore
               </button>
               <button
                 onClick={() => handleRequest("interested", _id)}
-                className="btn btn-outline btn-success dark:hover:shadow-[0px_0px_7px_4px_#57977f] duration-500 ease-in font-montserrat text-lg"
+                className="btn btn-success shadow-md dark:hover:shadow-[0px_0px_10px_4px_#57977f] transition-all duration-300 ease-in-out transform hover:scale-105"
               >
                 Connect
               </button>
@@ -86,16 +93,18 @@ const UserCard = ({ user, setToast }) => {
           </div>
         </div>
 
+        {/* Next Button for Projects with Pulse Animation */}
         {projects.length !== 0 && (
           <button
             className="right-2 top-[47%] absolute"
             onClick={() => setShowDetails(!showDetails)}
           >
-            <FiChevronRight className="w-10 animate-pulse h-10" />
-            {/*showDetails ? "Back" : "Next →"*/}
+            <FiChevronRight className="w-10 h-10 animate-pulse transition-transform duration-300 hover:scale-110" />
           </button>
         )}
-        <p>{err}</p>
+
+        {/* Error Message */}
+        <p className="text-error">{err}</p>
       </section>
     </div>
   ) : (

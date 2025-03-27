@@ -6,15 +6,19 @@ import { addFeed } from "../../utils/feedSlice";
 import { useEffect } from "react";
 import UserCard from "./UserCard";
 import { useState } from "react";
-import Footer from "../utils/Footer";
 import Loading from "../utils/Loading";
 
 const Feed = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const feed = useSelector((store) => store.feed);
+  const user = useSelector((store) => store.user);
 
   const [toast, setToast] = useState(null);
+
+  if (user === null || user.length === 0) {
+    navigate("/login");
+  }
 
   const getFeed = async () => {
     if (feed && feed.length > 0) {
@@ -40,7 +44,7 @@ const Feed = () => {
   }, []);
 
   return feed !== null && feed.length !== 0 ? (
-    <div className="w-full bg-base-300 relative h-screen flex flex-col items-center justify-center mx-auto">
+    <div className="w-screen bg-base-100 my-auto relative h-screen md:pt-44 lg:pt-44 pt-28 mx-auto">
       {toast !== null ? (
         toast === "interested" ? (
           <div className="toast toast-top toast-end">
@@ -60,7 +64,6 @@ const Feed = () => {
       )}
 
       <UserCard user={feed[0]} setToast={setToast} />
-      <Footer />
     </div>
   ) : (
     <Loading />
