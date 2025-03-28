@@ -11,16 +11,16 @@ const ProjectDetails = ({ projects }) => {
           return (
             <div
               key={index}
-              className="card w-2/4 h-1/4 transition-all duration-00 cursor-pointer hover:shadow-lg hover:shadow-accent bg-base-200/50 gap-6 mx-auto lg:card-side shadow-sm border border-accent p-4 rounded-sm"
+              className="card w-2/3 md:w-1/2 lg:w-1/2 h-1/4 transition-all duration-00 cursor-pointer hover:shadow-lg hover:shadow-accent bg-base-200/50 gap-6 mx-auto lg:card-side shadow-sm border border-accent p-4 rounded-sm"
             >
-              <figure className="w-1/2 border border-accent shadow-sm shadow-accent">
+              <figure className="w-full  mx-auto border border-accent shadow-sm shadow-accent">
                 <img
                   className="object-contain"
                   src={project.P_PhotoURL}
                   alt=""
                 />
               </figure>
-              <div className="card-body w-1/2">
+              <div className="card-body mx-auto w-full">
                 <div className="flex flex-col gap-2">
                   <h1 className="font-semibold card-title text-xl text-base-content">
                     {project.PName}
@@ -46,9 +46,11 @@ const ProjectDetails = ({ projects }) => {
                     </p>
                   </div>
                 </div>
-                <button className="btn btn-primary w-1/4 mx-auto">
-                  Connect
-                </button>
+                <div className="card-actions justify-end">
+                  <button className="btn btn-primary w-1/4 mx-auto">
+                    Connect
+                  </button>
+                </div>
               </div>
             </div>
           );
