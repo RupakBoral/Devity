@@ -67,7 +67,7 @@ const Requests = () => {
   }
 
   return requests !== null && requests.length !== 0 ? (
-    <div className="w-screen pt-24 h-screen bg-base-300 relative flex flex-col gap-6 items-center py-20 transition-all ease-in-out duration-300">
+    <div className="w-screen pt-24 h-screen bg-gradient-to-b to-base-300 from-base-accent relative flex flex-col gap-6 items-center py-10 transition-all ease-in-out duration-300">
       {toast != null ? (
         toast === "accepted" ? (
           <div className="toast toast-top toast-end">
@@ -83,10 +83,12 @@ const Requests = () => {
           </div>
         )
       ) : (
-        <p></p>
+        <p className="hidden"></p>
       )}
 
-      <h1 className="font-merriweather text-3xl z-20 text-center">Requests</h1>
+      <h1 className="font-merriweather text-3xl z-20 text-center font-semibold">
+        Requests
+      </h1>
       <div className="flex flex-col gap-4 w-4/5 md:w-1/2 lg:w-1/2 ">
         {requests.map((request, index) => {
           const { firstName, lastName, photoUrl, about, headline } =

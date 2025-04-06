@@ -51,11 +51,11 @@ const ProjectCard = () => {
             <h1 className="font-semibold font-montserrat text-lg">
               {project.PName}
             </h1>
-            <p className="text-accent-content text-justify">
+            <p className="text-accent-content text-justify hidden md:inline-block lg:inline-block">
               {project.PDescription}
             </p>
             {project.PSkills !== null && project.PSkills.length !== 0 ? (
-              <p>
+              <p className=" hidden md:inline-block lg:inline-block">
                 Skills:{" "}
                 <span className="font-semibold text-accent-content">
                   {project.PSkills[0]}

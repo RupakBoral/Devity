@@ -101,87 +101,119 @@ const EditProfileForm = ({ setShowToast, user }) => {
   const [editType, setEditType] = useState("personal");
 
   return (
-    <div className="w-full flex justify-center gap-6 py-10 min-h-screen ">
-      <div className="flex-1 max-w-2xl border border-gray-200 overflow-hidden py-5 rounded-lg">
+    <div className="w-full flex flex-col lg:flex-row justify-center gap-6 pt-24 py-10 px-4 min-h-screen">
+      <div className="w-full lg:w-fit order-1">
+        <div className="flex mx-4 flex-row lg:flex-col gap-2 justify-around border border-accent rounded-lg p-4">
+          <h3
+            onClick={() => setEditType("personal")}
+            className={`cursor-pointer px-2 py-1 rounded-md text-center ${
+              editType === "personal"
+                ? "bg-primary text-white font-semibold"
+                : "hover:underline"
+            }`}
+          >
+            Personal
+          </h3>
+          <h3
+            onClick={() => setEditType("social")}
+            className={`cursor-pointer px-2 py-1 rounded-md text-center ${
+              editType === "social"
+                ? "bg-primary text-white font-semibold"
+                : "hover:underline"
+            }`}
+          >
+            Social
+          </h3>
+          <h3
+            onClick={() => setEditType("project")}
+            className={`cursor-pointer px-2 py-1 rounded-md text-center ${
+              editType === "project"
+                ? "bg-primary text-white font-semibold"
+                : "hover:underline"
+            }`}
+          >
+            Projects
+          </h3>
+        </div>
+      </div>
+
+      <div className="flex-1 w-full max-w-2xl border border-accent overflow-hidden py-5 rounded-lg order-2">
         <h3 className="text-xl text-center">Details</h3>
+
         {editType === "personal" ? (
           <form className="p-6 space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block  font-bold">First Name</label>
+                <label className="block font-bold">First Name</label>
                 <input
                   type="text"
                   name="firstName"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className="input border  input-bordered w-full "
+                  className="input input-bordered w-full"
                 />
               </div>
               <div>
-                <label className="block  font-bold">Last Name</label>
+                <label className="block font-bold">Last Name</label>
                 <input
                   type="text"
                   name="lastName"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  className="input border  input-bordered w-full "
+                  className="input input-bordered w-full"
                 />
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="text-black dark:text-white font-bold">
-                  Age
-                </label>
+                <label className="font-bold">Age</label>
                 <input
                   type="number"
                   name="age"
                   value={age}
                   onChange={(e) => setAge(e.target.value)}
-                  className="input border  input-bordered w-full "
+                  className="input input-bordered w-full"
                 />
               </div>
               <div>
-                <label className="text-black dark:text-white font-bold">
-                  Phone
-                </label>
+                <label className="font-bold">Phone</label>
                 <input
                   type="tel"
                   name="phone"
                   value={phoneNo}
                   onChange={(e) => setPhoneNo(e.target.value)}
-                  className="input border  input-bordered w-full "
+                  className="input input-bordered w-full"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block  font-bold">Email</label>
+              <label className="block font-bold">Email</label>
               <input
                 type="email"
                 name="email"
                 value={emailId}
                 readOnly
-                className="input border  input-bordered w-full "
+                className="input input-bordered w-full"
               />
             </div>
-            <div className="flex justify-between">
-              <div>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex-1">
                 <label className="block font-bold">Profile Photo</label>
                 <input
                   onChange={(e) => handlePhotoUpload(e)}
                   type="file"
-                  className="file-input"
+                  className="file-input w-full"
                 />
               </div>
-
-              <div>
-                <label className="block  font-bold">Background URL</label>
+              <div className="flex-1">
+                <label className="block font-bold">Background URL</label>
                 <input
                   onChange={(e) => handleBgUpload(e)}
                   type="file"
-                  className="file-input"
+                  className="file-input w-full"
                 />
               </div>
             </div>
@@ -193,18 +225,18 @@ const EditProfileForm = ({ setShowToast, user }) => {
                 maxLength={200}
                 value={about}
                 onChange={(e) => setAbout(e.target.value)}
-                className="input min-h-20 max-h-72 input-bordered w-full "
+                className="textarea input-bordered w-full min-h-20 max-h-72"
               ></textarea>
             </div>
 
             <div>
-              <label className="block  font-bold">Skills</label>
+              <label className="block font-bold">Skills</label>
               <input
                 type="text"
                 name="skills"
                 value={skills}
                 onChange={(e) => setSkills(e.target.value)}
-                className="input border  input-bordered w-full "
+                className="input input-bordered w-full"
               />
             </div>
           </form>
@@ -218,13 +250,14 @@ const EditProfileForm = ({ setShowToast, user }) => {
         ) : (
           <EditProjects />
         )}
-        {editType !== "project" ? (
-          <div>
-            <div className="w-1/2 mx-auto flex justify-around">
+
+        {editType !== "project" && (
+          <div className="mt-4">
+            <div className="w-full sm:w-3/4 mx-auto flex flex-col sm:flex-row justify-around gap-3">
               <button
                 onClick={() => dispatch(editSetting(false))}
                 type="submit"
-                className="btn btn-soft btn-error border border-gray-300"
+                className="btn btn-soft btn-error border border-accent mx-auto w-1/2 sm:w-auto"
               >
                 Cancel
               </button>
@@ -234,7 +267,7 @@ const EditProfileForm = ({ setShowToast, user }) => {
                   saveProfile();
                 }}
                 type="submit"
-                className="btn btn-soft btn-success border border-gray-300"
+                className="btn btn-soft btn-success border border-accent mx-auto w-1/2 sm:w-auto"
               >
                 Save Profile
               </button>
@@ -243,20 +276,7 @@ const EditProfileForm = ({ setShowToast, user }) => {
               {err}
             </p>
           </div>
-        ) : (
-          <p></p>
         )}
-      </div>
-      <div className="border border-white h-fit p-4 rounded-lg">
-        <h3 onClick={() => setEditType("personal")} className="cursor-pointer">
-          Personal Information
-        </h3>
-        <h3 onClick={() => setEditType("social")} className="cursor-pointer">
-          Social Links
-        </h3>
-        <h3 onClick={() => setEditType("project")} className="cursor-pointer">
-          Projects
-        </h3>
       </div>
     </div>
   );

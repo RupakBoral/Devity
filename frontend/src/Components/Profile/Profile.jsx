@@ -103,32 +103,32 @@ const Profile = () => {
               onClick={() => dispatch(editSetting(true))}
               className="flex justify-between cursor-pointer items-center"
             >
-              <p className="hidden lg:inline md:inline">Edit Profile</p>
+              <p>Edit Profile</p>
               <FiEdit className="w-5 h-5" />
             </div>
             <Link
               to={"/connections"}
               className="flex justify-between cursor-pointer items-center"
             >
-              <p className="hidden lg:inline md:inline">Connections</p>
+              <p>Connections</p>
               <FiUsers className="w-5 h-5" />
             </Link>
             <Link
               to={"/requests"}
               className="flex justify-between cursor-pointer items-center"
             >
-              <p className="hidden lg:inline md:inline">Requests</p>
+              <p>Requests</p>
               <FiUserPlus className="w-5 h-5" />
             </Link>
             <div className="flex justify-between cursor-pointer items-center">
-              <p className="hidden lg:inline md:inline">Messages</p>
+              <p>Messages</p>
               <FiMessageSquare className="w-5 h-5" />
             </div>
           </div>
 
           <div className="border border-gray-400 bg-base-200/50 p-6  max-h-48 rounded-lg flex flex-col gap-2">
             <div className="flex justify-between cursor-pointer items-center">
-              <p className="hidden lg:inline md:inline">Email</p>
+              <p>Email</p>
               <p className="text-wrap">{emailId}</p>
             </div>
             <div className="flex justify-between cursor-pointer items-center">
@@ -137,7 +137,7 @@ const Profile = () => {
             </div>
             {age && (
               <div className="flex justify-between cursor-pointer items-center">
-                <p className="hidden lg:inline md:inline">Age</p>
+                <p>Age</p>
                 <p>{age}</p>
               </div>
             )}

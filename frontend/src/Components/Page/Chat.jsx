@@ -34,7 +34,7 @@ const Chat = () => {
     return () => {
       socket.disconnect();
     };
-  }, [userId, receiver]);
+  }, []);
 
   const handleSendMessage = () => {
     if (!input.trim()) return;
@@ -45,8 +45,9 @@ const Chat = () => {
   };
 
   return (
-    <div className="w-screen h-screen pt-10 px-4 bg-base-300">
-      <div className="max-w-sm md:max-w-md lg:max-w-lg h-10/12 mx-auto my-auto p-4 border border-accent rounded-lg shadow-lg shadow-accent bg-base-200 flex flex-col">
+    <div className="w-screen h-screen py-8 pt-24 px-4 bg-base-300">
+      <h1 className="font-semibold text-center text-3xl">Chat</h1>
+      <div className="max-w-sm md:max-w-md lg:max-w-lg h-[90%] mx-auto my-2 p-4 border border-accent rounded-lg shadow-lg shadow-accent bg-base-200 flex flex-col">
         <div className="flex-1 overflow-y-auto p-2 border-b border-accent-content/50">
           {messages.map((mssg, index) =>
             mssg.userId !== userId ? (

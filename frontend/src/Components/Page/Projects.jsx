@@ -24,7 +24,7 @@ const Projects = () => {
   }, []);
   return projects ? (
     <section className="flex flex-col py-8 gap-10 bg-gradient-to-b to-base-300 from-base-accent pt-24">
-      <h1 className="text-3xl text-center">Projects</h1>
+      <h1 className="text-3xl text-center font-semibold">Projects</h1>
       <ProjectDetails projects={projects} />
       <p>{err}</p>
     </section>

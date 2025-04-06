@@ -47,7 +47,7 @@ const ProjectDetails = ({ projects }) => {
                   </div>
                 </div>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-primary w-1/4 mx-auto">
+                  <button className="btn btn-primary rounded-lg w-1/4 mx-auto">
                     Connect
                   </button>
                 </div>

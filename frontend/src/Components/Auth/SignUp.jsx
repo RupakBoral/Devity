@@ -52,7 +52,10 @@ const SignUp = () => {
 
   return user === null ? (
     <div className="flex overflow-x-hidden items-center w-screen min-h-screen bg-stone-200">
-      <img src={SignUpImg} className="w-1/2 h-screen" />
+      <img
+        src={SignUpImg}
+        className="w-1/2 h-screen md:inline lg:inline hidden"
+      />
 
       <div className="mx-auto rounded-2xl p-8 max-w-lg text-center">
         <h2 className="text-3xl font-bold text-black mb-4">Join Us!</h2>
