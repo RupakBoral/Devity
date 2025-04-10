@@ -41,13 +41,10 @@ const ProjectSchema = new mongoose.Schema({
   requirements: {
     type: String,
   },
-  roleRequired: {
-    type: [String],
-    maxLength: 5,
-  },
-  skillsRequired: {
-    type: String,
-    maxLength: 10,
+  communityId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Community",
+    default: null,
   },
 });
 

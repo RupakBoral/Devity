@@ -34,6 +34,7 @@ const profileRouter = require("./routes/profile.js");
 const requestRouter = require("./routes/request.js");
 const userRouter = require("./routes/user.js");
 const projectRouter = require("./routes/project.js");
+const communityRouter = require("./routes/community.js");
 
 // authentication
 app.use("/", authRouter);
@@ -51,6 +52,9 @@ app.use("/", userRouter);
 // projects
 app.use("/", projectRouter);
 
+// community
+app.use("/", communityRouter);
+
 // socket config
 const server = http.createServer(app);
 initializeSocket(server);
@@ -59,7 +63,7 @@ connectDb()
   .then(() => {
     console.log("Connection is Established");
     server.listen(port, "0.0.0.0", () => {
-      console.log("Server is running on "+port);
+      console.log("Server is running on " + port);
     });
   })
   .catch(() => {

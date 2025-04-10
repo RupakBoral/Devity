@@ -5,6 +5,7 @@ const { userAuth } = require("../middlewares/auth");
 const { validateProject } = require("../utils/validate");
 const projectRouter = express.Router();
 projectRouter.use(express.json());
+const CommunityModel = require("../models/community");
 
 projectRouter.post("/project/add", userAuth, async (req, res) => {
   try {
@@ -73,10 +74,38 @@ projectRouter.patch(
       }
       const project_id = req.params.project_id;
       const project = await ProjectModel.findById(project_id);
+      const { rolesRequired, skillsRequired } = req.body;
       Object.keys(req.body).forEach((key) => {
         project[key] = req.body[key];
       });
       await project.save();
+
+      const { help_indicator } = req.body;
+
+      if (help_indicator === "need_help") {
+        const community = await CommunityModel.findOne({
+          projectId: project_id,
+        });
+
+        // check if community exist or not
+        if (community) {
+          Object.keys(req.body).forEach((key) => {
+            community[key] = req.body[key];
+          });
+          await community.save();
+        } else {
+          const newCommunity = new CommunityModel({
+            projectId: project_id,
+            rolesRequired,
+            skillsRequired,
+            admin: req.user._id,
+          });
+          await newCommunity.save();
+          project.communityId = newCommunity._id;
+          await project.save();
+        }
+      }
+
       res.status(200).json({ message: "Success", data: project });
     } catch (err) {
       console.log(err);
