@@ -5,7 +5,7 @@ import { BASE_URL } from "../../utils/constants";
 import axios from "axios";
 import { removeUser } from "../../utils/userSlice";
 import logo from "../../img/logo.png";
-import { FiHome, FiUserPlus, FiUsers, FiBriefcase } from "react-icons/fi";
+import { FiUserPlus, FiUsers, FiBriefcase, FiCompass } from "react-icons/fi";
 import { useState, useEffect } from "react";
 
 const NavBar = () => {
@@ -35,8 +35,10 @@ const NavBar = () => {
     }
   };
 
+  const [active, setActive] = useState("");
+
   return home === false ? (
-    <nav className="navbar fixed top-2 mx-4 md:mx-10 lg:mx-10  w-[92%] md:w-[94%] lg:w-[94%] rounded-lg backdrop-blur-xl z-60 m-0 flex items-center border-2 border-base-content gap-2 lg:gap-6 md:gap-6 justify-evenly md:justify-around lg:justify-around">
+    <nav className="navbar py-2 fixed top-3 mx-4 md:mx-10 lg:mx-10  w-[92%] md:w-[94%] lg:w-[94%] rounded-lg backdrop-blur-xl z-60 m-0 flex items-center border-2 border-base-content gap-2 lg:gap-6 md:gap-6 justify-evenly md:justify-around lg:justify-around">
       <Link to={"/home"} className="group text-2xl flex gap-1 items-center">
         <img className="w-12 h-12 rounded-2xl" src={logo} />
         <span className="text-3xl font-bold animate-pulse md:inline lg:inline hidden bg-gradient-to-l from-violet-600 to-pink-400 text-transparent py-1 bg-clip-text">
@@ -46,15 +48,25 @@ const NavBar = () => {
 
       <Link
         to={"/"}
-        className=" hover:text-black flex flex-col gap-1 items-center text-gray-400 dark:hover:text-yellow-600 cursor-pointer"
+        onClick={() => setActive("explore")}
+        className={
+          active === "explore"
+            ? "dark:text-yellow-600 dark:hover:text-yellow-700 hover:text-black flex flex-col items-center cursor-pointer"
+            : "text-gray-400 hover:text-black flex flex-col items-center dark:hover:text-yellow-600 cursor-pointer"
+        }
       >
-        <FiHome className="w-6 h-6" />
-        <p className="font-merriweather hidden md:inline lg:inline">Home</p>
+        <FiCompass className="w-6 h-6" />
+        <p className="font-merriweather hidden md:inline lg:inline">Explore</p>
       </Link>
 
       <Link
         to={"/projects"}
-        className="hover:text-black flex flex-col gap-1 items-center text-gray-400 dark:hover:text-yellow-600 cursor-pointer"
+        onClick={() => setActive("projects")}
+        className={
+          active === "projects"
+            ? "dark:text-yellow-600 dark:hover:text-yellow-700 hover:text-black flex flex-col items-center cursor-pointer"
+            : "text-gray-400 hover:text-black flex flex-col items-center dark:hover:text-yellow-600 cursor-pointer"
+        }
       >
         <FiBriefcase className="w-6 h-6" />
         <p className="font-merriweather hidden md:inline lg:inline">Projects</p>
@@ -62,7 +74,12 @@ const NavBar = () => {
 
       <Link
         to={"/connections"}
-        className="flex flex-col gap-1 items-center dark:hover:text-yellow-600 hover:text-black  text-gray-400 cursor-pointer"
+        onClick={() => setActive("connections")}
+        className={
+          active === "connections"
+            ? "dark:text-yellow-600 dark:hover:text-yellow-700 hover:text-black flex flex-col items-center cursor-pointer"
+            : "text-gray-400 hover:text-black flex flex-col items-center dark:hover:text-yellow-600 cursor-pointer"
+        }
       >
         <FiUsers className="w-6 h-6" />
         <p className="font-merriweather hidden md:inline lg:inline">Network</p>
@@ -70,7 +87,12 @@ const NavBar = () => {
 
       <Link
         to={"/requests"}
-        className="flex flex-col gap-1 items-center dark:hover:text-yellow-600 hover:text-black  text-gray-400 cursor-pointer"
+        onClick={() => setActive("request")}
+        className={
+          active === "request"
+            ? "dark:text-yellow-600 dark:hover:text-yellow-700 hover:text-black flex flex-col items-center cursor-pointer"
+            : "text-gray-400 hover:text-black flex flex-col items-center dark:hover:text-yellow-600 cursor-pointer"
+        }
       >
         <FiUserPlus className="h-6 w-6" />
         <p className="font-merriweather hidden md:inline lg:inline">Requests</p>
@@ -105,14 +127,17 @@ const NavBar = () => {
         </svg>
       </label>
 
-      <div className="flex-none gap-2 mx-5 z-20">
+      <div
+        onClick={() => setActive("profile")}
+        className="flex-none gap-2 mx-5 z-20"
+      >
         <div className="dropdown dropdown-end">
           <div
             tabIndex={0}
             role="button"
             className="btn btn-ghost btn-circle avatar"
           >
-            <div className="rounded-full w-8 h-8">
+            <div className="rounded-full border border-yellow-600/50 w-8 h-8">
               <img src={photoUrl} />
             </div>
           </div>

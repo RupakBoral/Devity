@@ -70,13 +70,13 @@ const Requests = () => {
     <div className="w-screen pt-24 h-screen bg-gradient-to-b to-base-300 from-base-accent relative flex flex-col gap-6 items-center py-10 transition-all ease-in-out duration-300">
       {toast != null ? (
         toast === "accepted" ? (
-          <div className="toast toast-top toast-end">
+          <div className="z-60 toast toast-top toast-end">
             <div className="alert alert-success">
               <span className="text-white">Request accepted</span>
             </div>
           </div>
         ) : (
-          <div className="toast toast-top toast-end">
+          <div className="z-60 toast toast-top toast-end">
             <div className="alert alert-info">
               <span className="text-white">Request rejected</span>
             </div>
@@ -137,13 +137,13 @@ const Requests = () => {
     <div className="w-screen bg-base-300 relative z-10 max-h-screen py-[25%]">
       {toast != null ? (
         toast === "accepted" ? (
-          <div className="toast toast-top toast-end">
+          <div className="z-60 toast toast-top toast-end">
             <div className="alert alert-success">
               <span className="text-white">Request accepted</span>
             </div>
           </div>
         ) : (
-          <div className="toast toast-top toast-end">
+          <div className="z-60 toast toast-top toast-end">
             <div className="alert alert-info">
               <span className="text-white">Request rejected</span>
             </div>

@@ -47,13 +47,13 @@ const Feed = () => {
     <div className="w-screen bg-gradient-to-br from-base-200 to-accent my-auto relative h-screen md:pt-44 lg:pt-44 pt-28 mx-auto">
       {toast !== null ? (
         toast === "interested" ? (
-          <div className="toast toast-top toast-end">
+          <div className="z-60 toast toast-top toast-end">
             <div className="alert alert-success">
               <span>Request sent</span>
             </div>
           </div>
         ) : (
-          <div className="toast toast-top toast-end">
+          <div className="z-60 toast toast-top toast-end">
             <div className="alert alert-info">
               <span>ignored</span>
             </div>

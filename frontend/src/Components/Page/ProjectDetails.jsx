@@ -11,9 +11,32 @@ const ProjectDetails = ({ projects }) => {
           return (
             <div
               key={index}
-              className="card w-2/3 md:w-1/2 lg:w-1/2 h-1/4 transition-all duration-00 cursor-pointer hover:shadow-lg hover:shadow-accent bg-base-200/50 gap-6 mx-auto lg:card-side shadow-sm border border-accent p-4 rounded-sm"
+              className="card w-2/3 md:w-1/2 lg:w-1/2 h-72 transition-all duration-500 cursor-pointer hover:shadow-lg hover:shadow-accent-content/30 bg-base-200 gap-6 mx-auto lg:card-side shadow-sm border border-accent p-4 rounded-sm"
             >
-              <figure className="w-full  mx-auto border border-accent shadow-sm shadow-accent">
+              <input type="checkbox" id="my_modal_7" className="modal-toggle" />
+              <div className="modal" role="dialog">
+                <div className="modal-box bg-accent flex flex-col gap-8">
+                  <div>
+                    <h2>Requirements: </h2>
+                    <p>
+                      Role: <span></span>
+                    </p>
+                    <p>
+                      Skills: <span></span>
+                    </p>
+                  </div>
+                  <div className="w-full mx-auto">
+                    <button className="btn btn-ghost mx-auto border-accent-content">
+                      Request to Join Community
+                    </button>
+                  </div>
+                </div>
+                <label className="modal-backdrop" htmlFor="my_modal_7">
+                  Close
+                </label>
+              </div>
+
+              <figure className="w-full mx-auto border border-accent shadow-sm shadow-accent">
                 <img
                   className="object-contain"
                   src={project.P_PhotoURL}
@@ -28,28 +51,19 @@ const ProjectDetails = ({ projects }) => {
                       <FiExternalLink className="cursor-pointer" />
                     </Link>
                   </h1>
-                  <p className="font-semibold">
+                  <p className="font-semibold text-base">
                     Description:{" "}
                     <span className="font-medium">{project.PDescription}</span>
                   </p>
-                  <p className="font-semibold">
+                  <p className="font-semibold text-base">
                     Skills Used:{" "}
                     <span className="font-medium">{project.PSkills}</span>
                   </p>
-                  <div>
-                    <h2>Requirements: </h2>
-                    <p>
-                      Role: <span></span>
-                    </p>
-                    <p>
-                      Skills: <span></span>
-                    </p>
-                  </div>
                 </div>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-primary rounded-lg w-1/4 mx-auto">
-                    Connect
-                  </button>
+                  <label htmlFor="my_modal_7" className="btn btn-accent">
+                    Read more
+                  </label>
                 </div>
               </div>
             </div>
