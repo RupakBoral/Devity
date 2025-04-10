@@ -3,10 +3,11 @@ import Footer from "../utils/Footer";
 import Hero from "./Home/Hero";
 import Features from "./Home/Features";
 import HowItWorks from "./Home/HowItWorks";
+import CTA from "./Home/CTA";
 import Navbar from "./Home/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { homeSetting } from "../../utils/homeSlice";
-import CTA from "./Home/CTA";
+import Loading from "../utils/Loading";
 
 const Home = () => {
   const home = useSelector((store) => store.home);
@@ -15,6 +16,7 @@ const Home = () => {
   dispatch(homeSetting(true));
 
   useEffect(() => {
+    if (!home) return <Loading />;
     const handleScroll = () => {
       if (window.scrollY > 300) {
         setShowScrollButton(true);

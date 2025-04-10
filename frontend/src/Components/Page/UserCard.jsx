@@ -1,23 +1,12 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { FiChevronRight } from "react-icons/fi";
 import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
 import { useDispatch } from "react-redux";
 import { updateFeed } from "../../utils/feedSlice";
 
 const UserCard = ({ user, setToast }) => {
-  const {
-    _id,
-    firstName,
-    lastName,
-    headline,
-    photoUrl,
-    about,
-    skills,
-    projects,
-  } = user;
-  const [showDetails, setShowDetails] = useState(false);
+  const { _id, firstName, lastName, headline, photoUrl, about, skills } = user;
   const [err, setErr] = useState("");
   const dispatch = useDispatch();
 
@@ -45,7 +34,7 @@ const UserCard = ({ user, setToast }) => {
   };
 
   return user !== null ? (
-    <div className="bg-base-200/50 cursor-pointer rounded-sm hover:shadow-accent-content shadow-lg backdrop-blur-sm hover:shadow-[5px_5px_2px_2px_gray] transition-shadow duration-500 border border-accent-content/50 shadow-base-content w-sm md:min-w-4xl lg:min-w-4xl mx-auto animate-fadeIn">
+    <div className="bg-base-200/50 cursor-pointer rounded-sm hover:shadow-accent-content shadow-lg backdrop-blur-sm hover:shadow-[5px_5px_2px_2px_gray] transition-shadow duration-500 border border-accent-content/50 shadow-base-content w-5/6 md:w-2/3 lg:w-1/2 mx-auto animate-fadeIn">
       <section className="flex w-full items-center relative min-h-[400px]">
         <div className="flex flex-col md:flex-row gap-6 p-6 w-full mx-auto items-center">
           {/* Profile Image with Hover Effect */}
@@ -92,16 +81,6 @@ const UserCard = ({ user, setToast }) => {
             </div>
           </div>
         </div>
-
-        {/* Next Button for Projects with Pulse Animation */}
-        {projects.length !== 0 && (
-          <button
-            className="right-2 top-[47%] absolute"
-            onClick={() => setShowDetails(!showDetails)}
-          >
-            <FiChevronRight className="w-10 h-10 animate-pulse transition-transform duration-300 hover:scale-110" />
-          </button>
-        )}
 
         {/* Error Message */}
         <p className="text-error">{err}</p>

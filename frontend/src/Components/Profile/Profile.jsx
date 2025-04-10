@@ -3,9 +3,7 @@ import { useState } from "react";
 import ProjectCard from "./ProjectCard";
 import { FiEdit, FiUsers, FiMessageSquare, FiUserPlus } from "react-icons/fi";
 import EditProfileForm from "./EditProfileForm";
-import Error from "../utils/Error";
 import { editSetting } from "../../utils/editSlice";
-import Loading from "../utils/Loading";
 import { Link } from "react-router-dom";
 import GitHub from "./GitHub";
 
@@ -17,7 +15,18 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   if (user === null) {
-    return <Loading />;
+    return (
+      <div className="flex justify-center mx-auto w-1/3 flex-col gap-4 h-screen">
+        <div className="flex items-center gap-4 w-1/2">
+          <div className="skeleton h-32 w-32 shrink-0 rounded-full"></div>
+          <div className="flex flex-col gap-4">
+            <div className="skeleton h-12 w-52"></div>
+            <div className="skeleton h-12 w-52"></div>
+          </div>
+        </div>
+        <div className="skeleton h-32 w-full"></div>
+      </div>
+    );
   }
 
   const {
@@ -132,7 +141,7 @@ const Profile = () => {
               <p className="text-wrap">{emailId}</p>
             </div>
             <div className="flex justify-between cursor-pointer items-center">
-              <p className=" hidden lg:inline  md:inline">Phone</p>
+              <p>Phone</p>
               <p>{phoneNo}</p>
             </div>
             {age && (
@@ -161,7 +170,16 @@ const Profile = () => {
       <EditProfileForm setShowToast={setShowToast} user={user} />
     )
   ) : (
-    <Error />
+    <div className="flex justify-center mx-auto w-52 flex-col gap-4">
+      <div className="flex items-center gap-4">
+        <div className="skeleton h-16 w-16 shrink-0 rounded-full"></div>
+        <div className="flex flex-col gap-4">
+          <div className="skeleton h-4 w-20"></div>
+          <div className="skeleton h-4 w-28"></div>
+        </div>
+      </div>
+      <div className="skeleton h-32 w-full"></div>
+    </div>
   );
 };
 

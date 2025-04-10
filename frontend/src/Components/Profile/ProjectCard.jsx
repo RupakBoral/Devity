@@ -46,7 +46,7 @@ const ProjectCard = () => {
           >
             <img
               src={project.P_PhotoURL}
-              className="w-full h-56 rounded-sm border border-accent mx-auto object-cover"
+              className="w-full h-fit md:h-56 lg:h-56 rounded-sm border border-accent mx-auto object-contain md:object-cover lg:object-cover"
             />
             <h1 className="font-semibold font-montserrat text-lg">
               {project.PName}
@@ -103,7 +103,8 @@ const ProjectCard = () => {
     </div>
   ) : (
     <div>
-      <p className="text-center">ERROR {err}</p>
+      <p>{err}</p>
+      <span className="loading loading-spinner loading-xl"></span>
     </div>
   );
 };

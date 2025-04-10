@@ -40,7 +40,10 @@ const NavBar = () => {
   return home === false ? (
     <nav className="navbar py-2 fixed top-3 mx-4 md:mx-10 lg:mx-10  w-[92%] md:w-[94%] lg:w-[94%] rounded-lg backdrop-blur-xl z-60 m-0 flex items-center border-2 border-base-content gap-2 lg:gap-6 md:gap-6 justify-evenly md:justify-around lg:justify-around">
       <Link to={"/home"} className="group text-2xl flex gap-1 items-center">
-        <img className="w-12 h-12 rounded-2xl" src={logo} />
+        <img
+          className="md:w-12 md:h-12 w-4 h-4 rounded-2xl object-cover"
+          src={logo}
+        />
         <span className="text-3xl font-bold animate-pulse md:inline lg:inline hidden bg-gradient-to-l from-violet-600 to-pink-400 text-transparent py-1 bg-clip-text">
           evity
         </span>
@@ -129,7 +132,7 @@ const NavBar = () => {
 
       <div
         onClick={() => setActive("profile")}
-        className="flex-none gap-2 mx-5 z-20"
+        className="flex-none gap-2 z-20"
       >
         <div className="dropdown dropdown-end">
           <div

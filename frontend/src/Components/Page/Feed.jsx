@@ -6,13 +6,14 @@ import { addFeed } from "../../utils/feedSlice";
 import { useEffect } from "react";
 import UserCard from "./UserCard";
 import { useState } from "react";
-import Loading from "../utils/Loading";
+import Shimmer from "../utils/Shimmer";
 
 const Feed = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const feed = useSelector((store) => store.feed);
   const user = useSelector((store) => store.user);
+  const [err, setErr] = useState("");
 
   const [toast, setToast] = useState(null);
 
@@ -34,12 +35,15 @@ const Feed = () => {
       });
       dispatch(addFeed(res?.data?.data));
     } catch (err) {
-      console.error("Fetch Error:", err);
+      setErr(err);
       navigate("/home");
     }
   };
 
   useEffect(() => {
+    if (user === null || user.length === 0) {
+      navigate("/home");
+    }
     if (feed === null || feed.length === 0) getFeed();
   }, []);
 
@@ -60,13 +64,13 @@ const Feed = () => {
           </div>
         )
       ) : (
-        <p></p>
+        <p>{err}</p>
       )}
 
       <UserCard user={feed[0]} setToast={setToast} />
     </div>
   ) : (
-    <Loading />
+    <Shimmer />
   );
 };
 
