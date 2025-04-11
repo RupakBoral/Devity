@@ -1,13 +1,15 @@
 const mongoose = require("mongoose");
 
 const CommunitySchema = new mongoose.Schema({
-  name: {
+  communityName: {
     type: String,
+    required: true,
   },
   projectId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Project",
     required: true,
+    unique: true,
   },
   admin: {
     type: mongoose.Schema.Types.ObjectId,

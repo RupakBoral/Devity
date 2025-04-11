@@ -67,7 +67,7 @@ const Requests = () => {
   }
 
   return requests !== null && requests.length !== 0 ? (
-    <div className="w-screen pt-24 h-screen bg-gradient-to-b to-base-300 from-base-accent relative flex flex-col gap-6 items-center py-10 transition-all ease-in-out duration-300">
+    <div className="w-screen pt-24 h-full bg-gradient-to-b to-base-300 from-base-accent relative flex flex-col gap-6 items-center py-10 transition-all ease-in-out duration-300">
       {toast != null ? (
         toast === "accepted" ? (
           <div className="z-60 toast toast-top toast-end">
@@ -86,49 +86,51 @@ const Requests = () => {
         <p className="hidden"></p>
       )}
 
-      <h1 className="font-merriweather text-3xl z-20 text-center font-semibold">
-        Requests
-      </h1>
-      <div className="flex flex-col gap-4 w-4/5 md:w-1/2 lg:w-1/2 ">
-        {requests.map((request, index) => {
-          const { firstName, lastName, photoUrl, about, headline } =
-            request.fromUserId;
-          return (
-            <div
-              key={index}
-              className="cursor-pointer bg-base-200/50 z-20 border-2 border-accent/70 p-4 rounded-lg min-h-24 flex gap-2 justify-between items-center hover:shadow-lg hover:shadow-accent duration-500 ease-out"
-            >
-              <img
-                className="w-20 h-20 rounded-full border-2 border-base-content"
-                src={photoUrl}
-              />
-              <div className="flex flex-col flex-1">
-                <h2 className="text-xl font-merriweather">
-                  {firstName} {lastName}
-                </h2>
-                <p className="text-gray-500 font-montserrat">{headline}</p>
-                <p className="text-gray-400 font-montserrat hidden md:inline lg:inline">
-                  {about}
-                </p>
-              </div>
+      <div className="w-[90%] border-sm md:w-1/2 lg:w-1/2 mx-auto border border-accent-content/30 min-h-screen max-h-fit px-2 pb-10 md:px-10">
+        <h1 className="font-merriweather py-6 text-3xl z-20 text-center font-semibold">
+          Requests
+        </h1>
+        <div className="flex flex-col gap-4">
+          {requests.map((request, index) => {
+            const { firstName, lastName, photoUrl, about, headline } =
+              request.fromUserId;
+            return (
+              <div
+                key={index}
+                className="cursor-pointer bg-base-200/50 z-20 border-2 border-accent-content/40 p-4 rounded-lg min-h-24 flex gap-2 justify-between items-center hover:shadow-lg hover:shadow-accent duration-500 ease-out"
+              >
+                <img
+                  className="w-20 h-20 rounded-full border-2 border-base-content"
+                  src={photoUrl}
+                />
+                <div className="flex flex-col flex-1">
+                  <h2 className="text-xl font-merriweather">
+                    {firstName} {lastName}
+                  </h2>
+                  <p className="text-gray-500 font-montserrat">{headline}</p>
+                  <p className="text-gray-400 font-montserrat hidden md:inline lg:inline">
+                    {about}
+                  </p>
+                </div>
 
-              <div className="flex flex-col md:flex-row lg:flex-row gap-2">
-                <button
-                  onClick={() => reviewRequest("rejected", request._id)}
-                  className="btn dark:border-yellow-600 duration-300 ease-in text-lg font-instrument-sans m-auto hover:bg-accent-content/15 hover:text-base-content font-thin"
-                >
-                  Ignore
-                </button>
-                <button
-                  onClick={() => reviewRequest("accepted", request._id)}
-                  className="btn dark:border-yellow-600 duration-300 ease-in text-lg font-instrument-sans m-auto hover:bg-accent-content/15 hover:text-base-content font-thin"
-                >
-                  Accept
-                </button>
+                <div className="flex flex-col md:flex-row lg:flex-row gap-2">
+                  <button
+                    onClick={() => reviewRequest("rejected", request._id)}
+                    className="btn dark:border-yellow-600 duration-300 ease-in text-lg font-instrument-sans m-auto hover:bg-accent-content/15 hover:text-base-content font-thin"
+                  >
+                    Ignore
+                  </button>
+                  <button
+                    onClick={() => reviewRequest("accepted", request._id)}
+                    className="btn dark:border-yellow-600 duration-300 ease-in text-lg font-instrument-sans m-auto hover:bg-accent-content/15 hover:text-base-content font-thin"
+                  >
+                    Accept
+                  </button>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   ) : err !== "" ? (

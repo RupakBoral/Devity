@@ -5,7 +5,13 @@ import { BASE_URL } from "../../utils/constants";
 import axios from "axios";
 import { removeUser } from "../../utils/userSlice";
 import logo from "../../img/logo.png";
-import { FiUserPlus, FiUsers, FiBriefcase, FiCompass } from "react-icons/fi";
+import {
+  FiUserPlus,
+  FiUsers,
+  FiBriefcase,
+  FiCompass,
+  FiRadio,
+} from "react-icons/fi";
 import { useState, useEffect } from "react";
 
 const NavBar = () => {
@@ -38,7 +44,7 @@ const NavBar = () => {
   const [active, setActive] = useState("");
 
   return home === false ? (
-    <nav className="navbar py-2 fixed top-3 mx-4 md:mx-10 lg:mx-10  w-[92%] md:w-[94%] lg:w-[94%] rounded-lg backdrop-blur-xl z-60 m-0 flex items-center border-2 border-base-content gap-2 lg:gap-6 md:gap-6 justify-evenly md:justify-around lg:justify-around">
+    <nav className="navbar py-2 fixed top-3 mx-4 md:mx-10 lg:mx-10  w-[92%] md:w-[94%] lg:w-[94%] rounded-lg backdrop-blur-xl z-60 m-0 flex items-center border border-base-content gap-2 lg:gap-6 md:gap-6 justify-evenly md:justify-around lg:justify-around">
       <Link to={"/home"} className="group text-2xl flex gap-1 items-center">
         <img
           className="md:w-12 md:h-12 w-4 h-4 rounded-2xl object-cover"
@@ -99,6 +105,21 @@ const NavBar = () => {
       >
         <FiUserPlus className="h-6 w-6" />
         <p className="font-merriweather hidden md:inline lg:inline">Requests</p>
+      </Link>
+
+      <Link
+        to={"/communities"}
+        onClick={() => setActive("community")}
+        className={
+          active === "community"
+            ? "dark:text-yellow-600 dark:hover:text-yellow-700 hover:text-black flex flex-col items-center cursor-pointer"
+            : "text-gray-400 hover:text-black flex flex-col items-center dark:hover:text-yellow-600 cursor-pointer"
+        }
+      >
+        <FiRadio className="h-6 w-6" />
+        <p className="font-merriweather hidden md:inline lg:inline">
+          Communities
+        </p>
       </Link>
 
       <label className="swap swap-rotate text-gray-400 hover:dark:text-yellow-600">

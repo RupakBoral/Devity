@@ -129,10 +129,13 @@ const Profile = () => {
               <p>Requests</p>
               <FiUserPlus className="w-5 h-5" />
             </Link>
-            <div className="flex justify-between cursor-pointer items-center">
-              <p>Messages</p>
+            <Link
+              to={"/communities"}
+              className="flex justify-between cursor-pointer items-center"
+            >
+              <p>Communities</p>
               <FiMessageSquare className="w-5 h-5" />
-            </div>
+            </Link>
           </div>
 
           <div className="border border-gray-400 bg-base-200/50 p-6  max-h-48 rounded-lg flex flex-col gap-2">

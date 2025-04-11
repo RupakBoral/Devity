@@ -56,13 +56,13 @@ const ProjectDetails = ({ projects }) => {
   };
 
   return (
-    <section className="flex flex-col gap-10 mx-auto w-screen">
+    <section className="flex flex-col gap-10 mx-auto">
       {projects ? (
         projects.map((project, index) => {
           return (
             <div
               key={index}
-              className="card w-5/6 md:w-1/2 lg:w-1/2 h-fit transition-all duration-500 cursor-pointer hover:shadow-lg hover:shadow-accent-content/30 bg-base-200 md:gap-6 lg:gap-6 mx-auto lg:card-side shadow-sm border border-accent p-4 rounded-sm"
+              className="card w-full md:w-[80%] lg:w-[80%] h-fit transition-all duration-500 cursor-pointer hover:shadow-lg hover:shadow-accent-content/30 bg-base-200 md:gap-6 lg:gap-6 mx-auto lg:card-side shadow-sm border border-accent p-4 rounded-sm"
             >
               <input
                 type="checkbox"
@@ -130,13 +130,11 @@ const ProjectDetails = ({ projects }) => {
                   </h1>
                   <p className="font-semibold text-md md:text-base">
                     Description:{" "}
-                    <span className="font-light md:font-medium">
-                      {project.PDescription}
-                    </span>
+                    <span className="font-light">{project.PDescription}</span>
                   </p>
                   <p className="font-semibold md:inline lg:inline hidden text-base">
                     Skills Used:{" "}
-                    <span className="font-medium">{project.PSkills}</span>
+                    <span className="font-light">{project.PSkills}</span>
                   </p>
                 </div>
                 <div className="card-actions justify-end">

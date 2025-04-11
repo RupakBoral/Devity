@@ -13,6 +13,7 @@ import Requests from "./Components/Page/Requests";
 import AboutMe from "./Components/Page/AboutMe";
 import Chat from "./Components/Page/Chat";
 import Projects from "./Components/Page/Projects";
+import Communitites from "./Components/Page/Home/Communitites";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
               <Route path="/aboutMe" element={<AboutMe />} />
               <Route path="/chat/:receiverId" element={<Chat />} />
               <Route path="/projects" element={<Projects />} />
+              <Route path="/communities" element={<Communitites />} />
             </Route>
           </Routes>
         </BrowserRouter>
