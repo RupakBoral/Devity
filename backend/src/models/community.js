@@ -20,6 +20,9 @@ const CommunitySchema = new mongoose.Schema({
   skillsRequired: {
     type: String,
   },
+  requirements: {
+    type: String,
+  },
   members: [
     {
       userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },

@@ -34,20 +34,30 @@ communityRouter.post(
       const user = community.members.find((member) =>
         member.userId.equals(userId)
       );
-      if (community.admin.equals(userId) || user) {
-        throw new Error("Already a member");
-      }
 
-      // handle multiple requests----
+      if (community.admin.equals(userId) || user) {
+        if (user.status === "accepted")
+          res.status(200).json({ message: "Already a member" });
+        else if (user.status === "pending")
+          res
+            .status(200)
+            .json({ message: "Already requested, wait for approval" });
+        else
+          res
+            .status(200)
+            .json({ message: "Rejected, please explore for another projects" });
+        return;
+      }
 
       const newMember = { userId, role, message, status: "pending" };
       community.members.push(newMember);
 
       await community.save();
 
-      res.status(200).json({ message: "Sucess", data: newMember });
+      res
+        .status(202)
+        .json({ message: "Request sent successfully", data: newMember });
     } catch (err) {
-      console.log(err);
       res.status(400).json(err.message);
     }
   }
@@ -117,22 +127,39 @@ communityRouter.post(
   }
 );
 
-communityRouter.get("/community/:community_id", userAuth, async (req, res) => {
+communityRouter.get("/community/:community_id/", userAuth, async (req, res) => {
   try {
     const { community_id } = req.params;
+    const userId = req.user._id;
     const community = await CommunityModel.findById(community_id);
-
     if (!community) throw new Error("No community found");
 
-    const activeMembers = community.members.filter(
-      (member) => member.status === "accepted"
-    );
-    if (!activeMembers) throw new Error("No members found");
-
-    res.status(200).json({ message: "Success", data: activeMembers });
+    res.status(200).json({ message: "Success", data: community });
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
 });
+
+communityRouter.get(
+  "/community/:community_id/members",
+  userAuth,
+  async (req, res) => {
+    try {
+      const { community_id } = req.params;
+      const community = await CommunityModel.findById(community_id);
+
+      if (!community) throw new Error("No community found");
+
+      const activeMembers = community.members.filter(
+        (member) => member.status === "accepted"
+      );
+      if (!activeMembers) throw new Error("No members found");
+
+      res.status(200).json({ message: "Success", data: activeMembers });
+    } catch (error) {
+      res.status(400).json({ Error: error.message });
+    }
+  }
+);
 
 module.exports = communityRouter;
