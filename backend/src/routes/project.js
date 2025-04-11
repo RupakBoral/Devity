@@ -74,7 +74,7 @@ projectRouter.patch(
       }
       const project_id = req.params.project_id;
       const project = await ProjectModel.findById(project_id);
-      const { rolesRequired, skillsRequired } = req.body;
+      const { name, rolesRequired, skillsRequired } = req.body;
       Object.keys(req.body).forEach((key) => {
         project[key] = req.body[key];
       });
@@ -95,6 +95,7 @@ projectRouter.patch(
           await community.save();
         } else {
           const newCommunity = new CommunityModel({
+            name,
             projectId: project_id,
             rolesRequired,
             skillsRequired,

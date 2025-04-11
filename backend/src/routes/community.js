@@ -31,17 +31,21 @@ communityRouter.post(
         throw new Error("Community not found");
       }
 
-      const user = community.members.find((member) => member.userId == userId);
-      if (user) {
+      const user = community.members.find((member) =>
+        member.userId.equals(userId)
+      );
+      if (community.admin.equals(userId) || user) {
         throw new Error("Already a member");
       }
+
+      // handle multiple requests----
 
       const newMember = { userId, role, message, status: "pending" };
       community.members.push(newMember);
 
       await community.save();
 
-      res.status(200).json({ message: "Sucess", data: community });
+      res.status(200).json({ message: "Sucess", data: newMember });
     } catch (err) {
       console.log(err);
       res.status(400).json(err.message);
@@ -55,10 +59,14 @@ communityRouter.get(
   async (req, res) => {
     try {
       const { community_id } = req.params;
+      const userId = req.user._id;
 
-      const { members } = await CommunityModel.findById(community_id).select(
-        "members"
-      );
+      const community = await CommunityModel.findById(community_id);
+
+      if (!community.admin.equals(userId)) throw new Error("Not authorized");
+      if (!community) throw new Error("Community not found");
+
+      const { members } = community;
 
       if (!members) {
         throw new Error("Members not found");
@@ -72,10 +80,59 @@ communityRouter.get(
 
       res.status(200).json({ message: "Success", data: requests });
     } catch (err) {
-      console.log(err);
       res.status(400).json(err.message);
     }
   }
 );
+
+communityRouter.post(
+  "/community/:status/:community_id/:member_id",
+  userAuth,
+  async (req, res) => {
+    try {
+      const { status, community_id, member_id } = req.params;
+      const userId = req.user._id;
+
+      const community = await CommunityModel.findById(community_id);
+      if (!community) {
+        throw new Error("Community not found");
+      }
+
+      if (community.admin.equals(member_id))
+        throw new Error("Cannot review yourself, you are the admin");
+
+      const member = community.members.find((member) =>
+        member.userId.equals(member_id)
+      );
+      if (!member) throw new Error("Member not found");
+
+      member.status = status;
+      await community.save();
+      res
+        .status(200)
+        .json({ message: "Successfully reviewed", data: community });
+    } catch (error) {
+      res.status(400).json({ Error: error.message });
+    }
+  }
+);
+
+communityRouter.get("/community/:community_id", userAuth, async (req, res) => {
+  try {
+    const { community_id } = req.params;
+    const community = await CommunityModel.findById(community_id);
+
+    if (!community) throw new Error("No community found");
+
+    const activeMembers = community.members.filter(
+      (member) => member.status === "accepted"
+    );
+    if (!activeMembers) throw new Error("No members found");
+
+    res.status(200).json({ message: "Success", data: activeMembers });
+  } catch (error) {
+    res.status(400).json({ Error: error.message });
+  }
+});
 
 module.exports = communityRouter;
