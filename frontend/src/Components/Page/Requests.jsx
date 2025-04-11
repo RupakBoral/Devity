@@ -100,14 +100,16 @@ const Requests = () => {
                 className="cursor-pointer bg-base-200/50 z-20 border-2 border-accent-content/40 p-4 rounded-lg min-h-24 flex gap-2 justify-between items-center hover:shadow-lg hover:shadow-accent duration-500 ease-out"
               >
                 <img
-                  className="w-20 h-20 rounded-full border-2 border-base-content"
+                  className="w-12 h-12 md:w-20 md:h-20 lg:w-20 lg:h-20 rounded-full border-2 border-base-content"
                   src={photoUrl}
                 />
                 <div className="flex flex-col flex-1">
-                  <h2 className="text-xl font-merriweather">
+                  <h2 className="text-base md:text-xl lg:text-xl font-merriweather">
                     {firstName} {lastName}
                   </h2>
-                  <p className="text-gray-500 font-montserrat">{headline}</p>
+                  <p className="text-gray-500 text-sm md:text-base font-montserrat">
+                    {headline}
+                  </p>
                   <p className="text-gray-400 font-montserrat hidden md:inline lg:inline">
                     {about}
                   </p>
@@ -116,13 +118,13 @@ const Requests = () => {
                 <div className="flex flex-col md:flex-row lg:flex-row gap-2">
                   <button
                     onClick={() => reviewRequest("rejected", request._id)}
-                    className="btn dark:border-yellow-600 duration-300 ease-in text-lg font-instrument-sans m-auto hover:bg-accent-content/15 hover:text-base-content font-thin"
+                    className="btn md:btn-md lg:btn-lg btn-sm dark:border-yellow-600 duration-300 ease-in text-lg font-instrument-sans m-auto hover:bg-accent-content/15 hover:text-base-content font-thin"
                   >
                     Ignore
                   </button>
                   <button
                     onClick={() => reviewRequest("accepted", request._id)}
-                    className="btn dark:border-yellow-600 duration-300 ease-in text-lg font-instrument-sans m-auto hover:bg-accent-content/15 hover:text-base-content font-thin"
+                    className="btn md:btn-md lg:btn-lg btn-sm dark:border-yellow-600 duration-300 ease-in text-lg font-instrument-sans m-auto hover:bg-accent-content/15 hover:text-base-content font-thin"
                   >
                     Accept
                   </button>
