@@ -101,15 +101,15 @@ const EditProfileForm = ({ setShowToast, user }) => {
   const [editType, setEditType] = useState("personal");
 
   return (
-    <div className="w-full flex flex-col lg:flex-row justify-center gap-6 pt-24 py-10 px-4 min-h-screen">
+    <div className="w-[80%] mx-auto flex flex-col lg:flex-row justify-center gap-6 pt-24 py-10 px-4 min-h-screen">
       <div className="w-full lg:w-fit order-1">
-        <div className="flex mx-4 flex-row lg:flex-col gap-2 justify-around border border-accent rounded-lg p-4">
+        <div className="flex mx-4 flex-row lg:flex-col text-sm md:text-base lg:text-lg gap-2 justify-around border border-accent rounded-lg p-1 md:p-4 lg:p-4">
           <h3
             onClick={() => setEditType("personal")}
             className={`cursor-pointer px-2 py-1 rounded-md text-center ${
               editType === "personal"
                 ? "bg-primary text-white font-semibold"
-                : "hover:underline"
+                : "hover:bg-accent"
             }`}
           >
             Personal
@@ -119,7 +119,7 @@ const EditProfileForm = ({ setShowToast, user }) => {
             className={`cursor-pointer px-2 py-1 rounded-md text-center ${
               editType === "social"
                 ? "bg-primary text-white font-semibold"
-                : "hover:underline"
+                : "hover:bg-accent"
             }`}
           >
             Social
@@ -129,7 +129,7 @@ const EditProfileForm = ({ setShowToast, user }) => {
             className={`cursor-pointer px-2 py-1 rounded-md text-center ${
               editType === "project"
                 ? "bg-primary text-white font-semibold"
-                : "hover:underline"
+                : "hover:bg-accent"
             }`}
           >
             Projects
@@ -137,7 +137,7 @@ const EditProfileForm = ({ setShowToast, user }) => {
         </div>
       </div>
 
-      <div className="flex-1 w-full max-w-2xl border border-accent overflow-hidden py-5 rounded-lg order-2">
+      <div className="flex-1 w-full max-w-2xl border border-accent overflow-hidden py-5 rounded-lg mx-auto order-2">
         <h3 className="text-xl text-center">Details</h3>
 
         {editType === "personal" ? (

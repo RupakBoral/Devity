@@ -34,7 +34,10 @@ const EditProjects = () => {
       <div className="flex flex-col items-center gap-4 w-full mx-auto">
         {projects !== null && projects.length !== 0 ? (
           projects.map((project, index) => (
-            <div key={index} className="card card-border bg-base-100 w-96 ">
+            <div
+              key={index}
+              className="card card-sm md:card-md lg:card-lg card-border bg-base-100 w-[90%]"
+            >
               <div className="card-body">
                 <h2 className="card-title">{project.PName}</h2>
                 <p>{project.PDescription}</p>
