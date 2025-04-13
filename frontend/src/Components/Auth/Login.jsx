@@ -7,6 +7,7 @@ import { BASE_URL } from "../../utils/constants";
 import LoginImg from "../../img/LoginImg.png";
 import logo from "../../img/logo.png";
 import Feed from "../Page/Feed";
+import { homeSetting } from "../../utils/homeSlice";
 
 const Login = () => {
   const [emailId, setEmailId] = useState("");
@@ -29,6 +30,7 @@ const Login = () => {
         }
       );
       dispatch(addUser(res.data));
+      dispatch(homeSetting(false));
       navigate("/");
     } catch (e) {
       setError(e?.response?.data || "Login failed. Try again.");

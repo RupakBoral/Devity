@@ -7,16 +7,15 @@ import CTA from "./Home/CTA";
 import Navbar from "./Home/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { homeSetting } from "../../utils/homeSlice";
-import Loading from "../utils/Loading";
+// import Loading from "../utils/Loading";
 
 const Home = () => {
-  const home = useSelector((store) => store.home);
+  // const home = useSelector((store) => store.home);
   const dispatch = useDispatch();
 
-  dispatch(homeSetting(true));
-
   useEffect(() => {
-    if (!home) return <Loading />;
+    dispatch(homeSetting(true));
+    // if (!home) return <Loading />;
     const handleScroll = () => {
       if (window.scrollY > 300) {
         setShowScrollButton(true);
@@ -37,13 +36,14 @@ const Home = () => {
       behavior: "smooth",
     });
   };
+
   return (
     <div
       data-theme="dark"
       className="min-h-screen -mt-20 transition-all duration-500 ease-in-out z-60"
     >
       {/*Navbar */}
-      {home ? <Navbar /> : <p></p>}
+      <Navbar />
 
       {/* Hero Section */}
       <Hero />

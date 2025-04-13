@@ -5,7 +5,6 @@ import { addUser } from "../utils/userSlice";
 import axios from "axios";
 import { useEffect } from "react";
 import NavBar from "./utils/NavBar";
-import { homeSetting } from "../utils/homeSlice";
 
 const Body = () => {
   const dispatch = useDispatch();
@@ -27,10 +26,9 @@ const Body = () => {
   };
 
   useEffect(() => {
+    if (user === null || user.length === 0) return navigate("/home");
     fetchUser();
   }, []);
-
-  dispatch(homeSetting(false));
 
   return (
     <div className={`w-full "flex-col h-full gap-10 bg-transparent"}`}>

@@ -1,8 +1,10 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { homeSetting } from "../../../utils/homeSlice";
 
 const Hero = () => {
   const user = useSelector((store) => store.user);
+  const dispatch = useDispatch();
 
   return (
     <section id="home" className="pt-16">
@@ -10,19 +12,18 @@ const Hero = () => {
         <div className="hero-overlay bg-opacity-30"></div>
         <div className="hero-content text-center text-neutral-content transition-all duration-500 ease-linear">
           <div className="max-w-lg">
-            {/*<FloatingAnimation>*/}
             <h1 className="mb-5 text-4xl font-bold">
               Innovate with{" "}
               <span className="text-5xl font-bold bg-gradient-to-l from-violet-600 to-pink-400 text-transparent bg-clip-text">
                 Devity
               </span>
             </h1>
-            {/*<FloatingAnimation>*/}
             <p className="mb-8 text-base-content">
               A modern solution for your development workflow that helps you
               achieve greater productivity with ease and efficiency.
             </p>
             <Link
+              onClick={() => dispatch(homeSetting(false))}
               to={user === null ? "/login" : "/"}
               className="btn btn-xl bg-white text-black hover:text-white animate-bounce transition-all transition-duration-700 shadow-2xl rounded-sm hover:bg-gradient-to-l from-violet-600 to-pink-400 border-0 "
             >

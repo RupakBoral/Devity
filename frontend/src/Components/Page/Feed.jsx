@@ -17,10 +17,6 @@ const Feed = () => {
 
   const [toast, setToast] = useState(null);
 
-  if (user === null || user.length === 0) {
-    navigate("/home");
-  }
-
   const getFeed = async () => {
     if (feed && feed.length > 0) {
       return;
@@ -42,7 +38,7 @@ const Feed = () => {
 
   useEffect(() => {
     if (user === null || user.length === 0) {
-      navigate("/home");
+      return navigate("/home");
     }
     if (feed === null || feed.length === 0) getFeed();
   }, []);
