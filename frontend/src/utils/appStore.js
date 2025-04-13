@@ -27,16 +27,13 @@ const persistConfig = {
   storage,
 };
 
-// Wrap the rootReducer
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// Configure store with serializableCheck adjustment
 export const appStore = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        // Ignore specific actions related to Redux Persist
         ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
       },
     }),
