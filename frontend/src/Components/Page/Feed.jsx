@@ -44,7 +44,7 @@ const Feed = () => {
   }, []);
 
   return feed !== null && feed.length !== 0 ? (
-    <div className="w-screen bg-gradient-to-br from-base-200 to-accent my-auto relative h-screen md:pt-44 lg:pt-44 pt-28 mx-auto">
+    <div className="w-screen bg-gradient-to-br from-base-200 to-accent my-auto relative min-h-screen h-full md:pt-44 lg:pt-44 py-10 pt-28 mx-auto">
       {toast !== null ? (
         toast === "interested" ? (
           <div className="z-60 toast toast-top toast-end">
