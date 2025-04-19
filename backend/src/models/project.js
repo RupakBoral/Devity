@@ -38,9 +38,6 @@ const ProjectSchema = new mongoose.Schema({
     required: true,
   },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  requirements: {
-    type: String,
-  },
   communityId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Community",

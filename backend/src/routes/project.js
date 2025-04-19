@@ -80,7 +80,7 @@ projectRouter.patch(
       });
       await project.save();
 
-      const { help_indicator, communityName } = req.body;
+      const { help_indicator } = req.body;
 
       if (help_indicator === "need_help") {
         const community = await CommunityModel.findOne({
@@ -97,6 +97,7 @@ projectRouter.patch(
           const newCommunity = new CommunityModel({
             Projectname: project.PName,
             projectId: project_id,
+            requirements,
             rolesRequired,
             skillsRequired,
             admin: req.user._id,

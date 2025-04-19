@@ -7,6 +7,7 @@ import { updateNewProject } from "../../../utils/projectSlice";
 import { useDispatch } from "react-redux";
 
 const ProjectForm = ({ updateThisProject, setBtn }) => {
+  console.log(updateThisProject);
   const [err, setErr] = useState("");
   const [PName, setPName] = useState(updateThisProject.PName);
   const [PDescription, setPDescription] = useState(
@@ -16,6 +17,15 @@ const ProjectForm = ({ updateThisProject, setBtn }) => {
   const [P_URL, setP_URL] = useState(updateThisProject.P_URL);
   const [P_GitURL, setP_GitURL] = useState(updateThisProject.P_GitURL);
   const [P_PhotoURL, setP_PhotoURL] = useState(updateThisProject.P_PhotoURL);
+  const [requirements, setRequirements] = useState(
+    updateThisProject?.Requirements
+  );
+  const [rolesRequired, setRolesRequired] = useState(
+    updateThisProject?.RolesRequired
+  );
+  const [skillsRequired, setSkillsRequired] = useState(
+    updateThisProject?.SkillsRequired
+  );
   const [project_status, setProject_Status] = useState(
     updateThisProject.project_status
   );
@@ -62,6 +72,9 @@ const ProjectForm = ({ updateThisProject, setBtn }) => {
         P_URL,
         project_status,
         help_indicator,
+        requirements,
+        rolesRequired,
+        skillsRequired,
       };
       const res = await axios.patch(BASE_URL + `/project/${_id}/update`, body, {
         withCredentials: true,
@@ -145,6 +158,30 @@ const ProjectForm = ({ updateThisProject, setBtn }) => {
             <option>No Help Needed</option>
           </select>
         </label>
+
+        <input
+          type="text"
+          value={P_GitURL}
+          onChange={(e) => setRequirements(e.target.value)}
+          placeholder="Requirements"
+          className="input"
+        />
+
+        <input
+          type="text"
+          value={P_GitURL}
+          onChange={(e) => setRolesRequired(e.target.value)}
+          placeholder="Roles Required"
+          className="input"
+        />
+
+        <input
+          type="text"
+          value={P_GitURL}
+          onChange={(e) => setSkillsRequired(e.target.value)}
+          placeholder="Skills Required"
+          className="input"
+        />
 
         <div className="w-1/2 flex justify-around">
           <button
