@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import ProjectCard from "./ProjectCard";
 import { FiEdit, FiUsers, FiMessageSquare, FiUserPlus } from "react-icons/fi";
 import EditProfileForm from "./EditProfileForm";
 import { editSetting } from "../../utils/editSlice";
 import { Link } from "react-router-dom";
 import GitHub from "./GitHub";
+import ViewProfile from "./ViewProfile";
 
 const Profile = () => {
   let user = useSelector((store) => store.user);
@@ -29,20 +29,7 @@ const Profile = () => {
     );
   }
 
-  const {
-    firstName,
-    lastName,
-    about,
-    phoneNo,
-    emailId,
-    age,
-    gitHub,
-    headline,
-    BgUrl,
-    photoUrl,
-    skills,
-    projects,
-  } = user;
+  const { phoneNo, emailId, age, gitHub } = user;
 
   return user !== null ? (
     !edit ? (
@@ -54,57 +41,8 @@ const Profile = () => {
             </div>
           </div>
         )}
-        <div className="md:w-4xl lg:w-4xl h-full rounded-lg flex flex-col gap-4">
-          <section className="rounded-lg bg-base-200/50 border border-gray-400">
-            <div className="relative rounded-lg">
-              <img
-                className="h-56 rounded-t-lg w-full object-cover"
-                src={
-                  BgUrl ||
-                  "https://t3.ftcdn.net/jpg/09/12/76/70/360_F_912767030_3E4ePOMr42kY42YcFIQhrzUEH9iAFwuW.jpg"
-                }
-              />
-              <img
-                className="w-32 h-32 border-2 border-base-content rounded-full absolute -bottom-10 left-10"
-                src={
-                  photoUrl ||
-                  "https://img.freepik.com/premium-vector/professional-male-avatar-profile-picture-employee-work_1322206-66590.jpg"
-                }
-              />
-            </div>
-            <div className="mt-12 p-6">
-              <h1 className="font-semibold font-montserrat text-2xl">
-                {firstName} {lastName}
-              </h1>
 
-              <h3 className="text-lg text-gray-500">{headline}</h3>
-            </div>
-          </section>
-
-          <section className="p-6 rounded-lg border flex flex-col bg-base-200/50 border-gray-400 gap-2 justify-between ">
-            <h2 className="font-merriweather text-xl font-semibold">
-              General Information
-            </h2>
-            <hr className="text-accent" />
-            <p className="text-lg text-base-content/65">{about}</p>
-          </section>
-
-          <GitHub gitHub={gitHub} />
-
-          {projects !== null && projects.length !== 0 ? (
-            <section className="p-6 rounded-lg bg-base-200/50 dark:border border-gray-400">
-              <div className="flex flex-1 flex-col gap-2 justify-between">
-                <h2 className="text-xl font-merriweather font-semibold">
-                  Projects
-                </h2>
-                <hr className="text-gray-400" />
-                <ProjectCard />
-              </div>
-            </section>
-          ) : (
-            <p></p>
-          )}
-        </div>
+        <ViewProfile user={user} />
 
         <div className="md:w-xl lg:w-xl space-y-6">
           <div className="border border-gray-400 bg-base-200/50 p-6  max-h-48 rounded-lg flex flex-col gap-2">
@@ -155,18 +93,7 @@ const Profile = () => {
             )}
           </div>
 
-          <section className="flex flex-col p-6 bg-base-200/50  rounded-lg gap-2 border border-gray-400">
-            <h1 className=" font-merriweather text-lg">Skills</h1>
-            <hr className="" />
-            <div className="flex flex-wrap gap-2">
-              {skills &&
-                skills.map((skill) => (
-                  <span key={skill} className="text-base-content">
-                    {skill}
-                  </span>
-                ))}
-            </div>
-          </section>
+          <GitHub gitHub={gitHub} />
         </div>
       </div>
     ) : (

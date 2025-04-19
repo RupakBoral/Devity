@@ -13,8 +13,9 @@ import Requests from "./Components/Page/Requests";
 import AboutMe from "./Components/Page/AboutMe";
 import Chat from "./Components/Page/Chat";
 import Projects from "./Components/Page/Projects";
-import Communitites from "./Components/Page/Home/Communitites";
+import Communitites from "./Components/Page/Communitites";
 import { PersistGate } from "redux-persist/integration/react";
+import ViewProfile from "./Components/Profile/ViewProfile";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
                 <Route path="/signUp" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/profile-view" element={<ViewProfile />} />
                 <Route path="/connections" element={<Connections />} />
                 <Route path="/requests" element={<Requests />} />
                 <Route path="/aboutMe" element={<AboutMe />} />

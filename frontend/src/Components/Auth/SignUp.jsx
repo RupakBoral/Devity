@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import SignUpImg from "../../img/LoginImg.png";
 import Feed from "../Page/Feed";
+import { homeSetting } from "../../utils/homeSlice";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const SignUp = () => {
       );
       setError("");
       if (res.status === 200) {
+        dispatch(homeSetting(false));
         dispatch(addUser(res?.data));
         navigate("/");
       }

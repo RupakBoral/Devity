@@ -1,7 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // uses localStorage
-// Reducers
+
 import userReducer from "./userSlice";
 import feedReducer from "./feedSlice";
 import editReducer from "./editSlice";
@@ -10,7 +10,6 @@ import connectionReducer from "./connectionSlice";
 import requestReducer from "./requestSlice";
 import projectReducer from "./projectSlice";
 
-// Combine all slices
 const rootReducer = combineReducers({
   user: userReducer,
   feed: feedReducer,
@@ -21,13 +20,19 @@ const rootReducer = combineReducers({
   projects: projectReducer,
 });
 
-// Persist config
+const masterReducer = (state, action) => {
+  if (action.type === "RESET") {
+    state = undefined;
+  }
+  return rootReducer(state, action);
+};
+
 const persistConfig = {
   key: "root",
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, masterReducer);
 
 export const appStore = configureStore({
   reducer: persistedReducer,

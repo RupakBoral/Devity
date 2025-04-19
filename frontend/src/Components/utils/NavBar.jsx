@@ -13,6 +13,7 @@ import {
   FiRadio,
 } from "react-icons/fi";
 import { useState, useEffect } from "react";
+import { persistor } from "../../utils/appStore";
 
 const NavBar = () => {
   const user = useSelector((store) => store.user);
@@ -34,6 +35,8 @@ const NavBar = () => {
     try {
       await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
       dispatch(removeUser());
+      dispatch({ type: "RESET" });
+      persistor.purge();
       return navigate("/home");
     } catch (err) {
       if (err.response.status === 401) return navigate("/home");
@@ -162,7 +165,7 @@ const NavBar = () => {
             className="btn btn-ghost btn-circle avatar"
           >
             <div className="rounded-full border border-yellow-600/50 w-8 h-8">
-              <img src={photoUrl} />
+              <img className="object-cover" src={photoUrl} />
             </div>
           </div>
           <ul
