@@ -71,21 +71,33 @@ communityRouter.get(
       const { community_id } = req.params;
       const userId = req.user._id;
 
-      const community = await CommunityModel.findById(community_id);
+      const community = await CommunityModel.findById(community_id).populate(
+        "members.userId"
+      );
 
-      if (!community.admin.equals(userId)) throw new Error("Not authorized");
-      if (!community) throw new Error("Community not found");
+      if (!community) {
+        res.status(200).json({ data: "Community not found" });
+        return;
+      }
 
+      if (!community.admin.equals(userId)) {
+        res.status(200).json({ data: "You are not the admin" });
+        return;
+      }
       const { members } = community;
 
       if (!members) {
-        throw new Error("Members not found");
+        res.status(200).json({ data: "No members found" });
+        return;
       }
 
-      const requests = members.filter((member) => member.status === "pending");
+      const requests = community.members.filter(
+        (member) => member.status === "pending"
+      );
 
       if (!requests) {
-        throw new Error("No requests found");
+        res.status(200).json({ data: "No requests" });
+        return;
       }
 
       res.status(200).json({ message: "Success", data: requests });

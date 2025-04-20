@@ -6,7 +6,7 @@ import axios from "axios";
 import { addProject } from "../../utils/projectSlice";
 import { Link } from "react-router-dom";
 
-const ProjectCard = () => {
+const ProjectCard = ({ secondaryUser }) => {
   const user = useSelector((store) => store.user);
   const Storedprojects = useSelector((store) => store.projects);
   const [projects, setProjects] = useState(Storedprojects);
@@ -14,28 +14,38 @@ const ProjectCard = () => {
   const dispatch = useDispatch();
 
   const fetchProjects = async () => {
-    if (Storedprojects !== null && Storedprojects.length !== 0) return;
     try {
-      const res = await axios.get(BASE_URL + "/user/projects", {
+      const _id = secondaryUser._id;
+      if (
+        Storedprojects !== null &&
+        Storedprojects.length !== 0 &&
+        user._id === _id
+      )
+        return;
+      const res = await axios.get(BASE_URL + `/user/projects/${_id}`, {
         withCredentials: true,
         headers: {
           "Content-Type": "application/json",
         },
       });
       setProjects(res?.data?.data?.projects);
-      dispatch(addProject(res?.data?.data?.projects));
+      if (user._id === _id) dispatch(addProject(res?.data?.data?.projects));
     } catch (err) {
       setErr(err);
     }
   };
 
   useEffect(() => {
-    if (projects !== null && projects.length !== 0) return;
+    if (
+      projects !== null &&
+      projects.length !== 0 &&
+      user._id === secondaryUser._id
+    )
+      return;
     fetchProjects();
-    setProjects(Storedprojects);
-  }, [Storedprojects]);
+  }, []);
 
-  return user !== null ? (
+  return secondaryUser !== null ? (
     <div className="flex overflow-x-scroll gap-4">
       {projects != null &&
         projects.length != 0 &&

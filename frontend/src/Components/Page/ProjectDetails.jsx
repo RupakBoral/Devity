@@ -73,10 +73,10 @@ const ProjectDetails = ({ projects }) => {
                 <div className="modal-box bg-accent flex flex-col gap-8">
                   <div>
                     <h2>
-                      Requirements:{" "}
+                      {requirements && "Requirements: "}
                       <span className="text-accent-content">
                         {requirements}
-                      </span>{" "}
+                      </span>
                     </h2>
                     <p>
                       Role: <span className="text-accent-content">{roles}</span>

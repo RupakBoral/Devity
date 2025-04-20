@@ -51,10 +51,10 @@ projectRouter.post("/project/add", userAuth, async (req, res) => {
   }
 });
 
-projectRouter.get("/user/projects", userAuth, async (req, res) => {
+projectRouter.get("/user/projects/:_id", async (req, res) => {
   try {
-    const userId = req.user._id;
-    const projects = await UserModel.findById(userId)
+    const { _id } = req.params;
+    const projects = await UserModel.findById(_id)
       .populate("projects")
       .select("projects");
 

@@ -13,7 +13,7 @@ import Requests from "./Components/Page/Requests";
 import AboutMe from "./Components/Page/AboutMe";
 import Chat from "./Components/Page/Chat";
 import Projects from "./Components/Page/Projects";
-import Communitites from "./Components/Page/Communitites";
+import Communitites from "./Components/Page/Communities/Communitites";
 import { PersistGate } from "redux-persist/integration/react";
 import ViewProfile from "./Components/Profile/ViewProfile";
 

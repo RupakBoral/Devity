@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { BASE_URL } from "../../utils/constants";
+import { BASE_URL } from "../../../utils/constants";
 import Disscussion from "./Disscussion";
-import communitiesDark from "../../img/communitiesDark.png";
+import communitiesDark from "../../../img/communitiesDark.png";
 
 const Communitites = () => {
   const [communities, setCommunities] = useState();
@@ -26,7 +26,7 @@ const Communitites = () => {
   }, []);
 
   return (
-    <div className="w-5/6 relative mx-auto flex min-h-screen max-h-fit my-20 bg-base-100 border rounded-sm border-accent mt-24">
+    <div className="w-5/6 relative mx-auto flex min-h-[80%] max-h-[80%] my-20 bg-base-100 border rounded-sm border-accent mt-24">
       {communities ? (
         <div className="drawer lg:drawer-open">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -35,13 +35,19 @@ const Communitites = () => {
             {selectCom ? (
               <Disscussion selectCom={selectCom} />
             ) : (
-              <div className="carousel carousel-center bg-neutral rounded-box w-fit space-x-4">
-                <div className="carousel-item">
-                  <img
-                    src={communitiesDark}
-                    className="rounded-box w-sm h-sm lg:w-lg lg:h-lg md:w-md md:h-md bg-transparent"
-                  />
-                </div>
+              <div className="flex flex-col items-center rounded-box space-y-4 w-fit space-x-4">
+                <img
+                  src={communitiesDark}
+                  className="rounded-box w-sm h-sm lg:w-lg lg:h-lg md:w-md md:h-md bg-transparent"
+                />
+                <label
+                  htmlFor="my-drawer-2"
+                  className="drawer-button lg:hidden"
+                >
+                  <div className="btn-sm md:btn-md btn-dash bg-transparent">
+                    Click here to get Started!
+                  </div>
+                </label>
               </div>
             )}
             <p>{error}</p>
