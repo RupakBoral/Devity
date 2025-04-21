@@ -19,7 +19,7 @@ import ViewProfile from "./Components/Profile/ViewProfile";
 
 function App() {
   return (
-    <div className="p-0 m-0">
+    <div className="p-0 m-0 bg-gradient-to-t to-base-300 from-base-accent">
       <Provider store={appStore}>
         <PersistGate loading={null} persistor={persistor}>
           <BrowserRouter>

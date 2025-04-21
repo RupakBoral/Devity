@@ -43,7 +43,7 @@ const Connections = () => {
 
   return connections !== null ? (
     !viewProf ? (
-      <div className="w-screen bg-gradient-to-b to-base-300 from-base-accent min-h-screen relative flex flex-col gap-6 items-center pt-24 py-10 transition-all ease-in-out duration-300">
+      <div className="w-screen bg-gradient-to-t to-base-300 from-base-accent min-h-screen relative flex flex-col gap-6 items-center pt-24 py-10 transition-all ease-in-out duration-300">
         <div className="w-[90%] rounded-sm border-sm md:w-1/2 lg:w-1/2 mx-auto border border-accent-content/30 min-h-screen max-h-fit px-2 pb-10 md:px-10">
           <h2 className="text-xl py-6 md:text-3xl z-10 font-poppins font-semibold text-center">
             Connections

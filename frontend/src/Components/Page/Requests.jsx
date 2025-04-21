@@ -71,7 +71,7 @@ const Requests = () => {
 
   return requests !== null && requests.length !== 0 ? (
     !viewProf ? (
-      <div className="w-screen pt-24 h-full bg-gradient-to-b to-base-300 from-base-accent relative flex flex-col gap-6 items-center py-10 transition-all ease-in-out duration-300">
+      <div className="w-screen pt-24 h-full bg-gradient-to-t to-base-300 from-base-accent relative flex flex-col gap-6 items-center py-10 transition-all ease-in-out duration-300">
         {toast != null ? (
           toast === "accepted" ? (
             <div className="z-60 toast toast-top toast-end">

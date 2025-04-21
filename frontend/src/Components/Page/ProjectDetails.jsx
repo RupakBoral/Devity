@@ -62,7 +62,7 @@ const ProjectDetails = ({ projects }) => {
           return (
             <div
               key={index}
-              className="card w-full md:w-[80%] lg:w-[80%] h-fit transition-all duration-500 cursor-pointer hover:shadow-lg hover:shadow-accent-content/30 bg-base-200 md:gap-6 lg:gap-6 mx-auto lg:card-side shadow-sm border border-accent p-4 rounded-sm"
+              className="card w-full md:w-[80%] lg:w-[80%] h-fit transition-all duration-500 cursor-pointer hover:shadow-lg hover:shadow-accent-content/30 bg-base-100/20 md:gap-6 lg:gap-6 mx-auto lg:card-side shadow-sm border border-accent p-4 rounded-sm"
             >
               <input
                 type="checkbox"
