@@ -29,7 +29,7 @@ const Communitites = () => {
     <div className="w-screen h-screen pt-24">
       <div className="w-5/6 relative h-screen mx-auto flex bg-base-100 ">
         {communities ? (
-          <div className="drawer h-full relative lg:drawer-open ">
+          <div className="drawer h-screen relative lg:drawer-open ">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col items-center justify-center ">
               {/*Main Chat platform*/}

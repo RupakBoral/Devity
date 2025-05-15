@@ -158,14 +158,15 @@ communityRouter.get(
   async (req, res) => {
     try {
       const { community_id } = req.params;
-      const community = await CommunityModel.findById(community_id);
+      const community = await CommunityModel.findById(community_id).populate(
+        "members.userId"
+      );
 
       if (!community) throw new Error("No community found");
 
       const activeMembers = community.members.filter(
         (member) => member.status === "accepted"
       );
-      if (!activeMembers) throw new Error("No members found");
 
       res.status(200).json({ message: "Success", data: activeMembers });
     } catch (error) {

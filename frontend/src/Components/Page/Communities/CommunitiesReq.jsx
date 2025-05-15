@@ -28,7 +28,7 @@ const CommunitiesReq = ({ _id }) => {
   }, []);
 
   return !prof ? (
-    <div className="flex flex-col gap-2 md:gap-4 lg:gap-8 justify-center items-center py-10">
+    <div className="flex flex-col overflow-y-scroll min-h-screen max-h-screen py-10 gap-2 md:gap-4 lg:gap-8 items-center px-4 box-border">
       {req &&
         req.map((request, index) => {
           return (
@@ -38,12 +38,12 @@ const CommunitiesReq = ({ _id }) => {
                 setUser(request.userId);
               }}
               key={index}
-              className="card card-border cursor-pointer border-accent/80 border-sm bg-base-100 w-[100%] md:w-[60%] h-full"
+              className="card card-border card-sm cursor-pointer border-accent/80 border-sm bg-base-100 w-[100%] md:w-[60%] h-full"
             >
               <div className="card-body">
                 <div className="flex gap-2 md:gap-4">
                   <img
-                    className="w-1/6 h-1/6 rounded-full"
+                    className="w-12 h-12 rounded-full"
                     src={request.userId.photoUrl}
                   />
                   <div className="flex flex-col gap-1 ">
