@@ -10,7 +10,7 @@ import {
   FiUsers,
   FiBriefcase,
   FiCompass,
-  FiRadio,
+  // FiRadio,
 } from "react-icons/fi";
 import { useState, useEffect } from "react";
 import { persistor } from "../../utils/appStore";
@@ -110,7 +110,7 @@ const NavBar = () => {
         <p className="font-merriweather hidden md:inline lg:inline">Requests</p>
       </Link>
 
-      <Link
+      {/*<Link
         to={"/communities"}
         onClick={() => setActive("community")}
         className={
@@ -123,7 +123,7 @@ const NavBar = () => {
         <p className="font-merriweather hidden md:inline lg:inline">
           Communities
         </p>
-      </Link>
+      </Link>*/}
 
       <label className="swap swap-rotate text-gray-400 hover:dark:text-yellow-600">
         {/* this hidden checkbox controls the state */}
