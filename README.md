@@ -14,16 +14,20 @@ Dive and meet people around your interests.
 
 SCREENSHOTS OF THE WEBSITE:
 
-Explore Projects:
+1) Explore Projects:
+   
 <img width="1210" height="944" alt="image" src="https://github.com/user-attachments/assets/2e684d43-0ba5-42d0-b3ca-ff665131636c" />
 
-Chat with your network:
+2) Chat with your network:
+   
 <img width="1210" height="994" alt="image" src="https://github.com/user-attachments/assets/e5ccd683-f9e2-46eb-bf95-ff9abc2b45d8" />
 
-Personal Portfolio:
+3) Personal Portfolio:
+   
 <img width="1210" height="994" alt="image" src="https://github.com/user-attachments/assets/5b37879d-51e1-44fe-90ee-c73297ea4e32" />
 
-White Theme:
+4) White Theme:
+   
 <img width="1210" height="994" alt="image" src="https://github.com/user-attachments/assets/74ee7b7d-0601-4ab2-a02d-6b8a13b1b079" />
 
 *Developed By: Rupak Boral*
