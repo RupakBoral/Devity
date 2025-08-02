@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 var jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const ProjectSchema = require("./project");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -30,22 +29,41 @@ const UserSchema = new mongoose.Schema(
     phoneNo: {
       type: String,
       trim: true,
-      required: true,
+      required: function() {
+        // Phone number is only required for local auth, not Google auth
+        return this.authProvider === 'local';
+      },
       unique: true,
+      sparse: true, // Allows multiple null values
       validate(value) {
-        if (!validator.isMobilePhone(value) || value.length != 10) {
+        // Only validate if value exists
+        if (value && (!validator.isMobilePhone(value) || value.length != 10)) {
           throw new Error("Invalid mobile number");
         }
       },
     },
     password: {
       type: String,
-      required: true,
+      required: function () {
+        // Password is only required if user is not signing up with Google
+        return !this.googleId;
+      },
       validate(value) {
-        if (!validator.isStrongPassword(value)) {
+        // Only validate password if it exists (for non-Google users)
+        if (value && !validator.isStrongPassword(value)) {
           throw new Error("Enter a strong Password");
         }
       },
+    },
+    googleId: {
+      type: String,
+      unique: true,
+      sparse: true, // Allows multiple null values but ensures uniqueness for non-null values
+    },
+    authProvider: {
+      type: String,
+      enum: ["local", "google"],
+      default: "local",
     },
     photoUrl: {
       type: String,

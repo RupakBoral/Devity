@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import SignUpImg from "../../img/LoginImg.png";
 import Feed from "../Page/Feed";
 import { homeSetting } from "../../utils/homeSlice";
+import FirebaseUISignUp from "./FirebaseUISignUp";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -18,13 +19,12 @@ const SignUp = () => {
   let phoneNoRef = useRef("");
   let emailIdRef = useRef("");
   let passwordRef = useRef("");
-
   const [error, setError] = useState("");
 
   const handleSignUp = async () => {
     try {
       const res = await axios.post(
-        BASE_URL + "/signUp",
+        BASE_URL + "/signup",
         {
           firstName: firstNameRef.current,
           lastName: lastNameRef.current,
@@ -42,7 +42,7 @@ const SignUp = () => {
       setError("");
       if (res.status === 200) {
         dispatch(homeSetting(false));
-        dispatch(addUser(res?.data));
+        dispatch(addUser(res?.data?.data || res?.data));
         navigate("/");
       }
     } catch (err) {
@@ -106,6 +106,14 @@ const SignUp = () => {
         >
           Sign Up
         </button>
+
+        <div className="flex items-center my-4">
+          <div className="flex-1 border-t border-gray-400"></div>
+          <span className="px-4 text-gray-600 text-sm">OR</span>
+          <div className="flex-1 border-t border-gray-400"></div>
+        </div>
+
+        <FirebaseUISignUp />
 
         <p className="mt-4 text-black">
           Already have an account?

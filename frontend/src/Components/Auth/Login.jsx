@@ -8,6 +8,7 @@ import LoginImg from "../../img/LoginImg.png";
 import logo from "../../img/logo.png";
 import Feed from "../Page/Feed";
 import { homeSetting } from "../../utils/homeSlice";
+import FirebaseUIAuth from "./FirebaseUIAuth";
 
 const Login = () => {
   const [emailId, setEmailId] = useState("");
@@ -77,6 +78,14 @@ const Login = () => {
         >
           Login
         </button>
+
+        <div className="flex items-center my-4">
+          <div className="flex-1 border-t border-gray-400"></div>
+          <span className="px-4 text-gray-600 text-sm">OR</span>
+          <div className="flex-1 border-t border-gray-400"></div>
+        </div>
+
+        <FirebaseUIAuth />
 
         <p className="mt-4 text-black font-semibold">
           New here?
