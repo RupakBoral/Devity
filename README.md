@@ -20,7 +20,7 @@
 ### **Frontend**
 
 * React.js
-* Redux / Context API
+* Redux 
 * Tailwind CSS
 * Axios
 * Daisy UI
@@ -36,7 +36,7 @@
 
 * Socket.io (for real-time chat)
 * Mongoose
-* Git & GitHub
+* GitHub
 
 
 ## 📸 Screenshots
