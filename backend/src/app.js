@@ -35,6 +35,8 @@ const requestRouter = require("./routes/request.js");
 const userRouter = require("./routes/user.js");
 const projectRouter = require("./routes/project.js");
 const communityRouter = require("./routes/community.js");
+const notFound = require("./middlewares/notFound");
+const errorHandler = require("./middlewares/errorHandler");
 
 // authentication
 app.use("/", authRouter);
@@ -55,10 +57,17 @@ app.use("/", projectRouter);
 // community
 app.use("/", communityRouter);
 
+// 404 handler - must be after all routes
+app.use(notFound);
+
+// Error handler - must be last
+app.use(errorHandler);
+
 // socket config
 const server = http.createServer(app);
 initializeSocket(server);
 
+// Initialize database connection
 connectDb()
   .then(() => {
     console.log("Connection is Established");
@@ -66,6 +75,6 @@ connectDb()
       console.log("Server is running on " + port);
     });
   })
-  .catch(() => {
-    console.error("Connection not established");
+  .catch((err) => {
+    console.error("Connection not established", err);
   });

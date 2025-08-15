@@ -18,9 +18,8 @@ const UserSchema = new mongoose.Schema(
     emailId: {
       type: String,
       required: true,
-      unique: true, // unique automatically creates index which is helpful in efficient searching
+      unique: true,
       trim: true,
-      // validate function only works when we create a document not when we update
       validate(value) {
         if (!validator.isEmail(value)) {
           throw new Error("Invalid email");
@@ -49,8 +48,7 @@ const UserSchema = new mongoose.Schema(
     },
     photoUrl: {
       type: String,
-      default:
-        "https://img.freepik.com/premium-vector/professional-male-avatar-profile-picture-employee-work_1322206-66590.jpg",
+      default: "https://avatars.githubusercontent.com/u/6470175?v=4",
     },
     BgUrl: {
       type: String,

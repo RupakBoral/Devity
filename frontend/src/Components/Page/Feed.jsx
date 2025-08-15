@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import UserCard from "./UserCard";
 import { useState } from "react";
 import Shimmer from "../utils/Shimmer";
+import { handleApiError } from "../../utils/errorHandler";
 
 const Feed = () => {
   const dispatch = useDispatch();
@@ -31,8 +32,8 @@ const Feed = () => {
       });
       dispatch(addFeed(res?.data?.data));
     } catch (err) {
-      setErr(err);
-      navigate("/home");
+      console.error("Feed error:", err);
+      handleApiError(err, navigate);
     }
   };
 

@@ -13,7 +13,7 @@ const ProjectSchema = new mongoose.Schema({
   },
   PDescription: {
     type: String,
-    require: true,
+    required: true,
     maxLength: 150,
   },
   P_URL: {

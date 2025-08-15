@@ -1,7 +1,7 @@
 const crypto = require("crypto");
 
 const getSecretRoomId = ({ userId, receiver }) => {
-  crypto
+  return crypto
     .createHash("sha256")
     .update([userId, receiver].sort().join("_"))
     .digest("hex");

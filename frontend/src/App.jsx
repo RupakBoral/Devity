@@ -6,7 +6,7 @@ import SignUp from "./Components/Auth/SignUp";
 import { Provider } from "react-redux";
 import { appStore, persistor } from "./utils/appStore";
 import Feed from "./Components/Page/Feed";
-import Error from "./Components/utils/Error";
+import ErrorPage from "./Components/utils/ErrorPage";
 import Home from "./Components/Page/Home";
 import Connections from "./Components/Page/Connections";
 import Requests from "./Components/Page/Requests";
@@ -27,7 +27,6 @@ function App() {
               <Route path="/" element={<Body />}>
                 <Route path="/" element={<Feed />} />
                 <Route path="/home" element={<Home />} />
-                <Route path="/error" element={<Error />} />
                 <Route path="/signUp" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/profile" element={<Profile />} />
@@ -38,6 +37,12 @@ function App() {
                 <Route path="/chat/:receiverId" element={<Chat />} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/communities" element={<Communitites />} />
+                <Route
+                  path="*"
+                  element={
+                    <ErrorPage errorCode="404" errorMessage="Page not found" />
+                  }
+                />
               </Route>
             </Routes>
           </BrowserRouter>
