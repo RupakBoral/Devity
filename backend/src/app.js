@@ -25,8 +25,7 @@ app.use(
   })
 );
 
-app.use(express.json({ limit: "2mb" })); // Increase to 2MB
-app.use(express.urlencoded({ limit: "2mb", extended: true }));
+app.use(express.json({ limit: "10mb" }));
 
 const port = process.env.PORT;
 const authRouter = require("./routes/auth.js");
@@ -43,7 +42,7 @@ app.use("/", authRouter);
 
 // profile fetch api
 // OR update the user by emailID
-app.use("/", profileRouter);
+app.use("/profile/", profileRouter);
 
 // sending connection request
 app.use("/", requestRouter);
@@ -55,7 +54,7 @@ app.use("/", userRouter);
 app.use("/", projectRouter);
 
 // community
-app.use("/", communityRouter);
+app.use("/communities/", communityRouter);
 
 // 404 handler - must be after all routes
 app.use(notFound);

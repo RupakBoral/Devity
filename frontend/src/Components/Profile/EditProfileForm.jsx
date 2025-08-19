@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../../utils/userSlice";
 import { BASE_URL } from "../../utils/constants";
 import { editSetting } from "../../utils/editSlice";
+import uploadImage from "../../utils/uploadImage";
 const Social = lazy(() => import("./EditProfile/Social"));
 const EditProjects = lazy(() => import("./EditProfile/EditProjects"));
 import { compressBase64 } from "../../utils/constants";
@@ -18,8 +19,8 @@ const EditProfileForm = ({ setShowToast, user }) => {
   const [age, setAge] = useState(user.age);
   const [about, setAbout] = useState(user.about);
   const [skills, setSkills] = useState(user.skills);
-  const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
-  const [BgUrl, setBgUrl] = useState(user.BgUrl);
+  const [photoUrl, setPhotoUrl] = useState();
+  const [BgUrl, setBgUrl] = useState();
   const [gitHub, setGitHub] = useState(user.gitHub);
   const [linkedin, setLinkedin] = useState(user.linkedin);
   const [err, setErr] = useState("");
@@ -53,49 +54,63 @@ const EditProfileForm = ({ setShowToast, user }) => {
         setShowToast(false);
       }, 3000);
     } catch (e) {
-      console.error("Error:", e);
+      // console.error("Error:", e);
       setErr(e.response?.data?.message || "Something went wrong!");
     }
   };
 
   const handleBgUpload = async (e) => {
-    const file = e.target.files[0];
+    try {
+      const file = e.target.files[0];
+      if (!file) return;
 
-    if (!file) return;
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = async () => {
+        try {
+          const compressedBase64 = await compressBase64(reader.result);
 
-    // Convert to Base64
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = async () => {
-      try {
-        const compressedBase64 = await compressBase64(reader.result, 500, 0.4); // Reduce width & quality
-        setBgUrl(compressedBase64);
-      } catch (err) {
-        setTimeout(() => {
+          await uploadImage(
+            compressedBase64,
+            "BgUrl",
+            setBgUrl,
+            setPhotoUrl,
+            setErr
+          );
+        } catch (err) {
           setErr(err);
-        }, 2000);
-      }
-    };
+        }
+      };
+    } catch (err) {
+      setErr(err);
+    }
   };
 
   const handlePhotoUpload = async (e) => {
-    const file = e.target.files[0];
+    try {
+      const file = e.target.files[0];
+      if (!file) return;
 
-    if (!file) return;
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = async () => {
+        try {
+          const compressedBase64 = await compressBase64(reader.result);
 
-    // Convert to Base64
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = async () => {
-      try {
-        const compressedBase64 = await compressBase64(reader.result, 500, 0.4); // Reduce width & quality
-        setPhotoUrl(compressedBase64);
-      } catch (err) {
-        setTimeout(() => {
+          await uploadImage(
+            compressedBase64,
+            "photoUrl",
+            setBgUrl,
+            setPhotoUrl,
+            setErr
+          );
+        } catch (err) {
           setErr(err);
-        }, 2000);
-      }
-    };
+        }
+      };
+    } catch (err) {
+      setErr(err);
+    }
   };
 
   const [editType, setEditType] = useState("personal");

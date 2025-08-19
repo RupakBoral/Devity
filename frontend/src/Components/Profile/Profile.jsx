@@ -4,6 +4,7 @@ import { FiEdit, FiUsers, FiMessageSquare, FiUserPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { editSetting } from "../../utils/editSlice";
 const GitHub = lazy(() => import("./GitHub"));
+// import GitHub from "./GitHub";
 const EditProfileForm = lazy(() => import("./EditProfileForm"));
 const ViewProfile = lazy(() => import("./ViewProfile"));
 

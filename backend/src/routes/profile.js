@@ -1,12 +1,13 @@
 const express = require("express");
 const { userAuth } = require("../middlewares/auth");
 const { validateEditProfile } = require("../utils/validate");
+const cloudinary = require("../utils/cloudinary_config");
 
 const profileRouter = express.Router();
 
 profileRouter.use(express.json());
 
-profileRouter.get("/profile", userAuth, async (req, res) => {
+profileRouter.get("/", userAuth, async (req, res) => {
   try {
     const user = req.user;
     res.json({ data: user });
@@ -15,7 +16,7 @@ profileRouter.get("/profile", userAuth, async (req, res) => {
   }
 });
 
-profileRouter.patch("/profile/edit", userAuth, async (req, res) => {
+profileRouter.patch("/edit", userAuth, async (req, res) => {
   try {
     if (!validateEditProfile(req)) {
       throw new Error("Invalid Edit Request");
@@ -34,7 +35,33 @@ profileRouter.patch("/profile/edit", userAuth, async (req, res) => {
   }
 });
 
-profileRouter.patch("/profile/password", userAuth, async (req, res) => {
+profileRouter.patch("/upload-image", userAuth, async (req, res) => {
+  try {
+    const { Base64URI, imageType } = req.body;
+
+    if (
+      Base64URI === undefined ||
+      Base64URI === null ||
+      Base64URI.length === 0
+    ) {
+      throw new Error("undefined path");
+    }
+    const LoggedInUser = req.user;
+    const result = await cloudinary.uploader.upload(Base64URI);
+    imageType == "photoUrl"
+      ? (LoggedInUser.photoUrl = result?.secure_url)
+      : (LoggedInUser.BgUrl = result?.secure_url);
+    await LoggedInUser.save();
+    res.status(200).json({
+      message: "uploaded successfully",
+    });
+  } catch (err) {
+    console.error("Error:", err.message);
+    res.status(400).json({ message: "Upload failed" });
+  }
+});
+
+profileRouter.patch("/password", userAuth, async (req, res) => {
   try {
     const { newPassword } = req.body;
     const LoggedInUser = req.user;
