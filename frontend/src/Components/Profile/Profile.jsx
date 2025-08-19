@@ -1,11 +1,11 @@
+import { lazy, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
 import { FiEdit, FiUsers, FiMessageSquare, FiUserPlus } from "react-icons/fi";
-import EditProfileForm from "./EditProfileForm";
-import { editSetting } from "../../utils/editSlice";
 import { Link } from "react-router-dom";
-import GitHub from "./GitHub";
-import ViewProfile from "./ViewProfile";
+import { editSetting } from "../../utils/editSlice";
+const GitHub = lazy(() => import("./GitHub"));
+const EditProfileForm = lazy(() => import("./EditProfileForm"));
+const ViewProfile = lazy(() => import("./ViewProfile"));
 
 const Profile = () => {
   let user = useSelector((store) => store.user);
@@ -41,9 +41,11 @@ const Profile = () => {
             </div>
           </div>
         )}
-
-        <ViewProfile user={user} />
-
+        {user != null || user != undefined ? (
+          <ViewProfile user={user} />
+        ) : (
+          <p></p>
+        )}
         <div className="md:w-xl lg:w-xl space-y-6">
           <div className="border border-gray-400 bg-base-200/50 p-6  max-h-48 rounded-lg flex flex-col gap-2">
             <div

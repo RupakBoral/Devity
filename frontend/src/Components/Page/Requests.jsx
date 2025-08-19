@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { lazy, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../utils/constants";
 import { addRequests, removeRequest } from "../../utils/requestSlice";
-import { useNavigate } from "react-router-dom";
 import Loading from "../utils/Loading";
-import ViewProfile from "../Profile/ViewProfile";
+const ViewProfile = lazy(() => import("../Profile/ViewProfile"));
 
 const Requests = () => {
   const [err, setErr] = useState("");

@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 import axios from "axios";
-import { useState } from "react";
+import { lazy, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../utils/userSlice";
 import { BASE_URL } from "../../utils/constants";
 import { editSetting } from "../../utils/editSlice";
-import Social from "./EditProfile/Social";
-import EditProjects from "./EditProfile/EditProjects";
+const Social = lazy(() => import("./EditProfile/Social"));
+const EditProjects = lazy(() => import("./EditProfile/EditProjects"));
 import { compressBase64 } from "../../utils/constants";
 
 const EditProfileForm = ({ setShowToast, user }) => {

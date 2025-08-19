@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-import ProjectCard from "./ProjectCard";
+import { lazy } from "react";
+const ProjectCard = lazy(() => import("./ProjectCard"));
 
 const ViewProfile = ({ user }) => {
   if (user === null || user == undefined) return;

@@ -20,9 +20,11 @@ const SignUp = () => {
   let passwordRef = useRef("");
 
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSignUp = async () => {
     try {
+      setLoading(true);
       const res = await axios.post(
         BASE_URL + "/signUp",
         {
@@ -47,6 +49,8 @@ const SignUp = () => {
       }
     } catch (err) {
       setError(err?.response?.data);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -104,7 +108,7 @@ const SignUp = () => {
           onClick={handleSignUp}
           className="w-full bg-black cursor-pointer text-white font-bold py-3 mt-4 rounded-sm hover:bg-white hover:text-black transition shadow-md"
         >
-          Sign Up
+          {loading ? "Loading..." : "Sign Up"}
         </button>
 
         <p className="mt-4 text-black">

@@ -1,11 +1,11 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import { BASE_URL } from "../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../../utils/connectionSlice";
 import { Link } from "react-router-dom";
 import Loading from "../utils/Loading";
-import ViewProfile from "../Profile/ViewProfile";
+const ViewProfile = lazy(() => import("../Profile/ViewProfile"));
 
 const Connections = () => {
   const dispatch = useDispatch();

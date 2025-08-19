@@ -13,12 +13,14 @@ const Login = () => {
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
+      setLoading(true);
       const res = await axios.post(
         BASE_URL + "/login",
         { emailId, password },
@@ -34,6 +36,8 @@ const Login = () => {
       navigate("/");
     } catch (e) {
       setError(e?.response?.data || "Login failed. Try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -75,7 +79,7 @@ const Login = () => {
           className="w-full cursor-pointer bg-black text-white font-bold py-3 mt-4 rounded-sm hover:bg-white hover:text-black transition shadow-md"
           onClick={handleLogin}
         >
-          Login
+          {loading ? "Loading..." : "Login"}
         </button>
 
         <p className="mt-4 text-black font-semibold">

@@ -1,51 +1,60 @@
-import Body from "./Components/Body";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./Components/Auth/Login";
-import Profile from "./Components/Profile/Profile";
-import SignUp from "./Components/Auth/SignUp";
+import { Suspense, lazy } from "react";
 import { Provider } from "react-redux";
 import { appStore, persistor } from "./utils/appStore";
-import Feed from "./Components/Page/Feed";
-import ErrorPage from "./Components/utils/ErrorPage";
-import Home from "./Components/Page/Home";
-import Connections from "./Components/Page/Connections";
-import Requests from "./Components/Page/Requests";
-import AboutMe from "./Components/Page/AboutMe";
-import Chat from "./Components/Page/Chat";
-import Projects from "./Components/Page/Projects";
-import Communitites from "./Components/Page/Communities/Communitites";
 import { PersistGate } from "redux-persist/integration/react";
-import ViewProfile from "./Components/Profile/ViewProfile";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Shimmer from "./Components/utils/Shimmer";
+import Body from "./Components/Body";
+const Login = lazy(() => import("./Components/Auth/Login"));
+const Profile = lazy(() => import("./Components/Profile/Profile"));
+const SignUp = lazy(() => import("./Components/Auth/SignUp"));
+const Feed = lazy(() => import("./Components/Page/Feed"));
+const ErrorPage = lazy(() => import("./Components/utils/ErrorPage"));
+const Home = lazy(() => import("./Components/Page/Home"));
+const Connections = lazy(() => import("./Components/Page/Connections"));
+const Requests = lazy(() => import("./Components/Page/Requests"));
+const AboutMe = lazy(() => import("./Components/Page/AboutMe"));
+const Chat = lazy(() => import("./Components/Page/Chat"));
+const Projects = lazy(() => import("./Components/Page/Projects"));
+const Communitites = lazy(() =>
+  import("./Components/Page/Communities/Communitites")
+);
+const ViewProfile = lazy(() => import("./Components/Profile/ViewProfile"));
 
 function App() {
   return (
     <div className="p-0 m-0 bg-gradient-to-t to-base-300 from-base-accent">
       <Provider store={appStore}>
         <PersistGate loading={null} persistor={persistor}>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Body />}>
-                <Route path="/" element={<Feed />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/signUp" element={<SignUp />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/profile-view" element={<ViewProfile />} />
-                <Route path="/connections" element={<Connections />} />
-                <Route path="/requests" element={<Requests />} />
-                <Route path="/aboutMe" element={<AboutMe />} />
-                <Route path="/chat/:receiverId" element={<Chat />} />
-                <Route path="/projects" element={<Projects />} />
-                <Route path="/communities" element={<Communitites />} />
-                <Route
-                  path="*"
-                  element={
-                    <ErrorPage errorCode="404" errorMessage="Page not found" />
-                  }
-                />
-              </Route>
-            </Routes>
-          </BrowserRouter>
+          <Suspense fallback={<Shimmer />}>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Body />}>
+                  <Route path="/" element={<Feed />} />
+                  <Route path="/home" element={<Home />} />
+                  <Route path="/signUp" element={<SignUp />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/profile-view" element={<ViewProfile />} />
+                  <Route path="/connections" element={<Connections />} />
+                  <Route path="/requests" element={<Requests />} />
+                  <Route path="/aboutMe" element={<AboutMe />} />
+                  <Route path="/chat/:receiverId" element={<Chat />} />
+                  <Route path="/projects" element={<Projects />} />
+                  <Route path="/communities" element={<Communitites />} />
+                  <Route
+                    path="*"
+                    element={
+                      <ErrorPage
+                        errorCode="404"
+                        errorMessage="Page not found"
+                      />
+                    }
+                  />
+                </Route>
+              </Routes>
+            </BrowserRouter>
+          </Suspense>
         </PersistGate>
       </Provider>
     </div>
