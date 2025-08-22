@@ -12,7 +12,6 @@ communityRouter.get("/", userAuth, async (req, res) => {
     );
     res.status(200).json({ message: "Success", data: communitites });
   } catch (err) {
-    console.log(err);
     res.status(400).json({ Error: err.message });
   }
 });

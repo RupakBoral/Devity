@@ -19,10 +19,12 @@ const EditProfileForm = ({ setShowToast, user }) => {
   const [age, setAge] = useState(user.age);
   const [about, setAbout] = useState(user.about);
   const [skills, setSkills] = useState(user.skills);
-  const [photoUrl, setPhotoUrl] = useState();
-  const [BgUrl, setBgUrl] = useState();
+  const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
+  const [BgUrl, setBgUrl] = useState(user.BgUrl);
   const [gitHub, setGitHub] = useState(user.gitHub);
   const [linkedin, setLinkedin] = useState(user.linkedin);
+  const [photoUpload, setPhotoUpload] = useState("Upload");
+  const [BgUpload, setBgUpload] = useState("Upload");
   const [err, setErr] = useState("");
   const emailId = user.emailId;
 
@@ -59,9 +61,13 @@ const EditProfileForm = ({ setShowToast, user }) => {
     }
   };
 
-  const handleBgUpload = async (e) => {
+  const handlePhotoUpload = async (event, type) => {
     try {
-      const file = e.target.files[0];
+      event.preventDefault();
+      if (type === "photoUrl") setPhotoUpload("Uploading");
+      else setBgUpload("Uploading");
+      const fileInput = event.target.elements[type];
+      const file = fileInput.files[0];
       if (!file) return;
 
       const reader = new FileReader();
@@ -69,47 +75,23 @@ const EditProfileForm = ({ setShowToast, user }) => {
       reader.onloadend = async () => {
         try {
           const compressedBase64 = await compressBase64(reader.result);
+          const secure_url = await uploadImage(compressedBase64, setErr);
 
-          await uploadImage(
-            compressedBase64,
-            "BgUrl",
-            setBgUrl,
-            setPhotoUrl,
-            setErr
-          );
+          if (type === "photoUrl") setPhotoUrl(secure_url);
+          else setBgUrl(secure_url);
+
+          if (type === "photoUrl") setPhotoUpload("Uploaded");
+          else setBgUpload("Uploaded");
         } catch (err) {
           setErr(err);
         }
       };
     } catch (err) {
       setErr(err);
-    }
-  };
-
-  const handlePhotoUpload = async (e) => {
-    try {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = async () => {
-        try {
-          const compressedBase64 = await compressBase64(reader.result);
-
-          await uploadImage(
-            compressedBase64,
-            "photoUrl",
-            setBgUrl,
-            setPhotoUrl,
-            setErr
-          );
-        } catch (err) {
-          setErr(err);
-        }
-      };
-    } catch (err) {
-      setErr(err);
+    } finally {
+      setTimeout(() => {
+        setErr("");
+      }, 2000);
     }
   };
 
@@ -156,7 +138,7 @@ const EditProfileForm = ({ setShowToast, user }) => {
         <h3 className="text-xl text-center">Details</h3>
 
         {editType === "personal" ? (
-          <form className="p-6 space-y-4">
+          <div className="p-6 space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block font-bold">First Name</label>
@@ -214,24 +196,43 @@ const EditProfileForm = ({ setShowToast, user }) => {
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <div className="flex-1">
-                <label className="block font-bold">Profile Photo</label>
-                <input
-                  onChange={(e) => handlePhotoUpload(e)}
-                  type="file"
-                  className="file-input w-full"
-                />
-              </div>
-              <div className="flex-1">
-                <label className="block font-bold">Background URL</label>
-                <input
-                  onChange={(e) => handleBgUpload(e)}
-                  type="file"
-                  className="file-input w-full"
-                />
-              </div>
-            </div>
+            <form
+              className="flex-1 flex-col justify-around"
+              onSubmit={(event) => handlePhotoUpload(event, "photoUrl")}
+            >
+              <label className="block font-bold">Profile Photo</label>
+              <input
+                type="file"
+                accept=".jpg, .jpeg, .png, .webp"
+                className="file-input w-4/5"
+                name="photoUrl"
+              />
+              <button
+                type="submit"
+                className="cursor-pointer btn btn-accent w-1/5"
+              >
+                {photoUpload}
+              </button>
+            </form>
+
+            <form
+              className="flex-1 flex-col justify-around"
+              onSubmit={(event) => handlePhotoUpload(event, "BgUrl")}
+            >
+              <label className="block font-bold">Background Photo</label>
+              <input
+                type="file"
+                accept=".jpg, .jpeg, .png, .webp"
+                className="file-input w-4/5"
+                name="BgUrl"
+              />
+              <button
+                type="submit"
+                className="cursor-pointer btn btn-accent w-1/5"
+              >
+                {BgUpload}
+              </button>
+            </form>
 
             <div>
               <label className="block font-bold">About</label>
@@ -254,7 +255,7 @@ const EditProfileForm = ({ setShowToast, user }) => {
                 className="input input-bordered w-full"
               />
             </div>
-          </form>
+          </div>
         ) : editType === "social" ? (
           <Social
             gitHub={gitHub}

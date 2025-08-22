@@ -32,8 +32,12 @@ const Feed = () => {
       });
       dispatch(addFeed(res?.data?.data));
     } catch (err) {
-      console.error("Feed error:", err);
+      setErr(err);
       handleApiError(err, navigate);
+    } finally {
+      setTimeout(() => {
+        setErr("");
+      }, 3000);
     }
   };
 

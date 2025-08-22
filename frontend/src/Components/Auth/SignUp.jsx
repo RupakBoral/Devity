@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { BASE_URL } from "../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../../utils/userSlice";
@@ -7,32 +7,39 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import SignUpImg from "../../img/LoginImg.png";
 import Feed from "../Page/Feed";
-import { homeSetting } from "../../utils/homeSlice";
 
 const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  let firstNameRef = useRef("");
-  let lastNameRef = useRef("");
-  let phoneNoRef = useRef("");
-  let emailIdRef = useRef("");
-  let passwordRef = useRef("");
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    phoneNo: "",
+    emailId: "",
+    password: "",
+  });
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
   const handleSignUp = async () => {
     try {
       setLoading(true);
+      const { firstName, lastName, phoneNo, emailId, password } = formData;
       const res = await axios.post(
         BASE_URL + "/signUp",
         {
-          firstName: firstNameRef.current,
-          lastName: lastNameRef.current,
-          phoneNo: phoneNoRef.current,
-          emailId: emailIdRef.current,
-          password: passwordRef.current,
+          firstName,
+          lastName,
+          phoneNo,
+          emailId,
+          password,
         },
         {
           withCredentials: true,
@@ -41,12 +48,11 @@ const SignUp = () => {
           },
         }
       );
-      setError("");
       if (res.status === 200) {
-        dispatch(homeSetting(false));
         dispatch(addUser(res?.data));
         navigate("/");
       }
+      setError("");
     } catch (err) {
       setError(err?.response?.data);
     } finally {
@@ -69,38 +75,43 @@ const SignUp = () => {
           Create an account and start exploring 🚀
         </p>
 
-        <div className="space-y-4">
+        <form className="space-y-4">
           <input
             type="text"
-            onChange={(e) => (firstNameRef.current = e.target.value)}
+            name="firstName"
+            onChange={handleChange}
             className="w-full p-3 font-semibold text-black font-serif bg-transparent border-b-2 border-black placeholder:text-gray-500 focus:outline-none placeholder:font-medium"
             placeholder="First Name"
           />
           <input
             type="text"
-            onChange={(e) => (lastNameRef.current = e.target.value)}
+            name="lastName"
+            onChange={handleChange}
             className="w-full p-3  font-semibold text-black  bg-transparent border-b-2 border-black font-serif placeholder:text-gray-500 focus:outline-none placeholder:font-medium"
             placeholder="Last Name"
           />
           <input
             type="tel"
-            onChange={(e) => (phoneNoRef.current = e.target.value)}
+            name="phoneNo"
+            onChange={handleChange}
             className="w-full p-3  font-semibold text-black  bg-transparent border-b-2 border-black font-serif focus:outline-none placeholder:text-gray-500 placeholder:font-medium"
             placeholder="Phone Number"
           />
           <input
             type="email"
-            onChange={(e) => (emailIdRef.current = e.target.value)}
+            name="emailId"
+            onChange={handleChange}
             className="w-full p-3  font-semibold text-black bg-transparent border-b-2 border-black font-serif focus:outline-none placeholder:text-gray-500 placeholder:font-medium "
             placeholder="Email"
           />
           <input
             type="password"
-            onChange={(e) => (passwordRef.current = e.target.value)}
+            name="password"
+            onChange={handleChange}
             className="w-full p-3 font-semibold text-black bg-transparent border-b-2 border-black font-serif placeholder:text-gray-500 focus:outline-none placeholder:font-medium"
             placeholder="Password"
           />
-        </div>
+        </form>
 
         {error && <p className="text-red-500 font-semibold mt-2">{error}</p>}
 

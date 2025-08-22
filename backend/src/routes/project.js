@@ -22,7 +22,6 @@ projectRouter.post("/project/add", userAuth, async (req, res) => {
       help_indicator,
       project_status,
     } = req.body;
-    // console.log(req.headers.cookie);
 
     const userId = req.user._id;
 
@@ -110,7 +109,6 @@ projectRouter.patch(
 
       res.status(200).json({ message: "Success", data: project });
     } catch (err) {
-      console.log(err);
       res.status(400).json({ message: err });
     }
   }

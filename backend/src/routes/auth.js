@@ -18,9 +18,9 @@ AuthRouter.post("/login", async (req, res) => {
       const token = await user.getJWT();
       res.cookie("token", token, {
         httpOnly: true,
-        secure: true, // Required for HTTPS
-        sameSite: "none", // Allows cross-site cookie sharing
-        // domain: "devity-backend.onrender.com", // May be needed depending on your setup
+        secure: true,
+        sameSite: "none",
+        // domain: "devity-backend.onrender.com",
       });
       res.status(200).send(user);
     }
@@ -49,9 +49,9 @@ AuthRouter.post("/signup", async (req, res) => {
     const token = await savedUser.getJWT();
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true, // Required for HTTPS
-      sameSite: "none", // Allows cross-site cookie sharing
-      domain: "devity-backend.onrender.com", // May be needed depending on your setup
+      secure: true,
+      sameSite: "none",
+      // domain: "devity-backend.onrender.com",
     });
     res
       .status(200)

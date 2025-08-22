@@ -1,15 +1,17 @@
 /* eslint-disable react/prop-types */
 import { lazy } from "react";
 const ProjectCard = lazy(() => import("./ProjectCard"));
+import { FiChevronLeft } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 const ViewProfile = ({ user }) => {
+  const navigate = useNavigate();
   if (user === null || user == undefined) return;
 
   const {
     firstName,
     lastName,
     about,
-    // gitHub,
     headline,
     BgUrl,
     photoUrl,
@@ -19,6 +21,12 @@ const ViewProfile = ({ user }) => {
 
   return (
     <div className="md:w-4xl lg:w-4xl h-full min-h-screen rounded-lg flex flex-col gap-4">
+      <FiChevronLeft
+        onClick={() => {
+          navigate(-1);
+        }}
+        className="md:w-8 md:h-8 w-6 h-6 cursor-pointer"
+      />
       <section className="rounded-lg bg-base-200/50 border border-gray-400">
         <div className="relative rounded-lg">
           <img

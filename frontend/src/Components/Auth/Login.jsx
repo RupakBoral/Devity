@@ -10,8 +10,10 @@ import Feed from "../Page/Feed";
 import { homeSetting } from "../../utils/homeSlice";
 
 const Login = () => {
-  const [emailId, setEmailId] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    emailId: "",
+    password: "",
+  });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -21,6 +23,7 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       setLoading(true);
+      const { emailId, password } = formData;
       const res = await axios.post(
         BASE_URL + "/login",
         { emailId, password },
@@ -41,6 +44,14 @@ const Login = () => {
     }
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   const user = useSelector((store) => store.user);
 
   return user === null ? (
@@ -56,22 +67,24 @@ const Login = () => {
           <h3 className="font-bold text-2xl text-black">evity</h3>
         </div>
 
-        <div className="space-y-4">
+        <form className="space-y-4">
           <input
             type="text"
-            value={emailId}
-            onChange={(e) => setEmailId(e.target.value)}
+            name="emailId"
+            value={formData.emailId}
+            onChange={handleChange}
             className="w-full p-3 border-b-2 text-black placeholder:text-gray-500 border-black focus:outline-none text-lg font-serif bg-transparent"
             placeholder="Email"
           />
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
             className="w-full p-3 border-b-2 text-black border-black placeholder:text-gray-500 focus:outline-none text-lg font-serif bg-transparent"
             placeholder="Password"
           />
-        </div>
+        </form>
 
         {error && <p className="text-red-600 font-semibold mt-2">{error}</p>}
 

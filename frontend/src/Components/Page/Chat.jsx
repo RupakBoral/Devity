@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { FaPaperPlane } from "react-icons/fa";
 import { createSocketConnection } from "../../utils/socket";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { FaChevronLeft } from "react-icons/fa6";
 
 const Chat = () => {
   let receiverId = useParams();
+  const navigate = useNavigate();
   const user = useSelector((store) => store.user);
   const [messages, setMessages] = useState([[]]);
   const [input, setInput] = useState("");
@@ -45,8 +47,14 @@ const Chat = () => {
   };
 
   return (
-    <div className="w-screen h-screen py-8 pt-24 px-4 bg-base-300">
-      <h1 className="font-semibold text-center text-3xl">Chat</h1>
+    <div className="w-[80%] h-screen mx-auto py-8 pt-24 px-4">
+      <FaChevronLeft
+        className="cursor-pointer duration-300 hover:scale-110"
+        onClick={() => {
+          navigate(-1);
+        }}
+      />
+      <h1 className="font-thin text-center text-3xl">Chat</h1>
       <div className="max-w-sm md:max-w-md lg:max-w-lg h-[90%] mx-auto my-2 p-4 border border-accent rounded-lg shadow-lg shadow-accent bg-base-200 flex flex-col">
         <div className="flex-1 overflow-y-auto p-2 border-b border-accent-content/50">
           {messages.map((mssg, index) =>

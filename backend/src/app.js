@@ -42,19 +42,20 @@ app.use("/", authRouter);
 
 // profile fetch api
 // OR update the user by emailID
-app.use("/profile/", profileRouter);
+app.use("/profile", profileRouter);
 
 // sending connection request
-app.use("/", requestRouter);
+app.use("/request", requestRouter);
 
 // users connection request
-app.use("/", userRouter);
+app.use("/user", userRouter);
+app.use("/feed", userRouter);
+
+// community
+app.use("/community/", communityRouter);
 
 // projects
 app.use("/", projectRouter);
-
-// community
-app.use("/communities/", communityRouter);
 
 // 404 handler - must be after all routes
 app.use(notFound);

@@ -37,7 +37,7 @@ profileRouter.patch("/edit", userAuth, async (req, res) => {
 
 profileRouter.patch("/upload-image", userAuth, async (req, res) => {
   try {
-    const { Base64URI, imageType } = req.body;
+    const { Base64URI } = req.body;
 
     if (
       Base64URI === undefined ||
@@ -46,14 +46,14 @@ profileRouter.patch("/upload-image", userAuth, async (req, res) => {
     ) {
       throw new Error("undefined path");
     }
-    const LoggedInUser = req.user;
-    const result = await cloudinary.uploader.upload(Base64URI);
-    imageType == "photoUrl"
-      ? (LoggedInUser.photoUrl = result?.secure_url)
-      : (LoggedInUser.BgUrl = result?.secure_url);
-    await LoggedInUser.save();
+    const result = await cloudinary.uploader.upload(Base64URI, {
+      crop: "scale",
+      quality: "auto",
+      fetch_format: "auto",
+    });
     res.status(200).json({
       message: "uploaded successfully",
+      secure_url: result?.secure_url,
     });
   } catch (err) {
     console.error("Error:", err.message);

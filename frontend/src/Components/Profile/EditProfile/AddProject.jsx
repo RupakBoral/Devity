@@ -3,17 +3,48 @@ import { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../../utils/constants";
 import { useDispatch } from "react-redux";
+import { compressBase64 } from "../../../utils/constants";
+import uploadImage from "../../../utils/uploadImage";
 import { addNewProject } from "../../../utils/projectSlice";
 
 const AddProject = ({ setAdd }) => {
   const [err, setErr] = useState();
   const [PName, setPName] = useState("");
   const [PDescription, setPDescription] = useState("");
+  const [P_PhotoURL, setP_PhotoURL] = useState("");
   const [PSkills, setPSkills] = useState("");
   const [project_status, setProject_Status] = useState("Completed");
   const [help_indicator, setHelp_indicator] = useState("need_help");
+  const [photoUpload, setPhotoUpload] = useState("Upload");
 
   const dispatch = useDispatch();
+
+  const handlePhotoUpload = (event) => {
+    event.preventDefault();
+    try {
+      event.preventDefault();
+      setPhotoUpload("Uploading");
+      const fileInput = event.target.elements.photoURL;
+      const file = fileInput.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = async () => {
+        try {
+          const compressedBase64 = await compressBase64(reader.result);
+          const secure_url = await uploadImage(compressedBase64, setErr);
+
+          setP_PhotoURL(secure_url);
+          setPhotoUpload("Uploaded");
+        } catch (err) {
+          setErr(err);
+        }
+      };
+    } catch (err) {
+      setErr(err);
+    }
+  };
 
   const handleSubmit = async () => {
     try {
@@ -21,6 +52,7 @@ const AddProject = ({ setAdd }) => {
         PName,
         PDescription,
         PSkills,
+        P_PhotoURL,
         project_status,
         help_indicator,
       };
@@ -30,7 +62,6 @@ const AddProject = ({ setAdd }) => {
       dispatch(addNewProject(res?.data?.data));
       setAdd(false);
     } catch (err) {
-      console.log(err);
       setAdd(true);
       setErr(err);
       setTimeout(() => {
@@ -60,7 +91,27 @@ const AddProject = ({ setAdd }) => {
       />
       <input type="text" placeholder="Website URL" className="input" />
       <input type="text" placeholder="GitHub Repo URL" className="input" />
-      <input type="text" placeholder="Project Photo" className="input" />
+
+      <div className="flex justify-around">
+        <form
+          className="gap-4 min-w-full flex flex-col items-center"
+          onSubmit={(event) => handlePhotoUpload(event, "projectPhoto")}
+        >
+          <input
+            type="file"
+            accept=".jpg, .jpeg, .png, .webp"
+            className="file-input file-input-bordered max-w-xs"
+            name="photoURL"
+            placeholder={P_PhotoURL}
+          />
+          <button
+            type="submit"
+            className="cursor-pointer btn btn-sm btn-primary"
+          >
+            {photoUpload + " Photo"}
+          </button>
+        </form>
+      </div>
 
       <label className="select">
         <span className="label">Project Status</span>
@@ -97,8 +148,8 @@ const AddProject = ({ setAdd }) => {
         </button>
         <button
           onClick={(e) => {
-            handleSubmit();
             e.preventDefault();
+            handleSubmit();
           }}
           type="submit"
           className="btn btn-soft btn-success border border-gray-300"
