@@ -119,7 +119,7 @@ const SignUp = () => {
           onClick={handleSignUp}
           className="w-full bg-black cursor-pointer text-white font-bold py-3 mt-4 rounded-sm hover:bg-white hover:text-black transition shadow-md"
         >
-          {loading ? "Loading..." : "Sign Up"}
+          {loading ? "Signing Up..." : "Sign Up"}
         </button>
 
         <p className="mt-4 text-black">

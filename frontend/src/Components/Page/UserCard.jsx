@@ -37,14 +37,12 @@ const UserCard = ({ user, setToast }) => {
     <div className="bg-base-200/50 cursor-pointer rounded-sm hover:shadow-accent-content shadow-lg backdrop-blur-sm hover:shadow-[5px_5px_2px_2px_gray] transition-shadow duration-500 border border-accent-content/50 shadow-base-content w-5/6 md:w-2/3 lg:w-1/2 mx-auto animate-fadeIn">
       <section className="flex w-full items-center relative min-h-[400px]">
         <div className="flex flex-col md:flex-row gap-6 p-6 w-full mx-auto items-center">
-          {/* Profile Image with Hover Effect */}
           <img
             src={photoUrl}
             alt={`${firstName}`}
             className="w-40 h-40 md:w-64 md:h-64 object-cover rounded-lg border-2 border-neutral transition-transform duration-300"
           />
 
-          {/* User Details */}
           <div className="text-center md:text-left space-y-2">
             <h1 className="text-3xl font-merriweather animate-fadeInUp">
               {firstName} {lastName}
@@ -56,7 +54,6 @@ const UserCard = ({ user, setToast }) => {
               {about}
             </p>
 
-            {/* Skills */}
             {skills.length !== 0 && (
               <div className="flex items-center gap-2 text-lg font-inter animate-fadeInUp">
                 <span className="font-semibold">Skills:</span>
@@ -64,7 +61,6 @@ const UserCard = ({ user, setToast }) => {
               </div>
             )}
 
-            {/* Action Buttons with Animation */}
             <div className="card-actions flex w-full pt-6 justify-evenly">
               <button
                 onClick={() => handleRequest("ignored", _id)}
@@ -82,7 +78,6 @@ const UserCard = ({ user, setToast }) => {
           </div>
         </div>
 
-        {/* Error Message */}
         <p className="text-error">{err}</p>
       </section>
     </div>

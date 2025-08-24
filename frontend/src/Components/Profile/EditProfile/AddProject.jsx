@@ -14,7 +14,6 @@ const AddProject = ({ setAdd }) => {
   const [P_PhotoURL, setP_PhotoURL] = useState("");
   const [PSkills, setPSkills] = useState("");
   const [project_status, setProject_Status] = useState("Completed");
-  const [help_indicator, setHelp_indicator] = useState("need_help");
   const [photoUpload, setPhotoUpload] = useState("Upload");
 
   const dispatch = useDispatch();
@@ -54,7 +53,6 @@ const AddProject = ({ setAdd }) => {
         PSkills,
         P_PhotoURL,
         project_status,
-        help_indicator,
       };
       const res = await axios.post(BASE_URL + "/project/add", body, {
         withCredentials: true,
@@ -122,18 +120,6 @@ const AddProject = ({ setAdd }) => {
           <option onClick={() => setProject_Status("Ongoing")}>Ongoing</option>
           <option onClick={() => setProject_Status("Discarded")}>
             Discarded
-          </option>
-        </select>
-      </label>
-
-      <label className="select">
-        <span className="label">Help Indicator</span>
-        <select>
-          <option onClick={() => setHelp_indicator("need_help")}>
-            Need Help
-          </option>
-          <option onClick={() => setHelp_indicator("no_help")}>
-            No Help Needed
           </option>
         </select>
       </label>

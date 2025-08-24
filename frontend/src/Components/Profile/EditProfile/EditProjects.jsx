@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import ProjectForm from "./ProjectForm";
 import AddProject from "./AddProject";
@@ -6,7 +7,6 @@ import { BASE_URL } from "../../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProject } from "../../../utils/projectSlice";
 
-/* eslint-disable react/prop-types */
 const EditProjects = () => {
   const [btn, setBtn] = useState(false);
   const [add, setAdd] = useState(false);

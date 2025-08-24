@@ -19,7 +19,6 @@ projectRouter.post("/project/add", userAuth, async (req, res) => {
       P_URL,
       P_GitURL,
       P_PhotoURL,
-      help_indicator,
       project_status,
     } = req.body;
 
@@ -32,7 +31,7 @@ projectRouter.post("/project/add", userAuth, async (req, res) => {
       P_URL,
       P_GitURL,
       P_PhotoURL,
-      help_indicator,
+      help_indicator: "no_help",
       project_status,
       userId,
     });
@@ -71,16 +70,21 @@ projectRouter.patch(
       if (!validateProject) {
         throw new Error("Invalid request");
       }
-      const project_id = req.params.project_id;
+      const { project_id } = req.params;
       const project = await ProjectModel.findById(project_id);
-      const { rolesRequired, skillsRequired } = req.body;
+      const {
+        PName,
+        help_indicator,
+        rolesRequired,
+        skillsRequired,
+        requirements,
+      } = req.body;
       Object.keys(req.body).forEach((key) => {
         project[key] = req.body[key];
       });
       await project.save();
 
-      const { help_indicator } = req.body;
-
+      // community changes
       if (help_indicator === "need_help") {
         const community = await CommunityModel.findOne({
           projectId: project_id,
@@ -91,14 +95,15 @@ projectRouter.patch(
           Object.keys(req.body).forEach((key) => {
             community[key] = req.body[key];
           });
+          community.name = PName;
           await community.save();
         } else {
           const newCommunity = new CommunityModel({
-            Projectname: project.PName,
             projectId: project_id,
             requirements,
             rolesRequired,
             skillsRequired,
+            communityName: PName,
             admin: req.user._id,
           });
           await newCommunity.save();
@@ -137,7 +142,6 @@ projectRouter.get("/projects", userAuth, async (req, res) => {
   try {
     const user = req.user;
     const userId = user._id;
-    // console.log(userId);
     let projects = await ProjectModel.find({ help_indicator: "need_help" });
     projects = projects.filter((project) => !project.userId.equals(userId));
     res.status(200).json({ data: projects, message: "Data sent successfully" });

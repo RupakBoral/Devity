@@ -9,26 +9,42 @@ import uploadImage from "../../utils/uploadImage";
 const Social = lazy(() => import("./EditProfile/Social"));
 const EditProjects = lazy(() => import("./EditProfile/EditProjects"));
 import { compressBase64 } from "../../utils/constants";
+import handleChange from "../../utils/handleChange";
 
 const EditProfileForm = ({ setShowToast, user }) => {
   const dispatch = useDispatch();
 
-  const [firstName, setFirstName] = useState(user.firstName);
-  const [lastName, setLastName] = useState(user.lastName);
-  const [phoneNo, setPhoneNo] = useState(user.phoneNo);
-  const [age, setAge] = useState(user.age);
-  const [about, setAbout] = useState(user.about);
-  const [skills, setSkills] = useState(user.skills);
-  const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
-  const [BgUrl, setBgUrl] = useState(user.BgUrl);
-  const [gitHub, setGitHub] = useState(user.gitHub);
-  const [linkedin, setLinkedin] = useState(user.linkedin);
+  const [formData, setFormData] = useState({
+    firstName: user.firstName,
+    lastName: user.lastName,
+    phoneNo: user.phoneNo,
+    age: user.age,
+    about: user.about,
+    skills: user.skills,
+    photoUrl: user.photoUrl,
+    BgUrl: user.BgUrl,
+    gitHub: user.gitHub,
+    linkedin: user.linkedin,
+  });
+
   const [photoUpload, setPhotoUpload] = useState("Upload");
   const [BgUpload, setBgUpload] = useState("Upload");
   const [err, setErr] = useState("");
   const emailId = user.emailId;
 
   const saveProfile = async () => {
+    const {
+      firstName,
+      lastName,
+      phoneNo,
+      age,
+      about,
+      skills,
+      photoUrl,
+      BgUrl,
+      gitHub,
+      linkedin,
+    } = formData;
     const body = {
       firstName,
       lastName,
@@ -64,8 +80,8 @@ const EditProfileForm = ({ setShowToast, user }) => {
   const handlePhotoUpload = async (event, type) => {
     try {
       event.preventDefault();
-      if (type === "photoUrl") setPhotoUpload("Uploading");
-      else setBgUpload("Uploading");
+      if (type === "photoUrl") setPhotoUpload("Uploading..");
+      else setBgUpload("Uploading..");
       const fileInput = event.target.elements[type];
       const file = fileInput.files[0];
       if (!file) return;
@@ -73,21 +89,20 @@ const EditProfileForm = ({ setShowToast, user }) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = async () => {
-        try {
-          const compressedBase64 = await compressBase64(reader.result);
-          const secure_url = await uploadImage(compressedBase64, setErr);
+        const compressedBase64 = await compressBase64(reader.result);
+        const secure_url = await uploadImage(compressedBase64, setErr);
 
-          if (type === "photoUrl") setPhotoUrl(secure_url);
-          else setBgUrl(secure_url);
+        if (type === "photoUrl")
+          setFormData((prev) => ({ ...prev, photoUrl: secure_url }));
+        else setFormData((prev) => ({ ...prev, BgUrl: secure_url }));
 
-          if (type === "photoUrl") setPhotoUpload("Uploaded");
-          else setBgUpload("Uploaded");
-        } catch (err) {
-          setErr(err);
-        }
+        if (type === "photoUrl") setPhotoUpload("Uploaded");
+        else setBgUpload("Uploaded");
       };
     } catch (err) {
       setErr(err);
+      if (type === "photoUrl") setPhotoUpload("Upload Failed");
+      else setBgUpload("Upload Failed");
     } finally {
       setTimeout(() => {
         setErr("");
@@ -140,61 +155,62 @@ const EditProfileForm = ({ setShowToast, user }) => {
         {editType === "personal" ? (
           <div className="p-6 space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
+              <form>
                 <label className="block font-bold">First Name</label>
                 <input
                   type="text"
                   name="firstName"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
+                  value={formData.firstName}
+                  onChange={(e) => handleChange(e, setFormData)}
                   className="input input-bordered w-full"
                 />
-              </div>
-              <div>
+              </form>
+
+              <form>
                 <label className="block font-bold">Last Name</label>
                 <input
                   type="text"
                   name="lastName"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  value={formData.lastName}
+                  onChange={(e) => handleChange(e, setFormData)}
                   className="input input-bordered w-full"
                 />
-              </div>
+              </form>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
+              <form>
                 <label className="font-bold">Age</label>
                 <input
                   type="number"
                   name="age"
-                  value={age}
-                  onChange={(e) => setAge(e.target.value)}
+                  value={formData.age}
+                  onChange={(e) => handleChange(e, formData)}
                   className="input input-bordered w-full"
                 />
-              </div>
-              <div>
+              </form>
+
+              <form>
                 <label className="font-bold">Phone</label>
                 <input
                   type="tel"
-                  name="phone"
-                  value={phoneNo}
-                  onChange={(e) => setPhoneNo(e.target.value)}
+                  name="phoneNo"
+                  value={formData.phoneNo}
+                  onChange={(e) => handleChange(e, setFormData)}
                   className="input input-bordered w-full"
                 />
-              </div>
+              </form>
             </div>
 
-            <div>
+            <form>
               <label className="block font-bold">Email</label>
               <input
                 type="email"
-                name="email"
                 value={emailId}
                 readOnly
                 className="input input-bordered w-full"
               />
-            </div>
+            </form>
 
             <form
               className="flex-1 flex-col justify-around"
@@ -203,9 +219,9 @@ const EditProfileForm = ({ setShowToast, user }) => {
               <label className="block font-bold">Profile Photo</label>
               <input
                 type="file"
+                name="photoUrl"
                 accept=".jpg, .jpeg, .png, .webp"
                 className="file-input w-4/5"
-                name="photoUrl"
               />
               <button
                 type="submit"
@@ -222,9 +238,9 @@ const EditProfileForm = ({ setShowToast, user }) => {
               <label className="block font-bold">Background Photo</label>
               <input
                 type="file"
+                name="BgUrl"
                 accept=".jpg, .jpeg, .png, .webp"
                 className="file-input w-4/5"
-                name="BgUrl"
               />
               <button
                 type="submit"
@@ -234,34 +250,35 @@ const EditProfileForm = ({ setShowToast, user }) => {
               </button>
             </form>
 
-            <div>
+            <form>
               <label className="block font-bold">About</label>
               <textarea
                 minLength={10}
                 maxLength={200}
-                value={about}
-                onChange={(e) => setAbout(e.target.value)}
+                name="about"
+                value={formData.about}
+                onChange={(e) => handleChange(e, setFormData)}
                 className="textarea input-bordered w-full min-h-20 max-h-72"
               ></textarea>
-            </div>
+            </form>
 
-            <div>
+            <form>
               <label className="block font-bold">Skills</label>
               <input
                 type="text"
                 name="skills"
-                value={skills}
-                onChange={(e) => setSkills(e.target.value)}
+                value={formData.skills}
+                onChange={(e) => handleChange(e, setFormData)}
                 className="input input-bordered w-full"
               />
-            </div>
+            </form>
           </div>
         ) : editType === "social" ? (
           <Social
-            gitHub={gitHub}
-            setGitHub={setGitHub}
-            linkedin={linkedin}
-            setLinkedin={setLinkedin}
+            gitHub={formData.gitHub}
+            setGitHub={formData.setGitHub}
+            linkedin={formData.linkedin}
+            setLinkedin={formData.setLinkedin}
           />
         ) : (
           <EditProjects />

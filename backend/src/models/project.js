@@ -9,11 +9,9 @@ const ProjectSchema = new mongoose.Schema({
   PSkills: {
     type: [String],
     maxLength: 50,
-    required: true,
   },
   PDescription: {
     type: String,
-    required: true,
     maxLength: 150,
   },
   P_URL: {
@@ -37,12 +35,11 @@ const ProjectSchema = new mongoose.Schema({
     enum: ["need_help", "no_help"],
     required: true,
   },
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   communityId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Community",
-    default: null,
   },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
 module.exports = mongoose.model("Project", ProjectSchema);

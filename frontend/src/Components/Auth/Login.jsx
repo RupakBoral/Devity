@@ -8,6 +8,7 @@ import LoginImg from "../../img/LoginImg.png";
 import logo from "../../img/logo.png";
 import Feed from "../Page/Feed";
 import { homeSetting } from "../../utils/homeSlice";
+import handleChange from "../../utils/handleChange";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -20,8 +21,9 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleLogin = async (event) => {
     try {
+      event.preventDefault();
       setLoading(true);
       const { emailId, password } = formData;
       const res = await axios.post(
@@ -44,14 +46,6 @@ const Login = () => {
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
   const user = useSelector((store) => store.user);
 
   return user === null ? (
@@ -72,7 +66,7 @@ const Login = () => {
             type="text"
             name="emailId"
             value={formData.emailId}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e, setFormData)}
             className="w-full p-3 border-b-2 text-black placeholder:text-gray-500 border-black focus:outline-none text-lg font-serif bg-transparent"
             placeholder="Email"
           />
@@ -80,20 +74,27 @@ const Login = () => {
             type="password"
             name="password"
             value={formData.password}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e, setFormData)}
             className="w-full p-3 border-b-2 text-black border-black placeholder:text-gray-500 focus:outline-none text-lg font-serif bg-transparent"
             placeholder="Password"
           />
+          {error && <p className="text-red-600 font-semibold mt-2">{error}</p>}
+
+          <button
+            type="submit"
+            className="w-full cursor-pointer bg-black text-white font-bold py-3 mt-4 rounded-sm hover:bg-white hover:text-black transition shadow-md"
+            onClick={(event) => handleLogin(event)}
+          >
+            {loading ? (
+              <p>
+                Logging..
+                <span className="loading loading-ring loading-xl "></span>
+              </p>
+            ) : (
+              "Login"
+            )}
+          </button>
         </form>
-
-        {error && <p className="text-red-600 font-semibold mt-2">{error}</p>}
-
-        <button
-          className="w-full cursor-pointer bg-black text-white font-bold py-3 mt-4 rounded-sm hover:bg-white hover:text-black transition shadow-md"
-          onClick={handleLogin}
-        >
-          {loading ? "Loading..." : "Login"}
-        </button>
 
         <p className="mt-4 text-black font-semibold">
           New here?

@@ -7,9 +7,11 @@ import { BASE_URL } from "../../utils/constants";
 import { useState } from "react";
 
 const ProjectDetails = ({ projects }) => {
-  const [requirements, setRequirements] = useState("developer");
-  const [skills, setSkills] = useState("default");
-  const [roles, setRoles] = useState("default");
+  const [requirements, setRequirements] = useState({
+    description: null,
+    skills: null,
+    rolesRequired: null,
+  });
 
   const [err, setErr] = useState("");
   const [success, setSuccess] = useState("");
@@ -23,11 +25,18 @@ const ProjectDetails = ({ projects }) => {
         withCredentials: true,
       });
       const data = res?.data?.data;
-      setRequirements(data?.requirements);
-      setSkills(data?.skillsRequired);
-      setRoles(data?.rolesRequired);
+      setRequirements({
+        description: data?.requirements,
+        skills: data?.skillsRequired,
+        rolesRequired: data?.rolesRequired,
+      });
+      console.log(requirements);
     } catch (error) {
       setErr(error);
+    } finally {
+      setTimeout(() => {
+        setErr("");
+      }, 3000);
     }
   };
 
@@ -44,14 +53,13 @@ const ProjectDetails = ({ projects }) => {
         { withCredentials: true }
       );
       setSuccess(res?.data?.message);
-      setTimeout(() => {
-        setSuccess("");
-      }, 3000);
     } catch (error) {
       setErr(error?.response?.data);
+    } finally {
       setTimeout(() => {
         setSuccess("");
-      }, 5000);
+        setErr("");
+      }, 3000);
     }
   };
 
@@ -72,18 +80,35 @@ const ProjectDetails = ({ projects }) => {
               <div className="modal" role="dialog">
                 <div className="modal-box bg-accent flex flex-col gap-8">
                   <div>
-                    <h2>
-                      {requirements && "Requirements: "}
-                      <span className="text-accent-content">
-                        {requirements}
-                      </span>
-                    </h2>
                     <p>
-                      Role: <span className="text-accent-content">{roles}</span>
+                      What help I need:{" "}
+                      <span className="text-accent-content">
+                        {requirements !== null &&
+                        requirements.description !== null &&
+                        requirements.description !== undefined
+                          ? requirements.description
+                          : "No details provided"}
+                      </span>
+                    </p>
+                    <p>
+                      Role:{" "}
+                      <span className="text-accent-content">
+                        {requirements !== null &&
+                        requirements.skills !== null &&
+                        requirements.skills !== undefined
+                          ? requirements.skills
+                          : "No details provided"}
+                      </span>
                     </p>
                     <p>
                       Skills:{" "}
-                      <span className="text-accent-content">{skills}</span>
+                      <span className="text-accent-content">
+                        {requirements !== null &&
+                        requirements.rolesRequired !== null &&
+                        requirements.rolesRequired !== undefined
+                          ? requirements.rolesRequired
+                          : "No details provided"}
+                      </span>
                     </p>
                   </div>
 
