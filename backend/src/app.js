@@ -6,6 +6,7 @@ const connectDb = require("./database");
 const cookieParser = require("cookie-parser");
 const http = require("http");
 const initializeSocket = require("./utils/socket.js");
+const compression = require("compression");
 
 app.use(express.json());
 app.use(cookieParser());
@@ -24,6 +25,11 @@ app.use(
     methods: ["GET,POST,PATCH,PUT,DELETE"],
   })
 );
+// enable gzip compression
+app.use(compression());
+
+// serve React build
+app.use(express.static("build"));
 
 app.use(express.json({ limit: "10mb" }));
 
