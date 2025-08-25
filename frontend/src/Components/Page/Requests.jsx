@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../utils/constants";
 import { addRequests, removeRequest } from "../../utils/requestSlice";
 import Loading from "../utils/Loading";
+import CircleShimmer from "../utils/CircleShimmer";
 const ViewProfile = lazy(() => import("../Profile/ViewProfile"));
 
 const Requests = () => {
@@ -107,9 +108,12 @@ const Requests = () => {
                   className="cursor-pointer bg-base-200/50 z-20 border-2 border-accent-content/40 p-4 rounded-lg min-h-24 flex gap-2 justify-between items-center hover:shadow-lg hover:shadow-accent duration-500 ease-out"
                 >
                   <img
-                    className="w-12 h-12 md:w-20 md:h-20 lg:w-20 lg:h-20 rounded-full border-2 border-base-content"
+                    className="w-12 h-12 aspect-square md:w-20 md:h-20 lg:w-20 lg:h-20 rounded-full border-2 border-base-content object-cover"
                     src={photoUrl}
+                    alt="User profile photo"
+                    loading="lazy"
                   />
+
                   <div className="flex flex-col flex-1">
                     <h2 className="text-base md:text-xl lg:text-xl font-merriweather">
                       {firstName} {lastName}
@@ -150,7 +154,7 @@ const Requests = () => {
   ) : err !== "" ? (
     <p>{err}</p>
   ) : (
-    <div className="w-screen bg-base-300 relative z-10 max-h-screen py-[25%]">
+    <div className="w-screen bg-base-300 relative z-10 min-h-screen py-[25%]">
       {toast != null ? (
         toast === "accepted" ? (
           <div className="z-60 toast toast-top toast-end">
@@ -166,7 +170,7 @@ const Requests = () => {
           </div>
         )
       ) : (
-        <p></p>
+        <CircleShimmer />
       )}
       <p className="text-center font-merriweather">No requests found!!</p>
     </div>

@@ -33,17 +33,29 @@ const Hero = () => {
               <div className="avatar-group -space-x-6 rtl:space-x-reverse">
                 <div className="avatar border-white">
                   <div className="w-12">
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&h=120&q=80" />
+                    <img
+                      alt="image1"
+                      loading="lazy"
+                      src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&h=120&q=80"
+                    />
                   </div>
                 </div>
                 <div className="avatar border-white">
                   <div className="w-12">
-                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&h=120&q=80" />
+                    <img
+                      alt="image2"
+                      loading="lazy"
+                      src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&h=120&q=80"
+                    />
                   </div>
                 </div>
                 <div className="avatar border-white">
                   <div className="w-12">
-                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&h=120&q=80" />
+                    <img
+                      alt="image3"
+                      loading="lazy"
+                      src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&h=120&q=80"
+                    />
                   </div>
                 </div>
               </div>

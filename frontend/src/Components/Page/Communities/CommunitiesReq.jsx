@@ -43,8 +43,10 @@ const CommunitiesReq = ({ _id }) => {
               <div className="card-body">
                 <div className="flex gap-2 md:gap-4">
                   <img
-                    className="w-12 h-12 rounded-full"
+                    className="w-12 h-12 rounded-full object-cover"
                     src={request.userId.photoUrl}
+                    alt="user profile photo"
+                    loading="lazy"
                   />
                   <div className="flex flex-col gap-1 ">
                     <h2 className="card-title md:font-semibold text-accent-content text-sm lg:text-xl md:text-xl">

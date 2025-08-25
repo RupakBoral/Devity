@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import SignUpImg from "../../img/LoginImg.png";
+import SignUpImg from "../../img/LoginImg.webp";
 import Feed from "../Page/Feed";
+import logo from "../../img/logo.webp";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -63,17 +64,19 @@ const SignUp = () => {
   const user = useSelector((store) => store.user);
 
   return user === null ? (
-    <div className="flex overflow-x-hidden items-center w-screen min-h-screen bg-stone-200">
+    <div className="flex overflow-x-hidden items-center w-screen min-h-screen bg-[#f9efe5]">
       <img
         src={SignUpImg}
-        className="w-1/2 h-screen md:inline lg:inline hidden"
+        alt="image"
+        loading="lazy"
+        className="w-1/2 h-screen md:inline lg:inline hidden object-contain"
       />
 
-      <div className="mx-auto rounded-2xl p-8 max-w-lg text-center">
-        <h2 className="text-3xl font-bold text-black mb-4">Join Us!</h2>
-        <p className="text-black mb-4">
-          Create an account and start exploring 🚀
-        </p>
+      <div className="mx-auto rounded-2xl p-8 max-w-lg text-center bg-white/50">
+        <div className="flex items-center justify-center text-black">
+          <img src={logo} className="w-20 h-20" alt="logo" loading="lazy" />
+          <h3 className="-ml-4 font-bold text-2xl text-black">evity</h3>
+        </div>
 
         <form className="space-y-4">
           <input

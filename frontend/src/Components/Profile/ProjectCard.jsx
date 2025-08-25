@@ -56,7 +56,9 @@ const ProjectCard = ({ secondaryUser }) => {
           >
             <img
               src={project.P_PhotoURL}
-              className="w-full h-fit md:h-56 lg:h-56 rounded-sm border border-accent mx-auto object-contain md:object-cover lg:object-cover"
+              alt="project image"
+              loading="lazy"
+              className="w-full h-fit aspect-video md:h-56 lg:h-56 rounded-sm border border-accent mx-auto object-contain md:object-cover lg:object-cover"
             />
             <h1 className="font-semibold font-montserrat text-lg">
               {project.PName}
@@ -72,7 +74,7 @@ const ProjectCard = ({ secondaryUser }) => {
                 </span>
               </p>
             ) : (
-              <p></p>
+              <span></span>
             )}
             {project.P_URL !== null && project.P_URL !== undefined ? (
               <p>
@@ -85,7 +87,7 @@ const ProjectCard = ({ secondaryUser }) => {
                 </Link>
               </p>
             ) : (
-              <p></p>
+              <span></span>
             )}
             {project.P_GitURL !== null && project.P_GitURL !== undefined ? (
               <Link
@@ -95,7 +97,7 @@ const ProjectCard = ({ secondaryUser }) => {
                 GitHub Repository
               </Link>
             ) : (
-              <p></p>
+              <span></span>
             )}
             {project.P_GitURL !== null && project.P_GitURL !== undefined ? (
               <Link
@@ -105,16 +107,16 @@ const ProjectCard = ({ secondaryUser }) => {
                 PhotoURL
               </Link>
             ) : (
-              <p></p>
+              <span></span>
             )}
-            <p></p>
+            <span></span>
           </section>
         ))}
     </div>
   ) : (
     <div>
       <p>{err}</p>
-      <span className="loading loading-spinner loading-xl"></span>
+      <span></span>
     </div>
   );
 };

@@ -39,7 +39,8 @@ const UserCard = ({ user, setToast }) => {
         <div className="flex flex-col md:flex-row gap-6 p-6 w-full mx-auto items-center">
           <img
             src={photoUrl}
-            alt={`${firstName}`}
+            alt={"user profile photo"}
+            loading="lazy"
             className="w-40 h-40 md:w-64 md:h-64 object-cover rounded-lg border-2 border-neutral transition-transform duration-300"
           />
 

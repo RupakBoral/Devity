@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../utils/constants";
 import axios from "axios";
 import { removeUser } from "../../utils/userSlice";
-import logo from "../../img/logo.png";
+import logo from "../../img/logo.webp";
 import {
   FiUserPlus,
   FiUsers,
@@ -49,7 +49,12 @@ const NavBar = () => {
   return home === false ? (
     <nav className="navbar py-2 fixed top-3 mx-4 md:mx-10 lg:mx-10  w-[92%] md:w-[94%] lg:w-[94%] rounded-lg backdrop-blur-xl z-60 m-0 flex items-center border border-base-content gap-2 lg:gap-6 md:gap-6 justify-evenly md:justify-around lg:justify-around">
       <Link to={"/home"} className="group text-2xl flex gap-1 items-center">
-        <img className="md:w-14 md:h-12 w-8 h-8 object-cover" src={logo} />
+        <img
+          className="md:w-14 md:h-12 w-8 h-8 object-cover"
+          src={logo}
+          alt="logo"
+          loading="lazy"
+        />
         <span className="text-3xl -ml-4 font-bold animate-pulse md:inline lg:inline hidden bg-gradient-to-l from-violet-600 to-pink-400 text-transparent py-1 bg-clip-text">
           evity
         </span>
@@ -162,7 +167,12 @@ const NavBar = () => {
             className="btn btn-ghost btn-circle avatar"
           >
             <div className="rounded-full border border-yellow-600/50 w-8 h-8">
-              <img className="object-cover" src={photoUrl} />
+              <img
+                className="object-cover"
+                src={photoUrl}
+                alt="user photo"
+                loading="lazy"
+              />
             </div>
           </div>
           <ul

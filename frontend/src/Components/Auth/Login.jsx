@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../../utils/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../utils/constants";
-import LoginImg from "../../img/LoginImg.png";
-import logo from "../../img/logo.png";
+import LoginImg from "../../img/LoginImg.webp";
+import logo from "../../img/logo.webp";
 import Feed from "../Page/Feed";
 import { homeSetting } from "../../utils/homeSlice";
 import handleChange from "../../utils/handleChange";
@@ -49,16 +49,18 @@ const Login = () => {
   const user = useSelector((store) => store.user);
 
   return user === null ? (
-    <div className="flex overflow-x-hidden items-center min-h-screen bg-stone-200">
+    <div className="flex overflow-x-hidden items-center min-h-screen bg-[#f9efe5]">
       <img
         src={LoginImg}
-        className="w-1/2 h-screen md:inline lg:inline hidden"
+        alt="image"
+        loading="lazy"
+        className="w-1/2 h-screen md:inline lg:inline hidden object-contain"
       />
 
-      <div className="mx-auto rounded-2xl p-8 text-center space-y-8">
+      <div className="mx-auto rounded-2xl p-8 text-center space-y-8 bg-white/40">
         <div className="flex items-center justify-center text-black">
-          <img src={logo} className="w-20 h-20" />
-          <h3 className="font-bold text-2xl text-black">evity</h3>
+          <img src={logo} className="w-20 h-20" alt="logo" loading="lazy" />
+          <h3 className="-ml-4 font-bold text-2xl text-black">evity</h3>
         </div>
 
         <form className="space-y-4">

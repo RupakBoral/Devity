@@ -145,9 +145,10 @@ const ProjectDetails = ({ projects }) => {
 
               <figure className="w-full mx-auto border border-accent shadow-sm shadow-accent">
                 <img
-                  className="object-contain "
+                  className="object-contain"
                   src={project.P_PhotoURL}
-                  alt=""
+                  alt="project photo"
+                  loading="lazy"
                 />
               </figure>
 

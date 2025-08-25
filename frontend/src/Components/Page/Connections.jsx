@@ -62,9 +62,12 @@ const Connections = () => {
                   className="bg-base-200/50 cursor-pointer z-20 transition-all duration-500 ease-out hover:shadow-lg hover:shadow-accent p-4 rounded-lg min-h-24 flex gap-2 justify-between items-center border border-accent-content/40"
                 >
                   <img
-                    className="w-12 h-12 md:lg:w-20 md:lg:h-20  rounded-full border-2 border-base-content"
+                    className="w-12 h-12 md:w-20 md:h-20 lg:w-20 lg:h-20 rounded-full border-2 border-base-content object-cover"
                     src={photoUrl}
+                    alt="User profile photo"
+                    loading="lazy"
                   />
+
                   <div className="flex flex-col flex-1">
                     <h2 className="md:text-xl text-base font-merriweather">
                       {firstName} {lastName}

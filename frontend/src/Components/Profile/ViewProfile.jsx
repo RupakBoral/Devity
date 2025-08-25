@@ -30,14 +30,18 @@ const ViewProfile = ({ user }) => {
       <section className="rounded-lg bg-base-200/50 border border-gray-400">
         <div className="relative rounded-lg">
           <img
-            className="h-56 rounded-t-lg w-full object-cover"
+            alt="Bg image"
+            loading="lazy"
+            className="aspect-video h-56 rounded-t-lg w-full object-cover"
             src={
               BgUrl ||
               "https://t3.ftcdn.net/jpg/09/12/76/70/360_F_912767030_3E4ePOMr42kY42YcFIQhrzUEH9iAFwuW.jpg"
             }
           />
           <img
-            className="w-32 h-32 border-2 border-base-content object-cover rounded-full absolute -bottom-10 left-10"
+            alt="user's profile photo"
+            loading="lazy"
+            className="aspect-square w-32 h-32 border-2 border-base-content object-cover rounded-full absolute -bottom-10 left-10"
             src={
               photoUrl ||
               "https://img.freepik.com/premium-vector/professional-male-avatar-profile-picture-employee-work_1322206-66590.jpg"

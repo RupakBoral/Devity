@@ -49,6 +49,7 @@ profileRouter.patch("/upload-image", userAuth, async (req, res) => {
     const result = await cloudinary.uploader.upload(Base64URI, {
       crop: "scale",
       quality: "auto",
+      format: "webp",
       fetch_format: "auto",
     });
     res.status(200).json({
