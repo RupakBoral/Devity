@@ -62,6 +62,7 @@ const NavBar = () => {
 
       <Link
         to={"/"}
+        title="explore"
         onClick={() => setActive("explore")}
         className={
           active === "explore"
@@ -75,6 +76,7 @@ const NavBar = () => {
 
       <Link
         to={"/projects"}
+        title="projects"
         onClick={() => setActive("projects")}
         className={
           active === "projects"
@@ -88,6 +90,7 @@ const NavBar = () => {
 
       <Link
         to={"/connections"}
+        title="connections"
         onClick={() => setActive("connections")}
         className={
           active === "connections"
@@ -101,6 +104,7 @@ const NavBar = () => {
 
       <Link
         to={"/requests"}
+        title="requests"
         onClick={() => setActive("request")}
         className={
           active === "request"
@@ -131,6 +135,7 @@ const NavBar = () => {
         {/* this hidden checkbox controls the state */}
         <input
           type="checkbox"
+          name="theme"
           className="theme-controller"
           checked={theme === "black"}
           onChange={() =>

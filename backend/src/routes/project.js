@@ -44,7 +44,6 @@ projectRouter.post("/project/add", userAuth, async (req, res) => {
 
     res.status(200).json({ message: "Success", data: savedProject });
   } catch (err) {
-    console.log(err);
     res.status(400).json({ err });
   }
 });

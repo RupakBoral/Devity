@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../../utils/constants";
 import Disscussion from "./Disscussion";
-import communitiesDark from "../../../img/communitiesDark.png";
+import communitiesDark from "../../../img/communitiesDark.webp";
 
 const Communitites = () => {
   const [communities, setCommunities] = useState();
@@ -16,7 +16,6 @@ const Communitites = () => {
       });
       setCommunities(res?.data?.data);
     } catch (error) {
-      console.log(error);
       setError(error);
     }
   };

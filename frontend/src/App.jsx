@@ -4,7 +4,8 @@ import { appStore, persistor } from "./utils/appStore";
 import { PersistGate } from "redux-persist/integration/react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Shimmer from "./Components/utils/Shimmer";
-import Body from "./Components/Body";
+
+const Body = lazy(() => import("./Components/Body"));
 const Login = lazy(() => import("./Components/Auth/Login"));
 const Profile = lazy(() => import("./Components/Profile/Profile"));
 const SignUp = lazy(() => import("./Components/Auth/SignUp"));

@@ -30,7 +30,6 @@ const ProjectDetails = ({ projects }) => {
         skills: data?.skillsRequired,
         rolesRequired: data?.rolesRequired,
       });
-      console.log(requirements);
     } catch (error) {
       setErr(error);
     } finally {

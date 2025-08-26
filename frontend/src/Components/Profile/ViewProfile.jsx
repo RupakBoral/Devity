@@ -31,7 +31,7 @@ const ViewProfile = ({ user }) => {
         <div className="relative rounded-lg">
           <img
             alt="Bg image"
-            loading="lazy"
+            fetchPriority="high"
             className="aspect-video h-56 rounded-t-lg w-full object-cover"
             src={
               BgUrl ||
@@ -53,7 +53,7 @@ const ViewProfile = ({ user }) => {
             {firstName} {lastName}
           </h1>
 
-          <h3 className="text-lg text-gray-500">{headline}</h3>
+          <h2 className="text-lg text-gray-500">{headline}</h2>
         </div>
       </section>
 

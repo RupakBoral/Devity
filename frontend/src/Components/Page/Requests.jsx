@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../utils/constants";
 import { addRequests, removeRequest } from "../../utils/requestSlice";
 import Loading from "../utils/Loading";
-import CircleShimmer from "../utils/CircleShimmer";
 const ViewProfile = lazy(() => import("../Profile/ViewProfile"));
 
 const Requests = () => {
@@ -91,7 +90,7 @@ const Requests = () => {
           <p className="hidden"></p>
         )}
         <div className="w-[90%] border-sm md:w-1/2 lg:w-1/2 mx-auto border border-accent-content/30 min-h-screen max-h-fit px-2 pb-10 md:px-10">
-          <h1 className="font-merriweather py-6 text-3xl z-20 text-center font-semibold">
+          <h1 className="font-merriweather py-6 text-3xl z-20 text-center font-light">
             Requests
           </h1>
           <div className="flex flex-col gap-4">
@@ -170,7 +169,7 @@ const Requests = () => {
           </div>
         )
       ) : (
-        <CircleShimmer />
+        <p></p>
       )}
       <p className="text-center font-merriweather">No requests found!!</p>
     </div>
