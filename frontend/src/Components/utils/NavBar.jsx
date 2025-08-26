@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../utils/constants";
 import axios from "axios";
-import { removeUser } from "../../utils/userSlice";
 import logo from "../../img/logo.webp";
 import {
   FiUserPlus,
@@ -34,9 +33,9 @@ const NavBar = () => {
   const Logout = async () => {
     try {
       await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
-      dispatch(removeUser());
       dispatch({ type: "RESET" });
       persistor.purge();
+      localStorage.clear();
       return navigate("/home");
     } catch (err) {
       if (err.response.status === 401) return navigate("/home");
@@ -90,7 +89,7 @@ const NavBar = () => {
 
       <Link
         to={"/connections"}
-        title="connections"
+        title="network"
         onClick={() => setActive("connections")}
         className={
           active === "connections"
