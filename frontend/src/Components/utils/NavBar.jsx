@@ -46,7 +46,7 @@ const NavBar = () => {
   const [active, setActive] = useState("");
 
   return home === false ? (
-    <nav className="navbar py-2 fixed top-3 mx-4 md:mx-10 lg:mx-10  w-[92%] md:w-[94%] lg:w-[94%] rounded-lg backdrop-blur-xl z-60 m-0 flex items-center border border-base-content gap-2 lg:gap-6 md:gap-6 justify-evenly md:justify-around lg:justify-around">
+    <nav className="navbar py-2 fixed top-3 mx-4 md:mx-10  w-[92%] md:w-[94%] rounded-lg backdrop-blur-xl z-60 m-0 flex items-center border border-base-content gap-2 md:gap-6 justify-evenly md:justify-around">
       <Link to={"/home"} className="group text-2xl flex gap-1 items-center">
         <img
           className="md:w-14 md:h-12 w-8 h-8 object-cover"
