@@ -56,6 +56,23 @@
 <img src="https://github.com/user-attachments/assets/5b37879d-51e1-44fe-90ee-c73297ea4e32" width="800"/>
 
 
+
+## 🚀 Performance & Optimization
+
+Tested with **Google Lighthouse**, the platform achieved outstanding scores:
+
+- ⚡ **Performance**: 95  
+- ♿ **Accessibility**: 96  
+- ✅ **Best Practices**: 100  
+- 🌐 **SEO**: 100  
+
+<img width="1919" height="1013" alt="Screenshot 2025-09-03 171324" src="https://github.com/user-attachments/assets/7432cecb-bc5a-4e05-be43-5c71d72095ea" />
+
+
+This ensures that Devity is **fast, accessible, SEO-friendly, and follows modern web best practices**.
+
+
+
 ### 🌞 White Theme Preview
 
 <img src="https://github.com/user-attachments/assets/74ee7b7d-0601-4ab2-a02d-6b8a13b1b079" width="800"/>
