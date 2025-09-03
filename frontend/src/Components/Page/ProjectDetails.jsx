@@ -142,9 +142,9 @@ const ProjectDetails = ({ projects }) => {
                 </label>
               </div>
 
-              <figure className="w-full mx-auto border border-accent shadow-sm shadow-accent aspect-video">
+              <figure className="w-full mx-auto border border-accent shadow-sm shadow-accent">
                 <img
-                  className="object-contain"
+                  className="object-cover"
                   src={project.P_PhotoURL}
                   alt="project photo"
                   loading="lazy"

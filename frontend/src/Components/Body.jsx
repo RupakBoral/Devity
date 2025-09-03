@@ -12,7 +12,7 @@ const Body = () => {
   }, []);
 
   return (
-    <div className={`w-full "flex-col h-full gap-10 bg-transparent"}`}>
+    <div className={`w-full "flex-col h-full gap-10 bg-black"}`}>
       {user !== null && user.length !== 0 ? <NavBar /> : <p></p>}
       <Outlet />
     </div>

@@ -24,7 +24,7 @@ const ViewProfile = lazy(() => import("./Components/Profile/ViewProfile"));
 
 function App() {
   return (
-    <div className="p-0 m-0 bg-gradient-to-t to-base-300 from-base-accent">
+    <div className="p-0 m-0 bg-black">
       <Provider store={appStore}>
         <PersistGate loading={null} persistor={persistor}>
           <Suspense fallback={<Shimmer />}>
