@@ -33,7 +33,7 @@ const Profile = () => {
 
   return user !== null ? (
     !edit ? (
-      <main className="w-screen h-full pt-28 bg-base-300 flex md:flex-row flex-wrap flex-col justify-around md:justify-center px-2 md:px-4 md:gap-6 gap-4 py-8 mx-auto">
+      <main className="max-w-screen h-full pt-28 bg-base-300 flex md:flex-row flex-wrap flex-col justify-around md:justify-center px-2 md:px-4 md:gap-6 gap-4 py-8 mx-auto">
         {showToast && (
           <div className="toast toast-top toast-end z-60">
             <div className="alert alert-success">
@@ -44,7 +44,7 @@ const Profile = () => {
         {user != null || user != undefined ? (
           <ViewProfile user={user} />
         ) : (
-          <p></p>
+          <p className="hidden"></p>
         )}
         <section className="space-y-6">
           <section className="border border-gray-400 bg-base-200/50 p-6 max-h-48 rounded-lg flex flex-col gap-2">

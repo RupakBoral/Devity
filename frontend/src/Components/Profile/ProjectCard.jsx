@@ -46,7 +46,7 @@ const ProjectCard = ({ secondaryUser }) => {
   }, []);
 
   return secondaryUser !== null ? (
-    <main className="flex overflow-x-scroll gap-4">
+    <main className="flex gap-4 overflow-x-scroll">
       {projects != null &&
         projects.length != 0 &&
         projects.map((project, index) => {
@@ -55,22 +55,20 @@ const ProjectCard = ({ secondaryUser }) => {
           return (
             <section
               key={index}
-              className="flex flex-col gap-2 border bg-base-200 border-accent md:min-w-96 py-3 px-5 rounded-lg"
+              className="flex flex-col gap-2 border bg-base-200 border-accent min-w-[80%] md:min-w-96 py-3 px-5 rounded-lg"
             >
               <img
                 src={P_PhotoURL}
                 alt="project image"
                 loading="lazy"
-                className="w-full h-fit aspect-video md:h-56 rounded-sm border border-accent mx-auto object-contain md:object-cover"
+                className="md:w-fit aspect-video md:h-56 object-contain rounded-sm border border-accent mx-auto"
               />
               <h1 className="text-accent-content font-light text-sm md:text-lg">
                 {PName}
               </h1>
-              <p className="md:text-base text-sm md:inline-block lg:inline-block">
-                {PDescription}
-              </p>
+              <p className="md:text-base text-xs">{PDescription}</p>
               {PSkills !== null && PSkills.length !== 0 ? (
-                <div className=" md:inline-block md:text-base text-sm">
+                <div className="md:text-base text-xs">
                   <span className="text-blue-400">Skills: </span>
                   <span>{PSkills[0]}</span>
                 </div>
@@ -78,7 +76,7 @@ const ProjectCard = ({ secondaryUser }) => {
                 <span className="hidden"></span>
               )}
               {P_URL !== null && P_URL !== undefined && P_URL.length !== 0 ? (
-                <div className="md:text-base text-sm">
+                <div className="md:text-base text-xs">
                   <span className="text-blue-400">Website: </span>
                   <Link to={P_URL} className="">
                     {project.PName}
@@ -93,7 +91,7 @@ const ProjectCard = ({ secondaryUser }) => {
                 <Link
                   target="_blank"
                   to={P_GitURL}
-                  className="text-blue-400 md:text-base text-sm"
+                  className="text-blue-400 md:text-base text-xs"
                 >
                   Link to GitHub Repository
                 </Link>

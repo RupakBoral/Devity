@@ -20,7 +20,7 @@ const ViewProfile = ({ user }) => {
   } = user;
 
   return (
-    <main className="md:w-4xl h-full min-h-screen rounded-lg flex flex-col gap-4">
+    <main className="md:w-4xl w-screen h-full min-h-screen rounded-lg flex flex-col gap-4">
       <FiChevronLeft
         onClick={() => {
           navigate(-1);
@@ -33,7 +33,7 @@ const ViewProfile = ({ user }) => {
           <img
             alt="Bg image"
             fetchPriority="high"
-            className="aspect-video h-56 rounded-t-lg w-full object-cover"
+            className="h-56 rounded-t-lg aspect-video w-full object-cover"
             src={
               BgUrl ||
               "https://t3.ftcdn.net/jpg/09/12/76/70/360_F_912767030_3E4ePOMr42kY42YcFIQhrzUEH9iAFwuW.jpg"
@@ -58,7 +58,7 @@ const ViewProfile = ({ user }) => {
         </div>
       </section>
 
-      <section className="p-6 rounded-lg border flex flex-col bg-base-200/50 border-gray-400 gap-2 justify-between ">
+      <section className="p-6 rounded-lg border flex flex-col bg-base-200/50 border-gray-400 gap-2 justify-between">
         <h2 className="font-merriweather lg:text-xl md:text-lg text-md font-semibold">
           General Information
         </h2>
@@ -70,16 +70,16 @@ const ViewProfile = ({ user }) => {
 
       {skills !== null && skills !== undefined && skills.length !== 0 && (
         <section className="flex flex-col p-6 bg-base-200/50  rounded-lg gap-2 border border-gray-400">
-          <h1 className=" font-merriweather lg:text-xl md:text-lg text-md font-semibold">
+          <h2 className=" font-merriweather md:text-lg text-md font-semibold">
             Skills
-          </h1>
+          </h2>
           <hr className="text-accent" />
           <div className="flex flex-wrap gap-2">
             {skills &&
               skills.map((skill) => (
                 <span
                   key={skill}
-                  className="text-base-content/65 lg:text-lg md:text-md text-sm"
+                  className="text-base-content/65 md:text-md text-sm"
                 >
                   {skill}
                 </span>
@@ -89,7 +89,7 @@ const ViewProfile = ({ user }) => {
       )}
 
       {projects !== null && projects !== undefined && projects.length !== 0 ? (
-        <section className="p-6 rounded-lg bg-base-200/50 dark:border border-gray-400">
+        <section className="p-6 rounded-lg bg-base-200/50 dark:border border-gray-400 ">
           <div className="flex flex-1 flex-col gap-2 justify-between">
             <h2 className="lg:text-xl md:text-lg text-md font-merriweather font-semibold">
               Projects
@@ -99,7 +99,7 @@ const ViewProfile = ({ user }) => {
           </div>
         </section>
       ) : (
-        <p></p>
+        <p className="hidden"></p>
       )}
     </main>
   );
