@@ -46,73 +46,64 @@ const ProjectCard = ({ secondaryUser }) => {
   }, []);
 
   return secondaryUser !== null ? (
-    <div className="flex overflow-x-scroll gap-4">
+    <main className="flex overflow-x-scroll gap-4">
       {projects != null &&
         projects.length != 0 &&
-        projects.map((project, index) => (
-          <section
-            key={index}
-            className="flex flex-col gap-2 border bg-base-200 border-accent w-60 md:min-w-96 py-3 px-5 rounded-lg"
-          >
-            <img
-              src={project.P_PhotoURL}
-              alt="project image"
-              loading="lazy"
-              className="w-full h-fit aspect-video md:h-56 lg:h-56 rounded-sm border border-accent mx-auto object-contain md:object-cover lg:object-cover"
-            />
-            <h1 className="font-semibold font-montserrat text-lg">
-              {project.PName}
-            </h1>
-            <p className="text-accent-content text-justify hidden md:inline-block lg:inline-block">
-              {project.PDescription}
-            </p>
-            {project.PSkills !== null && project.PSkills.length !== 0 ? (
-              <p className=" hidden md:inline-block lg:inline-block">
-                Skills:{" "}
-                <span className="font-semibold text-accent-content">
-                  {project.PSkills[0]}
-                </span>
+        projects.map((project, index) => {
+          const { PName, PDescription, PSkills, P_PhotoURL, P_URL, P_GitURL } =
+            project;
+          return (
+            <section
+              key={index}
+              className="flex flex-col gap-2 border bg-base-200 border-accent md:min-w-96 py-3 px-5 rounded-lg"
+            >
+              <img
+                src={P_PhotoURL}
+                alt="project image"
+                loading="lazy"
+                className="w-full h-fit aspect-video md:h-56 rounded-sm border border-accent mx-auto object-contain md:object-cover"
+              />
+              <h1 className="text-accent-content font-light text-sm md:text-lg">
+                {PName}
+              </h1>
+              <p className="md:text-base text-sm md:inline-block lg:inline-block">
+                {PDescription}
               </p>
-            ) : (
-              <span></span>
-            )}
-            {project.P_URL !== null && project.P_URL !== undefined ? (
-              <p>
-                Website:{" "}
+              {PSkills !== null && PSkills.length !== 0 ? (
+                <div className=" md:inline-block md:text-base text-sm">
+                  <span className="text-blue-400">Skills: </span>
+                  <span>{PSkills[0]}</span>
+                </div>
+              ) : (
+                <span className="hidden"></span>
+              )}
+              {P_URL !== null && P_URL !== undefined && P_URL.length !== 0 ? (
+                <div className="md:text-base text-sm">
+                  <span className="text-blue-400">Website: </span>
+                  <Link to={P_URL} className="">
+                    {project.PName}
+                  </Link>
+                </div>
+              ) : (
+                <span className="hidden"></span>
+              )}
+              {P_GitURL !== null &&
+              P_GitURL !== undefined &&
+              P_GitURL.length !== 0 ? (
                 <Link
-                  to={project.P_URL}
-                  className="text-accent-content font-semibold"
+                  target="_blank"
+                  to={P_GitURL}
+                  className="text-blue-400 md:text-base text-sm"
                 >
-                  {project.PName}
+                  Link to GitHub Repository
                 </Link>
-              </p>
-            ) : (
-              <span></span>
-            )}
-            {project.P_GitURL !== null && project.P_GitURL !== undefined ? (
-              <Link
-                to={project.P_GitURL}
-                className="text-accent-content font-semibold"
-              >
-                GitHub Repository
-              </Link>
-            ) : (
-              <span></span>
-            )}
-            {project.P_GitURL !== null && project.P_GitURL !== undefined ? (
-              <Link
-                to={project.P_PhotoURL}
-                className="text-accent-content font-semibold"
-              >
-                PhotoURL
-              </Link>
-            ) : (
-              <span></span>
-            )}
-            <span></span>
-          </section>
-        ))}
-    </div>
+              ) : (
+                <span className="hidden"></span>
+              )}
+            </section>
+          );
+        })}
+    </main>
   ) : (
     <div>
       <p>{err}</p>

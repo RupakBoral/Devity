@@ -52,8 +52,7 @@ const GitHub = ({ gitHub }) => {
     return null;
   }
 
-  const { avatar_url, public_repos, location, bio, name, repos_url, html_url } =
-    user;
+  const { avatar_url, public_repos, location, bio, name, html_url } = user;
 
   return (
     <section className="p-6 bg-base-200/50 rounded-lg flex flex-col gap-2 justify-between dark:border border-gray-400">
@@ -61,7 +60,7 @@ const GitHub = ({ gitHub }) => {
         GitHub Profile
       </h2>
       <hr className="text-accent" />
-      <div className="flex justify-around items-center">
+      <div className="flex flex-wrap gap-2 justify-around items-center">
         <img
           className="w-20 h-20 rounded-full"
           src={avatar_url}
@@ -91,7 +90,7 @@ const GitHub = ({ gitHub }) => {
             Profile
           </p>
         </Link>
-        <Link target="_blank" to={repos_url}>
+        <Link target="_blank" to={`${html_url}/?tab=repositories`}>
           <p className="btn text-base-content border border-base-content">
             Repositories
           </p>

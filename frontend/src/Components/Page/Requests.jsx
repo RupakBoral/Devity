@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../utils/constants";
 import { addRequests, removeRequest } from "../../utils/requestSlice";
-import Loading from "../utils/Loading";
+import Shimmer from "../utils/Shimmer";
 const ViewProfile = lazy(() => import("../Profile/ViewProfile"));
 
 const Requests = () => {
@@ -51,54 +51,56 @@ const Requests = () => {
         },
       });
       dispatch(addRequests(res?.data?.data));
-      setFlag(false);
     } catch (err) {
       setErr(err);
       navigate("/home");
+    } finally {
+      setFlag(false);
     }
   };
 
   useEffect(() => {
-    if (requests === null) fetchRequests();
+    if (requests === null || requests === undefined) {
+      fetchRequests();
+    } else {
+      setFlag(false);
+    }
   }, []);
 
   if (flag) {
-    setTimeout(() => {
-      setFlag(false);
-    }, 5000);
-    return <Loading />;
+    return <Shimmer />;
   }
 
   return requests !== null && requests.length !== 0 ? (
     !viewProf ? (
-      <div className="w-screen pt-24 h-full bg-gradient-to-t to-base-300 from-base-accent relative flex flex-col gap-6 items-center py-10 transition-all ease-in-out duration-300">
+      <main className="w-screen pt-24 h-full bg-gradient-to-t to-base-300 from-base-accent relative flex flex-col gap-6 items-center py-10 transition-all ease-in-out duration-300">
         {toast != null ? (
           toast === "accepted" ? (
-            <div className="z-60 toast toast-top toast-end">
+            <section className="z-60 toast toast-top toast-end">
               <div className="alert alert-success">
                 <span className="text-white">Request accepted</span>
               </div>
-            </div>
+            </section>
           ) : (
-            <div className="z-60 toast toast-top toast-end">
+            <section className="z-60 toast toast-top toast-end">
               <div className="alert alert-info">
                 <span className="text-white">Request rejected</span>
               </div>
-            </div>
+            </section>
           )
         ) : (
           <p className="hidden"></p>
         )}
-        <div className="w-[90%] border-sm md:w-1/2 lg:w-1/2 mx-auto border border-accent-content/30 min-h-screen max-h-fit px-2 pb-10 md:px-10">
+        <section className="w-[90%] border-sm md:w-1/2 lg:w-1/2 mx-auto border border-accent-content/30 min-h-screen max-h-fit px-2 pb-10 md:px-10">
           <h1 className="font-merriweather py-6 text-3xl z-20 text-center font-light">
             Requests
           </h1>
-          <div className="flex flex-col gap-4">
+          <section className="flex flex-col gap-4">
             {requests.map((request, index) => {
               const { firstName, lastName, photoUrl, about, headline } =
                 request.fromUserId;
               return (
-                <div
+                <section
                   onClick={() => {
                     setViewProf(true);
                     setUser(request.fromUserId);
@@ -139,12 +141,12 @@ const Requests = () => {
                       Accept
                     </button>
                   </div>
-                </div>
+                </section>
               );
             })}
-          </div>
-        </div>
-      </div>
+          </section>
+        </section>
+      </main>
     ) : (
       <div className="w-screen h-full pt-28 bg-base-300 flex md:flex-row lg:flex-row flex-col justify-around lg:justify-center md:justify-center px-2 md:px-4 lg:px-6 lg:gap-8 md:gap-6 gap-4 py-8 mx-auto">
         <ViewProfile user={user} />

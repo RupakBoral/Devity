@@ -33,7 +33,7 @@ const Profile = () => {
 
   return user !== null ? (
     !edit ? (
-      <div className="w-screen h-full pt-28 bg-base-300 flex md:flex-row lg:flex-row flex-col justify-around lg:justify-center md:justify-center px-2 md:px-4 lg:px-6 lg:gap-8 md:gap-6 gap-4 py-8 mx-auto">
+      <main className="w-screen h-full pt-28 bg-base-300 flex md:flex-row flex-wrap flex-col justify-around md:justify-center px-2 md:px-4 md:gap-6 gap-4 py-8 mx-auto">
         {showToast && (
           <div className="toast toast-top toast-end z-60">
             <div className="alert alert-success">
@@ -46,8 +46,8 @@ const Profile = () => {
         ) : (
           <p></p>
         )}
-        <div className="md:w-xl lg:w-xl space-y-6">
-          <div className="border border-gray-400 bg-base-200/50 p-6  max-h-48 rounded-lg flex flex-col gap-2">
+        <section className="space-y-6">
+          <section className="border border-gray-400 bg-base-200/50 p-6 max-h-48 rounded-lg flex flex-col gap-2">
             <div
               onClick={() => dispatch(editSetting(true))}
               className="flex justify-between cursor-pointer items-center"
@@ -76,9 +76,8 @@ const Profile = () => {
               <p>Communities</p>
               <FiMessageSquare className="w-5 h-5" />
             </Link>
-          </div>
-
-          <div className="border border-gray-400 bg-base-200/50 p-6  max-h-48 rounded-lg flex flex-col gap-2">
+          </section>
+          <section className="border border-gray-400 bg-base-200/50 p-6 max-h-48 rounded-lg flex flex-col gap-2">
             <div className="flex justify-between cursor-pointer items-center">
               <p>Email</p>
               <p className="text-wrap">{emailId}</p>
@@ -93,11 +92,12 @@ const Profile = () => {
                 <p>{age}</p>
               </div>
             )}
-          </div>
-
-          <GitHub gitHub={gitHub} />
-        </div>
-      </div>
+          </section>
+          {gitHub !== null && gitHub !== undefined && gitHub.length !== 0 && (
+            <GitHub gitHub={gitHub} />
+          )}
+        </section>
+      </main>
     ) : (
       <EditProfileForm setShowToast={setShowToast} user={user} />
     )

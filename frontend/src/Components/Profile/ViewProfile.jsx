@@ -20,11 +20,12 @@ const ViewProfile = ({ user }) => {
   } = user;
 
   return (
-    <div className="md:w-4xl lg:w-4xl h-full min-h-screen rounded-lg flex flex-col gap-4">
+    <main className="md:w-4xl h-full min-h-screen rounded-lg flex flex-col gap-4">
       <FiChevronLeft
         onClick={() => {
           navigate(-1);
         }}
+        aria-label="back"
         className="md:w-8 md:h-8 w-6 h-6 cursor-pointer"
       />
       <section className="rounded-lg bg-base-200/50 border border-gray-400">
@@ -100,7 +101,7 @@ const ViewProfile = ({ user }) => {
       ) : (
         <p></p>
       )}
-    </div>
+    </main>
   );
 };
 

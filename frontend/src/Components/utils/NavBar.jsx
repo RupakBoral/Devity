@@ -49,7 +49,7 @@ const NavBar = () => {
     <nav className="navbar py-2 fixed top-3 mx-4 md:mx-10  w-[92%] md:w-[94%] rounded-lg backdrop-blur-xl z-60 m-0 flex items-center border border-base-content gap-2 md:gap-6 justify-evenly md:justify-around">
       <Link to={"/home"} className="group text-2xl flex gap-1 items-center">
         <img
-          className="md:w-14 md:h-12 w-8 h-8 object-cover"
+          className="md:w-14 md:h-12 w-8 h-8 object-cover aspect-square"
           src={logo}
           alt="logo"
           loading="lazy"
@@ -135,6 +135,7 @@ const NavBar = () => {
         <input
           type="checkbox"
           name="theme"
+          aria-label="Toggle-theme"
           className="theme-controller"
           checked={theme === "black"}
           onChange={() =>
@@ -172,7 +173,7 @@ const NavBar = () => {
           >
             <div className="rounded-full border border-yellow-600/50 w-8 h-8">
               <img
-                className="object-cover"
+                className="object-cover aspect-square"
                 src={photoUrl}
                 alt="user photo"
                 loading="lazy"

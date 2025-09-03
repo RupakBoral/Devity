@@ -2,14 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Devity – Share, Help, Grow</title>
 
-    <!-- Primary Meta Tags -->
     <meta
       name="description"
       content="Devity – A platform where developers share projects, seek help, and grow together."
@@ -19,46 +15,61 @@
       content="Devity, developer community, share projects, coding help, collaborate, grow together"
     />
     <meta name="author" content="Devity" />
+    <meta name="theme-color" content="#0f172a" />
 
-    <!-- Google Verification -->
     <meta
       name="google-site-verification"
       content="8mDt9uowx7jnqLoinFlsQXOFkP_Hy3NlKTU7VX6ZQwg"
     />
 
-    <!-- Open Graph (Facebook / LinkedIn) -->
     <meta property="og:title" content="Devity – Share, Help, Grow" />
     <meta
       property="og:description"
       content="A platform where developers can share projects, seek help, and grow together."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://your-domain.com" />
-    <meta property="og:image" content="https://your-domain.com/preview.png" />
+    <meta property="og:url" content="https://devity-frontend.onrender.com" />
+    <meta
+      property="og:image"
+      content="https://devity-frontend.onrender.com/preview.png"
+    />
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Devity – Share, Help, Grow" />
     <meta
       name="twitter:description"
       content="A platform where developers share projects, seek help, and grow together."
     />
-    <meta name="twitter:image" content="https://your-domain.com/preview.png" />
+    <meta
+      name="twitter:image"
+      content="https://devity-frontend.onrender.com/preview.png"
+    />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/webp" href="/favicon.webp" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
 
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="/src/index.css" />
-
-    <!-- Preconnect for faster external assets -->
-    <link rel="preconnect" href="https://img.freepik.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      html {
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto,
+          "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
+          "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+      }
+    </style>
+
+    <link rel="stylesheet" href="/src/index.css" />
   </head>
 
   <body>
+    <noscript>
+      <strong>This app works best with JavaScript enabled.</strong>
+    </noscript>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="/src/main.jsx" defer></script>
   </body>
 </html>

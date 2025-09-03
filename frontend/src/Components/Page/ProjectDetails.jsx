@@ -142,7 +142,7 @@ const ProjectDetails = ({ projects }) => {
                 </label>
               </div>
 
-              <figure className="w-full mx-auto border border-accent shadow-sm shadow-accent">
+              <figure className="w-full mx-auto border border-accent shadow-sm shadow-accent aspect-video">
                 <img
                   className="object-contain"
                   src={project.P_PhotoURL}
@@ -153,7 +153,7 @@ const ProjectDetails = ({ projects }) => {
 
               <div className="card-body mx-auto w-full">
                 <div className="flex flex-col md:gap-2 lg:gap-2">
-                  <h1 className="font-semibold card-title text-md md:text-xl text-base-content">
+                  <h1 className="font-semibold font-merriweather card-title text-md md:text-xl text-base-content">
                     {project.PName}
                     <Link target="_blank" to={project.P_URL}>
                       <FiExternalLink className="cursor-pointer" />

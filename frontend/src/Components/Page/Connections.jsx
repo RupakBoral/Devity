@@ -47,12 +47,12 @@ const Connections = () => {
 
   return connections !== null ? (
     !viewProf ? (
-      <div className="w-screen bg-gradient-to-t to-base-300 from-base-accent min-h-screen relative flex flex-col gap-6 items-center pt-24 py-10 transition-all ease-in-out duration-300">
-        <div className="w-[90%] rounded-sm border-sm md:w-1/2 lg:w-1/2 mx-auto border border-accent-content/30 min-h-screen max-h-fit px-2 pb-10 md:px-10">
-          <h2 className="text-xl py-6 md:text-3xl z-10 font-poppins font-light text-center">
+      <main className="w-screen bg-gradient-to-t to-base-300 from-base-accent min-h-screen relative flex flex-col gap-6 items-center pt-24 py-10 transition-all ease-in-out duration-300">
+        <section className="w-[90%] rounded-sm border-sm md:w-1/2 lg:w-1/2 mx-auto border border-accent-content/30 min-h-screen max-h-fit px-2 pb-10 md:px-10">
+          <h2 className="text-3xl py-6 md:text-3xl z-10 font-merriweather font-light text-center">
             Connections
           </h2>
-          <div className="flex flex-col gap-4 text-base">
+          <section className="flex flex-col gap-4 text-base">
             {connections.map((connection) => {
               const { _id, firstName, lastName, photoUrl, headline, about } =
                 connection;
@@ -91,9 +91,9 @@ const Connections = () => {
                 </div>
               );
             })}
-          </div>
-        </div>
-      </div>
+          </section>
+        </section>
+      </main>
     ) : (
       <div className="w-screen h-full pt-28 bg-base-300 flex md:flex-row lg:flex-row flex-col justify-around lg:justify-center md:justify-center px-2 md:px-4 lg:px-6 lg:gap-8 md:gap-6 gap-4 py-8 mx-auto">
         <ViewProfile user={user} />
