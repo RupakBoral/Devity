@@ -57,6 +57,13 @@
 
 
 
+
+### 🌞 White Theme Preview
+
+<img src="https://github.com/user-attachments/assets/74ee7b7d-0601-4ab2-a02d-6b8a13b1b079" width="800"/>
+
+
+
 ## 🚀 Performance & Optimization
 
 Tested with **Google Lighthouse**, the platform achieved outstanding scores:
@@ -71,11 +78,6 @@ Tested with **Google Lighthouse**, the platform achieved outstanding scores:
 
 This ensures that Devity is **fast, accessible, SEO-friendly, and follows modern web best practices**.
 
-
-
-### 🌞 White Theme Preview
-
-<img src="https://github.com/user-attachments/assets/74ee7b7d-0601-4ab2-a02d-6b8a13b1b079" width="800"/>
 
 
 ## 👨‍💻 Developed By
