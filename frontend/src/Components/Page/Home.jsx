@@ -1,54 +1,36 @@
 import { useEffect, useState } from "react";
 import Footer from "../utils/Footer";
+import Navbar from "./Home/Navbar";
+import { useDispatch } from "react-redux";
+import { homeSetting } from "../../utils/homeSlice";
 import Hero from "./Home/Hero";
 import Features from "./Home/Features";
 import HowItWorks from "./Home/HowItWorks";
 import CTA from "./Home/CTA";
-import Navbar from "./Home/Navbar";
-import { useDispatch } from "react-redux";
-import { homeSetting } from "../../utils/homeSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const [showScrollButton, setShowScrollButton] = useState(false);
 
   useEffect(() => {
     dispatch(homeSetting(true));
-    const handleScroll = () => {
-      if (window.scrollY > 300) {
-        setShowScrollButton(true);
-      } else {
-        setShowScrollButton(false);
-      }
-    };
-
+    const handleScroll = () => setShowScrollButton(window.scrollY > 300);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [dispatch]);
 
-  const [showScrollButton, setShowScrollButton] = useState(false);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <div
       data-theme="dark"
-      className="min-h-screen -mt-20 transition-all duration-500 ease-in-out z-60"
+      className="min-h-screen bg-gradient-to-tr from-gray-900 via-gray-800 to-gray-950 mt-20 transition-all duration-500 ease-in-out z-60"
     >
       <Navbar />
-
       <Hero />
-
       <Features />
-
       <HowItWorks />
-
       <CTA />
-
       <Footer />
 
       {showScrollButton && (
@@ -57,18 +39,7 @@ const Home = () => {
           className="fixed bottom-6 right-6 p-3 bg-primary text-white rounded-full shadow-lg hover:bg-primary/90 transition-colors z-50"
           aria-label="Scroll to top"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
+          ⬆
         </button>
       )}
     </div>

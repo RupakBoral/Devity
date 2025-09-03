@@ -3,13 +3,10 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="footer footer-center bg-base-200 text-base-content mx-0 p-10 border-t-2 border-accent">
+    <footer className="footer footer-center bg-transparent text-base-content mx-0 p-10 border-t-2 border-accent">
       <nav className="grid grid-flow-col md:gap-4 lg:gap-4 gap-2">
         <Link to={"/aboutMe"} className="link link-hover">
           About
-        </Link>
-        <Link to={""} className="link link-hover">
-          Contact
         </Link>
         <Link
           to={"https://rupakboral-portfolio.web.app/"}
@@ -18,6 +15,7 @@ const Footer = () => {
         >
           Portfolio
         </Link>
+        <a href="mailto:boralrupak@gmail.com">boralrupak@gmail.com</a>
       </nav>
       <nav>
         <div className="grid grid-flow-col gap-4">
@@ -34,10 +32,12 @@ const Footer = () => {
         </div>
       </nav>
       <aside>
-        <p>
+        <div>
           <span className="md:inline lg:inline hidden">Developed by </span>
-          Rupak Boral
-        </p>
+          <span className="text-transparent text-xl bg-clip-text bg-gradient-to-r from-fuchsia-500 to-orange-400 font-base">
+            Rupak Boral
+          </span>
+        </div>
       </aside>
     </footer>
   );
